@@ -1,22 +1,16 @@
 {
-  "name": "ept",
-  "title": "ETP",
-  "description": "ETP",
-  "keywords": [
-    "etp"
-  ],
+  "name": "mmac",
+  "title": "MMAC",
+  "description": "MMAC Overseer",
+  "keywords": ["etp", "mmac", "overseer"],
   "license": "MIT",
-  "author": "ZoomLab",
-  "contributors": [
-    "Alex NGOMBOL",
-    "Will",
-    "Stivo"
-  ],
+  "author": "Croquignolex",
+  "contributors": ["Alex NGOMBOL"],
   "repository": {
     "type": "git",
-    "url": "https://alexyxaxa@bitbucket.org/zoomlab2020/etp-web-react-js.git"
+    "url": "https://github.com/Croquignolex/etp-overseer-web-react-js.git"
   },
-  "version": "0.1.0",
+  "version": "2.0.0",
   "private": true,
   "dependencies": {
     "@babel/plugin-proposal-throw-expressions": "^7.10.1",
