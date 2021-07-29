@@ -4,10 +4,6 @@ export const SETTINGS_PAGE = 'Paramètres';
 export const DASHBOARD_PAGE = 'Tableau de bord';
 export const NOTIFICATIONS_PAGE = 'Notifications';
 
-// Network
-export const MY_NETWORK = 'Mon réseau';
-export const MY_NETWORK_FLEET = 'Flottages';
-
 // CommonsSa
 export const ZONES_PAGE = 'Zones';
 export const USERS = 'Utilisateurs';
