@@ -1,0 +1,163 @@
+@import './variables.scss';
+
+html,body {
+    width: 100%;
+    height: 100vh;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    height: 100%;
+    padding-top: 60px;
+}
+
+#app-navbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+}
+
+.not-found {
+    font-size: 78px;
+    margin-bottom: 20vh;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.auth-home {
+    width: 100%;
+    height: 100Vh;
+    position: absolute;
+    top:0;right:0;left:0;bottom:0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.spinner-loader {
+    width: 50px;
+    height: auto;
+    position: absolute;
+}
+
+.little-loader {
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+}
+
+.wrappffer{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin-left: 234px;
+    padding-top: 73px;
+    padding-left: 16px;
+}
+
+.hand-cursor {cursor: pointer !important;}
+.text-theme {color: $themeColor;}
+.custom-card-outline {border-top: 3px solid $themeColor;}
+
+.custom-active {
+    color: $themeWhiteColor !important;
+    background-color: $themeColor !important;
+}
+
+.btn-custom {
+    border: none;
+    background-color: $themeColor;
+}
+
+.bg-theme {
+    color: $themeWhiteColor;
+    background-color: $themeColor;
+}
+
+.btn-loader {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 80px;
+    border: none;
+}
+
+#login-card {
+    background-color: $themeColor;
+    color: #FFF;
+    margin-bottom: 4vh !important;
+}
+
+@media (max-width: 576px) {
+    .login-box, .register-box {
+        margin-top: -30px !important;
+    }
+}
+
+.login-btn {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    background-color: $themeColor;
+    border: none;
+}
+
+.center-loader {
+    margin: auto;
+}
+
+.toast-header button {
+    color: $themeWhiteColor !important;
+}
+
+.btn-theme {
+    background-color: $themeColor;
+    color: white;
+    border: none;
+}
+
+.bg-theme-light {
+    background-color: #fbf5dd;
+}
+
+// Rewrite some colors
+#nprogress .bar { background: $themeColor; }
+.nav-pills .nav-link:not(.active):hover { color: $themeColor; }
+#nprogress .peg {box-shadow: 0 0 10px $themeColor, 0 0 5px $themeColor}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {background-color: $themeColor;}
+
+.min-width-200 {
+    min-width: 200px !important;
+}
+
+.no-shadow {
+    box-shadow: none;
+}
+
+.center {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.table {
+    margin-bottom: 0 !important;
+}
