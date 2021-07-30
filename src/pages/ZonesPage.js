@@ -8,7 +8,6 @@ import HeaderComponent from "../components/HeaderComponent";
 import LoaderComponent from "../components/LoaderComponent";
 import AppLayoutContainer from "../containers/AppLayoutContainer";
 import {emitAllCollectorsFetch} from "../redux/collectors/actions";
-import ZoneNewContainer from "../containers/zones/ZoneNewContainer";
 import ErrorAlertComponent from "../components/ErrorAlertComponent";
 import TableSearchComponent from "../components/TableSearchComponent";
 import FormModalComponent from "../components/modals/FormModalComponent";
@@ -24,7 +23,7 @@ import {dateToString, needleSearch, requestFailed, requestLoading} from "../func
 function ZonesPage({zones, zonesRequests, hasMoreData, page, dispatch, location}) {
     // Local states
     const [needle, setNeedle] = useState('');
-    const [newZoneModal, setNewZoneModal] = useState({show: false, header: ''});
+    // const [newZoneModal, setNewZoneModal] = useState({show: false, header: ''});
     const [zoneDetailsModal, setZoneDetailsModal] = useState({show: false, header: "DETAIL DE LA ZONE", id: ''});
 
     // Local effects
@@ -56,7 +55,7 @@ function ZonesPage({zones, zonesRequests, hasMoreData, page, dispatch, location}
         dispatch(emitNextZonesFetch({page}));
     }
 
-    // Show new zone modal form
+   /* // Show new zone modal form
     const handleNewZoneModalShow = () => {
         setNewZoneModal({newZoneModal, header: "NOUVELLE ZONE", show: true})
     }
@@ -64,7 +63,7 @@ function ZonesPage({zones, zonesRequests, hasMoreData, page, dispatch, location}
     // Hide new zone modal form
     const handleNewZoneModalHide = () => {
         setNewZoneModal({...newZoneModal, show: false})
-    }
+    }*/
 
     // Show zone details modal form
     const handleZoneDetailsModalShow = ({id}) => {
@@ -97,12 +96,12 @@ function ZonesPage({zones, zonesRequests, hasMoreData, page, dispatch, location}
                                             {/* Error message */}
                                             {requestFailed(zonesRequests.list) && <ErrorAlertComponent message={zonesRequests.list.message} />}
                                             {requestFailed(zonesRequests.next) && <ErrorAlertComponent message={zonesRequests.next.message} />}
-                                            <button type="button"
+                                            {/*<button type="button"
                                                     className="btn btn-theme ml-2 mb-2"
                                                     onClick={handleNewZoneModalShow}
                                             >
                                                 <i className="fa fa-plus" /> Nouvelle zone
-                                            </button>
+                                            </button>*/}
                                             {/* Search result & Infinite scroll */}
                                             {(needle !== '' && needle !== undefined)
                                                 ? <ZonesCardsComponent zones={searchEngine(zones, needle)}
@@ -117,7 +116,7 @@ function ZonesPage({zones, zonesRequests, hasMoreData, page, dispatch, location}
                                                         >
                                                             <ZonesCardsComponent zones={zones}
                                                                                  handleZoneDetailsModalShow={handleZoneDetailsModalShow}
-                                                            />
+                                                      k      />
                                                         </InfiniteScroll>
                                                 )
                                             }
@@ -130,9 +129,9 @@ function ZonesPage({zones, zonesRequests, hasMoreData, page, dispatch, location}
                 </div>
             </AppLayoutContainer>
             {/* Modal */}
-            <FormModalComponent modal={newZoneModal} handleClose={handleNewZoneModalHide}>
+            {/*<FormModalComponent modal={newZoneModal} handleClose={handleNewZoneModalHide}>
                 <ZoneNewContainer handleClose={handleNewZoneModalHide} />
-            </FormModalComponent>
+            </FormModalComponent>*/}
             <FormModalComponent modal={zoneDetailsModal} handleClose={handleZoneDetailsModalHide}>
                 <ZoneDetailsContainer id={zoneDetailsModal.id} />
             </FormModalComponent>

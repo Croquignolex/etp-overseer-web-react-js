@@ -3,16 +3,15 @@ import React, {useState} from 'react';
 
 import FormModalComponent from "../modals/FormModalComponent";
 import {dateToString} from "../../functions/generalFunctions";
-import ZoneInfoEditContainer from "../../containers/zones/ZoneInfoEditContainer";
 import CollectorDetailsContainer from "../../containers/collectors/CollectorDetailsContainer";
 
 // Component
 function ZoneInfoComponent({zone}) {
     // Local states
-    const [infoEditModal, setInfoEditModal]  = useState({show: false, header: 'MODIFIER LES INFO DE ' + zone.name});
+    // const [infoEditModal, setInfoEditModal]  = useState({show: false, header: 'MODIFIER LES INFO DE ' + zone.name});
     const [collectorDetailsModal, setCollectorDetailsModal] = useState({show: false, header: 'DETAIL DU RESPONSABLE DE ZONE', id: ''});
 
-    // Show info edit modal form
+ /*   // Show info edit modal form
     const handleInfoEditModalShow = () => {
         setInfoEditModal({...infoEditModal, show: true})
     }
@@ -21,7 +20,7 @@ function ZoneInfoComponent({zone}) {
     const handleInfoEditModalHide = () => {
         setInfoEditModal({...infoEditModal, show: false})
     }
-
+*/
     // Hide collector details modal form
     const handleCollectorDetailModalHide = () => {
         setCollectorDetailsModal({...collectorDetailsModal, show: false})
@@ -30,9 +29,9 @@ function ZoneInfoComponent({zone}) {
     // Render
     return (
         <>
-            <button type="button" className="btn btn-theme mb-1 mr-1" onClick={handleInfoEditModalShow}>
+           {/* <button type="button" className="btn btn-theme mb-1 mr-1" onClick={handleInfoEditModalShow}>
                 <i className="fa fa-pencil" /> Modifier les info
-            </button>
+            </button>*/}
             <div className="card">
                 <div className="card-header bg-secondary" />
                 <div className="card-body">
@@ -66,9 +65,9 @@ function ZoneInfoComponent({zone}) {
                 </div>
             </div>
             {/* Modal */}
-            <FormModalComponent modal={infoEditModal} handleClose={handleInfoEditModalHide}>
+            {/*<FormModalComponent modal={infoEditModal} handleClose={handleInfoEditModalHide}>
                 <ZoneInfoEditContainer handleClose={handleInfoEditModalHide} />
-            </FormModalComponent>
+            </FormModalComponent>*/}
             <FormModalComponent modal={collectorDetailsModal} handleClose={handleCollectorDetailModalHide}>
                 <CollectorDetailsContainer id={collectorDetailsModal.id} />
             </FormModalComponent>
