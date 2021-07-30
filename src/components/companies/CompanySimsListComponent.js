@@ -4,15 +4,14 @@ import React, {useState} from 'react';
 import {formatNumber} from "../../functions/generalFunctions";
 import FormModalComponent from "../modals/FormModalComponent";
 import SimDetailsContainer from "../../containers/sims/SimDetailsContainer";
-import CompanyAddSimContainer from "../../containers/companies/CompanyAddSimContainer";
 
 // Component
 function CompanySimsListComponent({company}) {
     // Local states
     const [simDetailsModal, setSimDetailsModal] = useState({show: false, header: 'DETAIL DU COMPTE', id: ''});
-    const [addSimModal, setAddSimEditModal] = useState({show: false, header: 'AJOUTER UN COMPTE A ' + company.name});
+    // const [addSimModal, setAddSimEditModal] = useState({show: false, header: 'AJOUTER UN COMPTE A ' + company.name});
 
-    // Show add sim modal form
+   /* // Show add sim modal form
     const handleAddSimModalShow = () => {
         setAddSimEditModal({...addSimModal, show: true})
     }
@@ -20,7 +19,7 @@ function CompanySimsListComponent({company}) {
     // Hide add sim modal form
     const handleAddSimModalHide = () => {
         setAddSimEditModal({...addSimModal, show: false})
-    }
+    }*/
 
     // Hide sim details modal form
     const handleSimDetailModalHide = () => {
@@ -30,9 +29,9 @@ function CompanySimsListComponent({company}) {
     // Render
     return (
         <>
-            <button type="button" className="btn btn-theme mb-1" onClick={handleAddSimModalShow}>
+           {/* <button type="button" className="btn btn-theme mb-1" onClick={handleAddSimModalShow}>
                 <i className="fa fa-plus" /> Ajouter un compte
-            </button>
+            </button>*/}
             <div className="card">
                 <div className="table-responsive">
                     <table className="table table-hover text-nowrap table-bordered">
@@ -74,9 +73,9 @@ function CompanySimsListComponent({company}) {
                 </div>
             </div>
             {/* Modal */}
-            <FormModalComponent modal={addSimModal} handleClose={handleAddSimModalHide}>
+            {/*<FormModalComponent modal={addSimModal} handleClose={handleAddSimModalHide}>
                 <CompanyAddSimContainer handleClose={handleAddSimModalHide} />
-            </FormModalComponent>
+            </FormModalComponent>*/}
             <FormModalComponent small={true} modal={simDetailsModal} handleClose={handleSimDetailModalHide}>
                 <SimDetailsContainer id={simDetailsModal.id} />
             </FormModalComponent>

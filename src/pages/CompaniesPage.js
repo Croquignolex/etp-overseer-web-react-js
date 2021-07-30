@@ -9,7 +9,6 @@ import AppLayoutContainer from "../containers/AppLayoutContainer";
 import ErrorAlertComponent from "../components/ErrorAlertComponent";
 import TableSearchComponent from "../components/TableSearchComponent";
 import FormModalComponent from "../components/modals/FormModalComponent";
-import CompanyNewContainer from "../containers/companies/CompanyNewContainer";
 import {emitCompaniesFetch, emitNextCompaniesFetch} from "../redux/companies/actions";
 import CompaniesCardsComponent from "../components/companies/CompaniesCardsComponent";
 import CompanyDetailsContainer from "../containers/companies/CompanyDetailsContainer";
@@ -20,7 +19,7 @@ import {dateToString, formatNumber, needleSearch, requestFailed, requestLoading}
 function CompaniesPage({companies, companiesRequests, hasMoreData, page, dispatch, location}) {
     // Local states
     const [needle, setNeedle] = useState('');
-    const [newCompanyModal, setNewCompanyModal] = useState({show: false, header: ''});
+    // const [newCompanyModal, setNewCompanyModal] = useState({show: false, header: ''});
     const [companyDetailsModal, setCompanyDetailsModal] = useState({show: false, header: "DETAIL DE L'ENTREPRISE", id: ''});
 
     // Local effects
@@ -48,7 +47,7 @@ function CompaniesPage({companies, companiesRequests, hasMoreData, page, dispatc
         dispatch(emitNextCompaniesFetch({page}));
     }
 
-    // Show new company modal form
+   /* // Show new company modal form
     const handleNewCompanyModalShow = () => {
         setNewCompanyModal({newCompanyModal, header: "NOUVELLE ENTREPRISE", show: true})
     }
@@ -56,7 +55,7 @@ function CompaniesPage({companies, companiesRequests, hasMoreData, page, dispatc
     // Hide new company modal form
     const handleNewCompanyModalHide = () => {
         setNewCompanyModal({...newCompanyModal, show: false})
-    }
+    }*/
 
     // Show company details modal form
     const handleCompanyDetailsModalShow = ({id}) => {
@@ -89,12 +88,12 @@ function CompaniesPage({companies, companiesRequests, hasMoreData, page, dispatc
                                             {/* Error message */}
                                             {requestFailed(companiesRequests.list) && <ErrorAlertComponent message={companiesRequests.list.message} />}
                                             {requestFailed(companiesRequests.next) && <ErrorAlertComponent message={companiesRequests.next.message} />}
-                                            <button type="button"
+                                            {/*<button type="button"
                                                     className="btn btn-theme ml-2 mb-2"
                                                     onClick={handleNewCompanyModalShow}
                                             >
                                                 <i className="fa fa-plus" /> Nouvelle entreprise
-                                            </button>
+                                            </button>*/}
                                             {/* Search result & Infinite scroll */}
                                             {(needle !== '' && needle !== undefined)
                                                 ? <CompaniesCardsComponent companies={searchEngine(companies, needle)}
@@ -122,9 +121,9 @@ function CompaniesPage({companies, companiesRequests, hasMoreData, page, dispatc
                 </div>
             </AppLayoutContainer>
             {/* Modal */}
-            <FormModalComponent modal={newCompanyModal} handleClose={handleNewCompanyModalHide}>
+            {/*<FormModalComponent modal={newCompanyModal} handleClose={handleNewCompanyModalHide}>
                 <CompanyNewContainer handleClose={handleNewCompanyModalHide} />
-            </FormModalComponent>
+            </FormModalComponent>*/}
             <FormModalComponent modal={companyDetailsModal} handleClose={handleCompanyDetailsModalHide}>
                 <CompanyDetailsContainer id={companyDetailsModal.id} />
             </FormModalComponent>

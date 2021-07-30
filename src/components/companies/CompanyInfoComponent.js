@@ -1,18 +1,15 @@
+import React from 'react';
 import PropTypes from "prop-types";
-import React, {useState} from 'react';
 
-import FormModalComponent from "../modals/FormModalComponent";
 import {dateToString} from "../../functions/generalFunctions";
-import CompanyDocEditContainer from "../../containers/companies/CompanyDocEditContainer";
-import CompanyInfoEditContainer from "../../containers/companies/CompanyInfoEditContainer";
 
 // Component
 function CompanyInfoComponent({company}) {
     // Local states
-    const [infoEditModal, setInfoEditModal] = useState({show: false, header: 'MODIFIER LES INFO DE ' + company.name});
-    const [docEditModal, setDocEditModal] = useState({show: false, header: 'MODIFIER LE DOSSIER DE ' + company.name});
+    // const [infoEditModal, setInfoEditModal] = useState({show: false, header: 'MODIFIER LES INFO DE ' + company.name});
+    // const [docEditModal, setDocEditModal] = useState({show: false, header: 'MODIFIER LE DOSSIER DE ' + company.name});
 
-    // Show info edit modal form
+   /* // Show info edit modal form
     const handleInfoEditModalShow = () => {
         setInfoEditModal({...infoEditModal, show: true})
     }
@@ -31,16 +28,16 @@ function CompanyInfoComponent({company}) {
     const handleDocEditModalHide = () => {
         setDocEditModal({...docEditModal, show: false})
     }
-
+*/
     // Render
     return (
         <>
-            <button type="button" className="btn btn-theme mr-1 mb-1" onClick={handleInfoEditModalShow}>
+            {/*<button type="button" className="btn btn-theme mr-1 mb-1" onClick={handleInfoEditModalShow}>
                 <i className="fa fa-pencil" /> Modifier les info
             </button>
             <button type="button" className="btn btn-theme mb-1" onClick={handleDocEditModalShow}>
                 <i className="fa fa-pencil" /> Modifier le dossier
-            </button>
+            </button>*/}
             <div className="card">
                 <div className="card-header bg-secondary" />
                 <div className="card-body">
@@ -80,12 +77,12 @@ function CompanyInfoComponent({company}) {
                 </div>
             </div>
             {/* Modal */}
-            <FormModalComponent modal={infoEditModal} handleClose={handleInfoEditModalHide}>
+            {/*<FormModalComponent modal={infoEditModal} handleClose={handleInfoEditModalHide}>
                 <CompanyInfoEditContainer handleClose={handleInfoEditModalHide} />
             </FormModalComponent>
             <FormModalComponent modal={docEditModal} handleClose={handleDocEditModalHide}>
                 <CompanyDocEditContainer handleClose={handleDocEditModalHide} />
-            </FormModalComponent>
+            </FormModalComponent>*/}
         </>
     )
 }
