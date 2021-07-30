@@ -35,7 +35,7 @@ function SupervisorsPage({supervisors, supervisorsRequests, hasMoreData, page, d
         };
         // eslint-disable-next-line
     }, []);
-S
+
     const handleNeedleInput = (data) => {
         setNeedle(data)
     }
