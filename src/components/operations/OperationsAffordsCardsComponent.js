@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import React, {useState} from 'react';
 
-import LoaderComponent from "../LoaderComponent";
 import OperatorComponent from "../OperatorComponent";
 import FormModalComponent from "../modals/FormModalComponent";
 import {DONE, PROCESSING} from "../../constants/typeConstants";
@@ -11,7 +10,7 @@ import SimDetailsContainer from "../../containers/sims/SimDetailsContainer";
 import VendorDetailsContainer from "../../containers/vendors/VendorDetailsContainer";
 
 // Component
-function OperationsAffordsCardsComponent({affords, handleConfirmModalShow}) {
+function OperationsAffordsCardsComponent({affords}) {
     // Local states
     const [vendorDetailsModal, setVendorSimDetailsModal] = useState({show: false, header: 'DETAIL DU FOURNISSEUR', id: ''});
     const [outgoingSimDetailsModal, setOutgoingSimDetailsModal] = useState({show: false, header: 'DETAIL DU COMPTE DE FLOTTAGE', id: ''});
@@ -75,7 +74,7 @@ function OperationsAffordsCardsComponent({affords, handleConfirmModalShow}) {
                                             {item.status === PROCESSING && <b className="text-danger text-bold">En attente de confirmation</b>}
                                         </li>
                                     </ul>
-                                    {(item.status === PROCESSING) && (
+                                    {/*{(item.status === PROCESSING) && (
                                         <div className="mt-3 text-right">
                                             {item.actionLoader ? <LoaderComponent little={true} /> : (
                                                 <button type="button"
@@ -86,7 +85,7 @@ function OperationsAffordsCardsComponent({affords, handleConfirmModalShow}) {
                                                 </button>
                                             )}
                                         </div>
-                                    )}
+                                    )}*/}
                                 </div>
                             </div>
                         </div>
@@ -114,7 +113,7 @@ function OperationsAffordsCardsComponent({affords, handleConfirmModalShow}) {
 // Prop types to ensure destroyed props data type
 OperationsAffordsCardsComponent.propTypes = {
     affords: PropTypes.array.isRequired,
-    handleConfirmModalShow: PropTypes.func.isRequired,
+    // handleConfirmModalShow: PropTypes.func.isRequired,
 };
 
 export default React.memo(OperationsAffordsCardsComponent);

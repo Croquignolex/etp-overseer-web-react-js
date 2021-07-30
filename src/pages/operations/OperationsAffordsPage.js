@@ -8,28 +8,17 @@ import AppLayoutContainer from "../../containers/AppLayoutContainer";
 import ErrorAlertComponent from "../../components/ErrorAlertComponent";
 import TableSearchComponent from "../../components/TableSearchComponent";
 import {OPERATIONS_AFFORDS_PAGE} from "../../constants/pageNameConstants";
-import FormModalComponent from "../../components/modals/FormModalComponent";
-import ConfirmModalComponent from "../../components/modals/ConfirmModalComponent";
-import {emitAffordsFetch, emitConfirmAfford, emitNextAffordsFetch} from "../../redux/affords/actions";
+import {emitAffordsFetch, emitNextAffordsFetch} from "../../redux/affords/actions";
 import OperationsAffordsCardsComponent from "../../components/operations/OperationsAffordsCardsComponent";
-import OperationsAffordsAddAffordContainer from "../../containers/operations/OperationsAffordsAddAffordContainer";
-import {storeAffordsRequestReset, storeConfirmAffordRequestReset, storeNextAffordsRequestReset} from "../../redux/requests/affords/actions";
-import {
-    applySuccess,
-    dateToString,
-    formatNumber,
-    needleSearch,
-    requestFailed,
-    requestLoading,
-    requestSucceeded
-} from "../../functions/generalFunctions";
+import {dateToString, needleSearch, requestFailed, requestLoading} from "../../functions/generalFunctions";
+import {storeAffordsRequestReset, storeNextAffordsRequestReset} from "../../redux/requests/affords/actions";
 
 // Component
 function OperationsAffordsPage({affords, affordsRequests, hasMoreData, page, dispatch, location}) {
     // Local states
     const [needle, setNeedle] = useState('');
-    const [confirmModal, setConfirmModal] = useState({show: false, body: '', id: 0});
-    const [affordModal, setAffordModal] = useState({show: false, header: 'EFFECTUER UN APPROVISIONNEMENT'});
+    // const [confirmModal, setConfirmModal] = useState({show: false, body: '', id: 0});
+    // const [affordModal, setAffordModal] = useState({show: false, header: 'EFFECTUER UN APPROVISIONNEMENT'});
 
     // Local effects
     useEffect(() => {
@@ -41,14 +30,14 @@ function OperationsAffordsPage({affords, affordsRequests, hasMoreData, page, dis
         // eslint-disable-next-line
     }, []);
 
-    // Local effects
+    /*// Local effects
     useEffect(() => {
         // Reset inputs while toast (well done) into current scope
         if(requestSucceeded(affordsRequests.apply)) {
             applySuccess(affordsRequests.apply.message);
         }
         // eslint-disable-next-line
-    }, [affordsRequests.apply]);
+    }, [affordsRequests.apply]);*/
 
     const handleNeedleInput = (data) => {
         setNeedle(data)
@@ -58,7 +47,7 @@ function OperationsAffordsPage({affords, affordsRequests, hasMoreData, page, dis
     const shouldResetErrorData = () => {
         dispatch(storeAffordsRequestReset());
         dispatch(storeNextAffordsRequestReset());
-        dispatch(storeConfirmAffordRequestReset());
+        // dispatch(storeConfirmAffordRequestReset());
     };
 
     // Fetch next affords data to enhance infinite scroll
@@ -66,7 +55,7 @@ function OperationsAffordsPage({affords, affordsRequests, hasMoreData, page, dis
         dispatch(emitNextAffordsFetch({page}));
     }
 
-    // Show afford modal form
+    /*// Show afford modal form
     const handleAffordModalShow = (item) => {
         setAffordModal({...affordModal, item, show: true})
     }
@@ -90,7 +79,7 @@ function OperationsAffordsPage({affords, affordsRequests, hasMoreData, page, dis
     const handleConfirm = (id) => {
         handleConfirmModalHide();
         dispatch(emitConfirmAfford({id}));
-    };
+    };*/
 
     // Render
     return (
@@ -113,18 +102,16 @@ function OperationsAffordsPage({affords, affordsRequests, hasMoreData, page, dis
                                             {/* Error message */}
                                             {requestFailed(affordsRequests.list) && <ErrorAlertComponent message={affordsRequests.list.message} />}
                                             {requestFailed(affordsRequests.next) && <ErrorAlertComponent message={affordsRequests.next.message} />}
-                                            {requestFailed(affordsRequests.apply) && <ErrorAlertComponent message={affordsRequests.apply.message} />}
-                                            <button type="button"
+                                            {/*{requestFailed(affordsRequests.apply) && <ErrorAlertComponent message={affordsRequests.apply.message} />}*/}
+                                            {/*<button type="button"
                                                     className="btn btn-theme mb-2"
                                                     onClick={handleAffordModalShow}
                                             >
                                                 <i className="fa fa-plus" /> Effectuer un approvisionnement
-                                            </button>
+                                            </button>*/}
                                             {/* Search result & Infinite scroll */}
                                             {(needle !== '' && needle !== undefined)
-                                                ? <OperationsAffordsCardsComponent affords={searchEngine(affords, needle)}
-                                                                                   handleConfirmModalShow={handleConfirmModalShow}
-                                                />
+                                                ? <OperationsAffordsCardsComponent affords={searchEngine(affords, needle)} />
                                                 : (requestLoading(affordsRequests.list) ? <LoaderComponent /> :
                                                         <InfiniteScroll hasMore={hasMoreData}
                                                                         dataLength={affords.length}
@@ -132,9 +119,7 @@ function OperationsAffordsPage({affords, affordsRequests, hasMoreData, page, dis
                                                                         next={handleNextAffordsData}
                                                                         style={{ overflow: 'hidden' }}
                                                         >
-                                                            <OperationsAffordsCardsComponent affords={affords}
-                                                                                             handleConfirmModalShow={handleConfirmModalShow}
-                                                            />
+                                                            <OperationsAffordsCardsComponent affords={affords} />
                                                         </InfiniteScroll>
                                                 )
                                             }
@@ -147,13 +132,13 @@ function OperationsAffordsPage({affords, affordsRequests, hasMoreData, page, dis
                 </div>
             </AppLayoutContainer>
             {/* Modal */}
-            <FormModalComponent modal={affordModal} handleClose={handleAffordModalHide}>
+            {/*<FormModalComponent modal={affordModal} handleClose={handleAffordModalHide}>
                 <OperationsAffordsAddAffordContainer handleClose={handleAffordModalHide} />
             </FormModalComponent>
             <ConfirmModalComponent modal={confirmModal}
                                    handleModal={handleConfirm}
                                    handleClose={handleConfirmModalHide}
-            />
+            />*/}
         </>
     )
 }
