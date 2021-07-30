@@ -9,20 +9,18 @@ import AppLayoutContainer from "../../containers/AppLayoutContainer";
 import ErrorAlertComponent from "../../components/ErrorAlertComponent";
 import TableSearchComponent from "../../components/TableSearchComponent";
 import FormModalComponent from "../../components/modals/FormModalComponent";
-import BlockModalComponent from "../../components/modals/BlockModalComponent";
-import AccountantNewContainer from "../../containers/accountants/AccountantNewContainer";
+import {emitAccountantsFetch, emitNextAccountantsFetch} from "../../redux/accountants/actions";
 import AccountantsCardsComponent from "../../components/accountants/AccountantsCardsComponent";
 import AccountantDetailsContainer from "../../containers/accountants/AccountantDetailsContainer";
-import {emitAccountantsFetch, emitNextAccountantsFetch, emitToggleAccountantStatus} from "../../redux/accountants/actions";
-import {applySuccess, dateToString, needleSearch, requestFailed, requestLoading, requestSucceeded} from "../../functions/generalFunctions";
-import {storeAccountantsRequestReset, storeNextAccountantsRequestReset, storeAccountantStatusToggleRequestReset,} from "../../redux/requests/accountants/actions";
+import {dateToString, needleSearch, requestFailed, requestLoading, } from "../../functions/generalFunctions";
+import {storeAccountantsRequestReset, storeNextAccountantsRequestReset} from "../../redux/requests/accountants/actions";
 
 // Component
 function AccountantsPage({accountants, accountantsRequests, hasMoreData, page, dispatch, location}) {
     // Local states
     const [needle, setNeedle] = useState('');
-    const [blockModal, setBlockModal] = useState({show: false, body: '', id: 0});
-    const [newAccountantModal, setNewAccountantModal] = useState({show: false, header: ''});
+    // const [blockModal, setBlockModal] = useState({show: false, body: '', id: 0});
+    // const [newAccountantModal, setNewAccountantModal] = useState({show: false, header: ''});
     const [accountantDetailsModal, setAccountantDetailsModal] = useState({show: false, header: '', id: 0});
 
     // Local effects
@@ -35,14 +33,14 @@ function AccountantsPage({accountants, accountantsRequests, hasMoreData, page, d
         // eslint-disable-next-line
     }, []);
 
-    // Local effects
+    /*// Local effects
     useEffect(() => {
         // Reset inputs while toast (well done) into current scope
         if(requestSucceeded(accountantsRequests.status)) {
             applySuccess(accountantsRequests.status.message);
         }
         // eslint-disable-next-line
-    }, [accountantsRequests.status]);
+    }, [accountantsRequests.status]);*/
 
     const handleNeedleInput = (data) => {
         setNeedle(data)
@@ -52,7 +50,7 @@ function AccountantsPage({accountants, accountantsRequests, hasMoreData, page, d
     const shouldResetErrorData = () => {
         dispatch(storeAccountantsRequestReset());
         dispatch(storeNextAccountantsRequestReset());
-        dispatch(storeAccountantStatusToggleRequestReset());
+        // dispatch(storeAccountantStatusToggleRequestReset());
     };
 
     // Fetch next accountant data to enhance infinite scroll
@@ -60,7 +58,7 @@ function AccountantsPage({accountants, accountantsRequests, hasMoreData, page, d
         dispatch(emitNextAccountantsFetch({page}));
     }
 
-    // Show new accountant modal form
+    /*// Show new accountant modal form
     const handleNewAccountantModalShow = () => {
         setNewAccountantModal({newAccountantModal, header: "NOUVEAU COMPTABLE", show: true})
     }
@@ -68,7 +66,7 @@ function AccountantsPage({accountants, accountantsRequests, hasMoreData, page, d
     // Hide new accountant modal form
     const handleNewAccountantModalHide = () => {
         setNewAccountantModal({...newAccountantModal, show: false})
-    }
+    }*/
 
     // Show accountant details modal form
     const handleAccountantDetailsModalShow = ({id, name}) => {
@@ -80,7 +78,7 @@ function AccountantsPage({accountants, accountantsRequests, hasMoreData, page, d
         setAccountantDetailsModal({...accountantDetailsModal, show: false})
     }
 
-    // Trigger when user block status confirmed on modal
+   /* // Trigger when user block status confirmed on modal
     const handleBlockModalShow = ({id, name}) => {
         setBlockModal({...blockModal, show: true, id, body: `Bloquer le comptable ${name}?`})
     };
@@ -94,7 +92,7 @@ function AccountantsPage({accountants, accountantsRequests, hasMoreData, page, d
     const handleBlock = (id) => {
         handleBlockModalHide();
         dispatch(emitToggleAccountantStatus({id}));
-    };
+    };*/
 
     // Render
     return (
@@ -117,18 +115,16 @@ function AccountantsPage({accountants, accountantsRequests, hasMoreData, page, d
                                             {/* Error message */}
                                             {requestFailed(accountantsRequests.list) && <ErrorAlertComponent message={accountantsRequests.list.message} />}
                                             {requestFailed(accountantsRequests.next) && <ErrorAlertComponent message={accountantsRequests.next.message} />}
-                                            {requestFailed(accountantsRequests.status) && <ErrorAlertComponent message={accountantsRequests.status.message} />}
-                                            <button type="button"
+                                            {/*{requestFailed(accountantsRequests.status) && <ErrorAlertComponent message={accountantsRequests.status.message} />}*/}
+                                            {/*<button type="button"
                                                     className="btn btn-theme ml-2 mb-2"
                                                     onClick={handleNewAccountantModalShow}
                                             >
                                                 <i className="fa fa-plus" /> Nouveau comptable
-                                            </button>
+                                            </button>*/}
                                             {/* Search result & Infinite scroll */}
                                             {(needle !== '' && needle !== undefined)
-                                                ? <AccountantsCardsComponent handleBlock={handleBlock}
-                                                                             handleBlockModalShow={handleBlockModalShow}
-                                                                             accountants={searchEngine(accountants, needle)}
+                                                ? <AccountantsCardsComponent accountants={searchEngine(accountants, needle)}
                                                                              handleAccountantDetailsModalShow={handleAccountantDetailsModalShow}
                                                 />
                                                 : (requestLoading(accountantsRequests.list) ? <LoaderComponent /> :
@@ -139,8 +135,6 @@ function AccountantsPage({accountants, accountantsRequests, hasMoreData, page, d
                                                                         style={{ overflow: 'hidden' }}
                                                         >
                                                             <AccountantsCardsComponent accountants={accountants}
-                                                                                       handleBlock={handleBlock}
-                                                                                       handleBlockModalShow={handleBlockModalShow}
                                                                                        handleAccountantDetailsModalShow={handleAccountantDetailsModalShow}
                                                             />
                                                         </InfiniteScroll>
@@ -155,13 +149,13 @@ function AccountantsPage({accountants, accountantsRequests, hasMoreData, page, d
                 </div>
             </AppLayoutContainer>
             {/* Modal */}
-            <BlockModalComponent modal={blockModal}
+           {/* <BlockModalComponent modal={blockModal}
                                  handleBlock={handleBlock}
                                  handleClose={handleBlockModalHide}
             />
             <FormModalComponent modal={newAccountantModal} handleClose={handleNewAccountantModalHide}>
                 <AccountantNewContainer type={newAccountantModal.type} handleClose={handleNewAccountantModalHide} />
-            </FormModalComponent>
+            </FormModalComponent>*/}
             <FormModalComponent modal={accountantDetailsModal} handleClose={handleAccountantDetailsModalHide}>
                 <AccountantDetailsContainer id={accountantDetailsModal.id} />
             </FormModalComponent>

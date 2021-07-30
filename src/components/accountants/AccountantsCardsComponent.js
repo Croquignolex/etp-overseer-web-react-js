@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from "prop-types";
 
-import LoaderComponent from "../LoaderComponent";
 import {dateToString} from "../../functions/generalFunctions";
 
 // Component
-function AccountantsCardsComponent({accountants, handleBlock, handleBlockModalShow,handleAccountantDetailsModalShow}) {
+function AccountantsCardsComponent({accountants,handleAccountantDetailsModalShow}) {
     // Render
     return (
         <>
@@ -18,7 +17,7 @@ function AccountantsCardsComponent({accountants, handleBlock, handleBlockModalSh
                                 <div className="card-body">
                                     <div className="text-center mb-3">
                                         <img src={item.avatar} alt="avatar..." className="profile-user-img img-fluid img-circle" />
-                                        <div className="float-right">
+                                        {/*<div className="float-right">
                                             {item.actionLoader ? <LoaderComponent little={true} /> :(
                                                 item.status
                                                     ? <i onClick={() => handleBlockModalShow(item)}
@@ -29,7 +28,7 @@ function AccountantsCardsComponent({accountants, handleBlock, handleBlockModalSh
                                                          onClick={() => handleBlock(item.id)}
                                                     />
                                             )}
-                                        </div>
+                                        </div>*/}
                                     </div>
                                     <ul className="list-group list-group-unbordered">
                                         <li className="list-group-item">
@@ -77,8 +76,6 @@ function AccountantsCardsComponent({accountants, handleBlock, handleBlockModalSh
 // Prop types to ensure destroyed props data type
 AccountantsCardsComponent.propTypes = {
     accountants: PropTypes.array.isRequired,
-    handleBlock: PropTypes.func.isRequired,
-    handleBlockModalShow: PropTypes.func.isRequired,
     handleAccountantDetailsModalShow: PropTypes.func.isRequired,
 };
 
