@@ -1,12 +1,10 @@
 import React from 'react';
 import PropTypes from "prop-types";
 
-import LoaderComponent from "../LoaderComponent";
 import {dateToString, formatNumber} from "../../functions/generalFunctions";
 
 // Component
-function ManagersCardsComponent({managers, handleBlock, handleBlockModalShow,
-                                    handleTransactionsModalShow, handleMovementsModalShow, handleManagerDetailsModalShow}) {
+function ManagersCardsComponent({managers, handleTransactionsModalShow, handleMovementsModalShow, handleManagerDetailsModalShow}) {
     // Render
     return (
         <>
@@ -19,7 +17,7 @@ function ManagersCardsComponent({managers, handleBlock, handleBlockModalShow,
                                 <div className="card-body">
                                     <div className="text-center mb-3">
                                         <img src={item.avatar} alt="avatar..." className="profile-user-img img-fluid img-circle" />
-                                        <div className="float-right">
+                                        {/*<div className="float-right">
                                             {item.actionLoader ? <LoaderComponent little={true} /> :(
                                                 item.status
                                                     ? <i onClick={() => handleBlockModalShow(item)}
@@ -30,7 +28,7 @@ function ManagersCardsComponent({managers, handleBlock, handleBlockModalShow,
                                                          onClick={() => handleBlock(item.id)}
                                                     />
                                             )}
-                                        </div>
+                                        </div>*/}
                                     </div>
                                     <ul className="list-group list-group-unbordered">
                                         <li className="list-group-item">
@@ -94,8 +92,6 @@ function ManagersCardsComponent({managers, handleBlock, handleBlockModalShow,
 // Prop types to ensure destroyed props data type
 ManagersCardsComponent.propTypes = {
     managers: PropTypes.array.isRequired,
-    handleBlock: PropTypes.func.isRequired,
-    handleBlockModalShow: PropTypes.func.isRequired,
     handleMovementsModalShow: PropTypes.func.isRequired,
     handleTransactionsModalShow: PropTypes.func.isRequired,
     handleManagerDetailsModalShow: PropTypes.func.isRequired,

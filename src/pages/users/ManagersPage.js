@@ -8,22 +8,20 @@ import AppLayoutContainer from "../../containers/AppLayoutContainer";
 import ErrorAlertComponent from "../../components/ErrorAlertComponent";
 import TableSearchComponent from "../../components/TableSearchComponent";
 import FormModalComponent from "../../components/modals/FormModalComponent";
-import BlockModalComponent from "../../components/modals/BlockModalComponent";
-import ManagerNewContainer from "../../containers/managers/ManagerNewContainer";
+import {emitManagersFetch, emitNextManagersFetch} from "../../redux/managers/actions";
 import ManagersCardsComponent from "../../components/managers/ManagersCardsComponent";
 import ManagerDetailsContainer from "../../containers/managers/ManagerDetailsContainer";
 import ManagerMovementsContainer from "../../containers/managers/ManagerMovementsContainer";
 import ManagerTransactionsContainer from "../../containers/managers/ManagerTransactionsContainer";
-import {emitManagersFetch, emitNextManagersFetch, emitToggleManagerStatus} from "../../redux/managers/actions";
-import {applySuccess, dateToString, needleSearch, requestFailed, requestLoading, requestSucceeded} from "../../functions/generalFunctions";
-import {storeManagersRequestReset, storeNextManagersRequestReset, storeManagerStatusToggleRequestReset,} from "../../redux/requests/managers/actions";
+import {dateToString, needleSearch, requestFailed, requestLoading} from "../../functions/generalFunctions";
+import {storeManagersRequestReset, storeNextManagersRequestReset,} from "../../redux/requests/managers/actions";
 
 // Component
 function ManagersPage({managers, managersRequests, hasMoreData, page, dispatch, location}) {
     // Local states
     const [needle, setNeedle] = useState('');
-    const [blockModal, setBlockModal] = useState({show: false, body: '', id: 0});
-    const [newManagerModal, setNewManagerModal] = useState({show: false, header: ''});
+    // const [blockModal, setBlockModal] = useState({show: false, body: '', id: 0});
+    // const [newManagerModal, setNewManagerModal] = useState({show: false, header: ''});
     const [movementsModal, setMovementsModal] = useState({show: false, header: '', manager: {}});
     const [managerDetailsModal, setManagerDetailsModal] = useState({show: false, header: '', id: 0});
     const [transactionsModal, setTransactionsModal] = useState({show: false, header: '', manager: {}});
@@ -38,14 +36,14 @@ function ManagersPage({managers, managersRequests, hasMoreData, page, dispatch, 
         // eslint-disable-next-line
     }, []);
 
-    // Local effects
+   /* // Local effects
     useEffect(() => {
         // Reset inputs while toast (well done) into current scope
         if(requestSucceeded(managersRequests.status)) {
             applySuccess(managersRequests.status.message);
         }
         // eslint-disable-next-line
-    }, [managersRequests.status]);
+    }, [managersRequests.status]);*/
 
     const handleNeedleInput = (data) => {
         setNeedle(data)
@@ -55,7 +53,7 @@ function ManagersPage({managers, managersRequests, hasMoreData, page, dispatch, 
     const shouldResetErrorData = () => {
         dispatch(storeManagersRequestReset());
         dispatch(storeNextManagersRequestReset());
-        dispatch(storeManagerStatusToggleRequestReset());
+        // dispatch(storeManagerStatusToggleRequestReset());
     };
 
     // Fetch next manager data to enhance infinite scroll
@@ -63,7 +61,7 @@ function ManagersPage({managers, managersRequests, hasMoreData, page, dispatch, 
         dispatch(emitNextManagersFetch({page}));
     }
 
-    // Show new manager modal form
+   /* // Show new manager modal form
     const handleNewManagerModalShow = () => {
         setNewManagerModal({newManagerModal, header: "NOUVELLE GESTIONNAIRE DE FLOTTE", show: true})
     }
@@ -71,7 +69,7 @@ function ManagersPage({managers, managersRequests, hasMoreData, page, dispatch, 
     // Hide new manager modal form
     const handleNewManagerModalHide = () => {
         setNewManagerModal({...newManagerModal, show: false})
-    }
+    }*/
 
     // Show movements modal form
     const handleMovementsModalShow = (manager) => {
@@ -103,7 +101,7 @@ function ManagersPage({managers, managersRequests, hasMoreData, page, dispatch, 
         setManagerDetailsModal({...managerDetailsModal, show: false})
     }
 
-    // Trigger when user block status confirmed on modal
+   /* // Trigger when user block status confirmed on modal
     const handleBlockModalShow = ({id, name}) => {
         setBlockModal({...blockModal, show: true, id, body: `Bloquer la gestionnaire de flotte ${name}?`})
     };
@@ -117,7 +115,7 @@ function ManagersPage({managers, managersRequests, hasMoreData, page, dispatch, 
     const handleBlock = (id) => {
         handleBlockModalHide();
         dispatch(emitToggleManagerStatus({id}));
-    };
+    };*/
 
     // Render
     return (
@@ -140,18 +138,16 @@ function ManagersPage({managers, managersRequests, hasMoreData, page, dispatch, 
                                             {/* Error message */}
                                             {requestFailed(managersRequests.list) && <ErrorAlertComponent message={managersRequests.list.message} />}
                                             {requestFailed(managersRequests.next) && <ErrorAlertComponent message={managersRequests.next.message} />}
-                                            {requestFailed(managersRequests.status) && <ErrorAlertComponent message={managersRequests.status.message} />}
-                                            <button type="button"
+                                            {/*{requestFailed(managersRequests.status) && <ErrorAlertComponent message={managersRequests.status.message} />}*/}
+                                           {/* <button type="button"
                                                     className="btn btn-theme ml-2 mb-2"
                                                     onClick={handleNewManagerModalShow}
                                             >
                                                 <i className="fa fa-plus" /> Nouvelle gestionnaire
-                                            </button>
+                                            </button>*/}
                                             {/* Search result & Infinite scroll */}
                                             {(needle !== '' && needle !== undefined)
-                                                ? <ManagersCardsComponent handleBlock={handleBlock}
-                                                                          managers={searchEngine(managers, needle)}
-                                                                          handleBlockModalShow={handleBlockModalShow}
+                                                ? <ManagersCardsComponent managers={searchEngine(managers, needle)}
                                                                           handleMovementsModalShow={handleMovementsModalShow}
                                                                           handleTransactionsModalShow={handleTransactionsModalShow}
                                                                           handleManagerDetailsModalShow={handleManagerDetailsModalShow}
@@ -164,8 +160,6 @@ function ManagersPage({managers, managersRequests, hasMoreData, page, dispatch, 
                                                                         style={{ overflow: 'hidden' }}
                                                         >
                                                             <ManagersCardsComponent managers={managers}
-                                                                                    handleBlock={handleBlock}
-                                                                                    handleBlockModalShow={handleBlockModalShow}
                                                                                     handleMovementsModalShow={handleMovementsModalShow}
                                                                                     handleTransactionsModalShow={handleTransactionsModalShow}
                                                                                     handleManagerDetailsModalShow={handleManagerDetailsModalShow}
@@ -182,13 +176,13 @@ function ManagersPage({managers, managersRequests, hasMoreData, page, dispatch, 
                 </div>
             </AppLayoutContainer>
             {/* Modal */}
-            <BlockModalComponent modal={blockModal}
+            {/*<BlockModalComponent modal={blockModal}
                                  handleBlock={handleBlock}
                                  handleClose={handleBlockModalHide}
             />
             <FormModalComponent modal={newManagerModal} handleClose={handleNewManagerModalHide}>
                 <ManagerNewContainer type={newManagerModal.type} handleClose={handleNewManagerModalHide} />
-            </FormModalComponent>
+            </FormModalComponent>*/}
             <FormModalComponent modal={managerDetailsModal} handleClose={handleManagerDetailsModalHide}>
                 <ManagerDetailsContainer id={managerDetailsModal.id} />
             </FormModalComponent>
