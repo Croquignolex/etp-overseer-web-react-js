@@ -32,8 +32,8 @@ import {
 function OperationsTransfersPage({transfers, transfersRequests, hasMoreData, page, dispatch, location}) {
     // Local states
     const [needle, setNeedle] = useState('');
-    const [confirmModal, setConfirmModal] = useState({show: false, body: '', id: 0});
-    const [transferModal, setTransferModal] = useState({show: false, header: 'EFFECTUER UN TRANSFERT DE FLOTTE'});
+    // const [confirmModal, setConfirmModal] = useState({show: false, body: '', id: 0});
+    // const [transferModal, setTransferModal] = useState({show: false, header: 'EFFECTUER UN TRANSFERT DE FLOTTE'});
 
     // Local effects
     useEffect(() => {
@@ -45,14 +45,14 @@ function OperationsTransfersPage({transfers, transfersRequests, hasMoreData, pag
         // eslint-disable-next-line
     }, []);
 
-    // Local effects
+    /*// Local effects
     useEffect(() => {
         // Reset inputs while toast (well done) into current scope
         if(requestSucceeded(transfersRequests.apply)) {
             applySuccess(transfersRequests.apply.message);
         }
         // eslint-disable-next-line
-    }, [transfersRequests.apply]);
+    }, [transfersRequests.apply]);*/
 
     const handleNeedleInput = (data) => {
         setNeedle(data)
@@ -62,7 +62,7 @@ function OperationsTransfersPage({transfers, transfersRequests, hasMoreData, pag
     const shouldResetErrorData = () => {
         dispatch(storeTransfersRequestReset());
         dispatch(storeNextTransfersRequestReset());
-        dispatch(storeConfirmTransferRequestReset());
+        // dispatch(storeConfirmTransferRequestReset());
     };
 
     // Fetch next transfers data to enhance infinite scroll
@@ -70,7 +70,7 @@ function OperationsTransfersPage({transfers, transfersRequests, hasMoreData, pag
         dispatch(emitNextTransfersFetch({page}));
     }
 
-    // Show transfer modal form
+    /*// Show transfer modal form
     const handleTransferModalShow = (item) => {
         setTransferModal({...transferModal, item, show: true})
     }
@@ -94,7 +94,7 @@ function OperationsTransfersPage({transfers, transfersRequests, hasMoreData, pag
     const handleConfirm = (id) => {
         handleConfirmModalHide();
         dispatch(emitConfirmTransfer({id}));
-    };
+    };*/
 
     // Render
     return (
@@ -117,13 +117,13 @@ function OperationsTransfersPage({transfers, transfersRequests, hasMoreData, pag
                                             {/* Error message */}
                                             {requestFailed(transfersRequests.list) && <ErrorAlertComponent message={transfersRequests.list.message} />}
                                             {requestFailed(transfersRequests.next) && <ErrorAlertComponent message={transfersRequests.next.message} />}
-                                            {requestFailed(transfersRequests.apply) && <ErrorAlertComponent message={transfersRequests.apply.message} />}
-                                            <button type="button"
+                                            {/*{requestFailed(transfersRequests.apply) && <ErrorAlertComponent message={transfersRequests.apply.message} />}*/}
+                                            {/*<button type="button"
                                                     className="btn btn-theme mb-2"
                                                     onClick={handleTransferModalShow}
                                             >
                                                 <i className="fa fa-exchange" /> Effectuer un transfert
-                                            </button>
+                                            </button>*/}
                                             {/* Search result & Infinite scroll */}
                                             {(needle !== '' && needle !== undefined)
                                                 ? <OperationsTransfersCardsComponent transfers={searchEngine(transfers, needle)} />
@@ -134,9 +134,7 @@ function OperationsTransfersPage({transfers, transfersRequests, hasMoreData, pag
                                                                         next={handleNextTransfersData}
                                                                         style={{ overflow: 'hidden' }}
                                                         >
-                                                            <OperationsTransfersCardsComponent transfers={transfers}
-                                                                                               handleConfirmModalShow={handleConfirmModalShow}
-                                                            />
+                                                            <OperationsTransfersCardsComponent transfers={transfers} />
                                                         </InfiniteScroll>
                                                 )
                                             }
@@ -149,13 +147,13 @@ function OperationsTransfersPage({transfers, transfersRequests, hasMoreData, pag
                 </div>
             </AppLayoutContainer>
             {/* Modal */}
-            <ConfirmModalComponent modal={confirmModal}
+            {/*<ConfirmModalComponent modal={confirmModal}
                                    handleModal={handleConfirm}
                                    handleClose={handleConfirmModalHide}
             />
             <FormModalComponent modal={transferModal} handleClose={handleTransferModalHide}>
                 <OperationsTransfersAddTransferContainer handleClose={handleTransferModalHide} />
-            </FormModalComponent>
+            </FormModalComponent>*/}
         </>
     )
 }

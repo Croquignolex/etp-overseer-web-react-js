@@ -1,16 +1,15 @@
 import React, {useState} from 'react';
 import PropTypes from "prop-types";
 
-import LoaderComponent from "../LoaderComponent";
 import OperatorComponent from "../OperatorComponent";
 import FormModalComponent from "../modals/FormModalComponent";
+import {DONE, PROCESSING} from "../../constants/typeConstants";
 import {fleetTypeBadgeColor} from "../../functions/typeFunctions";
 import {dateToString, formatNumber} from "../../functions/generalFunctions";
 import SimDetailsContainer from "../../containers/sims/SimDetailsContainer";
-import {DONE, MASTER_TYPE, PROCESSING} from "../../constants/typeConstants";
 
 // Component
-function OperationsTransfersCardsComponent({transfers, handleConfirmModalShow}) {
+function OperationsTransfersCardsComponent({transfers}) {
     // Local states
     const [simDetailsModal, setSimDetailsModal] = useState({show: false, header: 'DETAIL DU COMPTE', id: ''});
 
@@ -68,7 +67,7 @@ function OperationsTransfersCardsComponent({transfers, handleConfirmModalShow}) 
                                             {item.status === PROCESSING && <b className="text-danger text-bold">En attente de confirmation</b>}
                                         </li>
                                     </ul>
-                                    {((item.status === PROCESSING) && (item.type.includes('->' + MASTER_TYPE))) && (
+                                    {/*{((item.status === PROCESSING) && (item.type.includes('->' + MASTER_TYPE))) && (
                                         <div className="mt-3 text-right">
                                             {item.actionLoader ? <LoaderComponent little={true} /> : (
                                                 <button type="button"
@@ -79,7 +78,7 @@ function OperationsTransfersCardsComponent({transfers, handleConfirmModalShow}) 
                                                 </button>
                                             )}
                                         </div>
-                                    )}
+                                    )}*/}
                                 </div>
                             </div>
                         </div>
@@ -104,7 +103,7 @@ function OperationsTransfersCardsComponent({transfers, handleConfirmModalShow}) 
 // Prop types to ensure destroyed props data type
 OperationsTransfersCardsComponent.propTypes = {
     transfers: PropTypes.array.isRequired,
-    handleConfirmModalShow: PropTypes.func.isRequired,
+    // handleConfirmModalShow: PropTypes.func.isRequired,
 };
 
 export default React.memo(OperationsTransfersCardsComponent);
