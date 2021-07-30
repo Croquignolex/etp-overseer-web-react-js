@@ -9,7 +9,6 @@ import AppLayoutContainer from "../../containers/AppLayoutContainer";
 import ErrorAlertComponent from "../../components/ErrorAlertComponent";
 import TableSearchComponent from "../../components/TableSearchComponent";
 import FormModalComponent from "../../components/modals/FormModalComponent";
-import SupervisorNewContainer from "../../containers/supervisors/SupervisorNewContainer";
 import SupervisorsCardsComponent from "../../components/supervisors/SupervisorsCardsComponent";
 import {emitSupervisorsFetch, emitNextSupervisorsFetch} from "../../redux/supervisors/actions";
 import SupervisorDetailsContainer from "../../containers/supervisors/SupervisorDetailsContainer";
@@ -22,7 +21,7 @@ import {storeSupervisorsRequestReset, storeNextSupervisorsRequestReset} from "..
 function SupervisorsPage({supervisors, supervisorsRequests, hasMoreData, page, dispatch, location}) {
     // Local states
     const [needle, setNeedle] = useState('');
-    const [newSupervisorModal, setNewSupervisorModal] = useState({show: false, header: ''});
+    // const [newSupervisorModal, setNewSupervisorModal] = useState({show: false, header: ''});
     const [movementsModal, setMovementsModal] = useState({show: false, header: '', supervisor: {}});
     const [transactionsModal, setTransactionsModal] = useState({show: false, header: '', supervisor: {}});
     const [supervisorDetailsModal, setSupervisorDetailsModal] = useState({show: false, header: '', id: ''});
@@ -36,7 +35,7 @@ function SupervisorsPage({supervisors, supervisorsRequests, hasMoreData, page, d
         };
         // eslint-disable-next-line
     }, []);
-
+S
     const handleNeedleInput = (data) => {
         setNeedle(data)
     }
@@ -52,7 +51,7 @@ function SupervisorsPage({supervisors, supervisorsRequests, hasMoreData, page, d
         dispatch(emitNextSupervisorsFetch({page}));
     }
 
-    // Show new supervisor modal form
+   /* // Show new supervisor modal form
     const handleNewSupervisorModalShow = () => {
         setNewSupervisorModal({newSupervisorModal, header: "NOUVEAU SUPERVISEUR", show: true})
     }
@@ -60,7 +59,7 @@ function SupervisorsPage({supervisors, supervisorsRequests, hasMoreData, page, d
     // Hide new supervisor modal form
     const handleNewSupervisorModalHide = () => {
         setNewSupervisorModal({...newSupervisorModal, show: false})
-    }
+    }*/
 
     // Show supervisor details modal form
     const handleSupervisorDetailsModalShow = ({id, name}) => {
@@ -113,12 +112,12 @@ function SupervisorsPage({supervisors, supervisorsRequests, hasMoreData, page, d
                                             {/* Error message */}
                                             {requestFailed(supervisorsRequests.list) && <ErrorAlertComponent message={supervisorsRequests.list.message} />}
                                             {requestFailed(supervisorsRequests.next) && <ErrorAlertComponent message={supervisorsRequests.next.message} />}
-                                            <button type="button"
+                                           {/* <button type="button"
                                                     className="btn btn-theme ml-2 mb-2"
                                                     onClick={handleNewSupervisorModalShow}
                                             >
                                                 <i className="fa fa-plus" /> Nouveau superviseur
-                                            </button>
+                                            </button>*/}
                                             {/* Search result & Infinite scroll */}
                                             {(needle !== '' && needle !== undefined)
                                                 ? <SupervisorsCardsComponent supervisors={searchEngine(supervisors, needle)}
@@ -150,9 +149,9 @@ function SupervisorsPage({supervisors, supervisorsRequests, hasMoreData, page, d
                 </div>
             </AppLayoutContainer>
             {/* Modal */}
-            <FormModalComponent modal={newSupervisorModal} handleClose={handleNewSupervisorModalHide}>
+            {/*<FormModalComponent modal={newSupervisorModal} handleClose={handleNewSupervisorModalHide}>
                 <SupervisorNewContainer type={newSupervisorModal.type} handleClose={handleNewSupervisorModalHide} />
-            </FormModalComponent>
+            </FormModalComponent>*/}
             <FormModalComponent modal={supervisorDetailsModal} handleClose={handleSupervisorDetailsModalHide}>
                 <SupervisorDetailsContainer id={supervisorDetailsModal.id} />
             </FormModalComponent>

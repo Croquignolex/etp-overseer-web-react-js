@@ -29,6 +29,12 @@ function ManagersCardsComponent({managers, handleTransactionsModalShow, handleMo
                                                     />
                                             )}
                                         </div>*/}
+                                        <div className="float-right">
+                                            {item.status
+                                                ?  <span className="badge badge-success">Activé</span>
+                                                :  <span className="badge badge-danger">Bloqué</span>
+                                            }
+                                        </div>
                                     </div>
                                     <ul className="list-group list-group-unbordered">
                                         <li className="list-group-item">
