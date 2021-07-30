@@ -4,17 +4,15 @@ import React, {useMemo, useState} from 'react';
 import FormModalComponent from "../modals/FormModalComponent";
 import {dateToString, formatNumber} from "../../functions/generalFunctions";
 import ZoneDetailsContainer from "../../containers/zones/ZoneDetailsContainer";
-import CollectorInfoEditContainer from "../../containers/collectors/CollectorInfoEditContainer";
-import CollectorZoneEditContainer from "../../containers/collectors/CollectorZoneEditContainer";
 
 // Component
 function CollectorInfoComponent({collector}) {
     // Local states
     const [zoneDetailsModal, setZoneDetailsModal] = useState({show: false, header: 'DETAIL DE LA ZONE', id: ''});
-    const [zoneEditModal, setZoneEditModal] = useState({show: false, header: 'MODIFIER LA ZONE DE ' + collector.name});
-    const [infoEditModal, setInfoEditModal] = useState({show: false, header: 'MODIFIER LES INFO DE ' + collector.name});
+    // const [zoneEditModal, setZoneEditModal] = useState({show: false, header: 'MODIFIER LA ZONE DE ' + collector.name});
+    // const [infoEditModal, setInfoEditModal] = useState({show: false, header: 'MODIFIER LES INFO DE ' + collector.name});
 
-    // Show zone edit modal form
+    /*// Show zone edit modal form
     const handleZoneEditModalShow = () => {
         setZoneEditModal({...zoneEditModal, show: true})
     }
@@ -22,9 +20,9 @@ function CollectorInfoComponent({collector}) {
     // Hide zone edit modal form
     const handleZoneEditModalHide = () => {
         setZoneEditModal({...zoneEditModal, show: false})
-    }
+    }*/
 
-    // Show info edit modal form
+   /* // Show info edit modal form
     const handleInfoEditModalShow = () => {
         setInfoEditModal({...infoEditModal, show: true})
     }
@@ -32,7 +30,7 @@ function CollectorInfoComponent({collector}) {
     // Hide info edit modal form
     const handleInfoEditModalHide = () => {
         setInfoEditModal({...infoEditModal, show: false})
-    }
+    }*/
 
     // Hide zone details modal form
     const handleZoneDetailModalHide = () => {
@@ -46,12 +44,12 @@ function CollectorInfoComponent({collector}) {
     // Render
     return (
         <>
-            <button type="button" className="btn btn-theme mb-1 mr-1" onClick={handleInfoEditModalShow}>
+            {/*<button type="button" className="btn btn-theme mb-1 mr-1" onClick={handleInfoEditModalShow}>
                 <i className="fa fa-pencil" /> Modifier les info
             </button>
             <button type="button" className="btn btn-theme mb-1" onClick={handleZoneEditModalShow}>
                 <i className="fa fa-pencil" /> Modifier la zone
-            </button>
+            </button>*/}
             <div className="card">
                 <div className="card-header bg-secondary" />
                 <div className="card-body">
@@ -124,12 +122,12 @@ function CollectorInfoComponent({collector}) {
                 </div>
             </div>
             {/* Modal */}
-            <FormModalComponent modal={infoEditModal} handleClose={handleInfoEditModalHide}>
+            {/*<FormModalComponent modal={infoEditModal} handleClose={handleInfoEditModalHide}>
                 <CollectorInfoEditContainer handleClose={handleInfoEditModalHide} />
-            </FormModalComponent>
-            <FormModalComponent modal={zoneEditModal} handleClose={handleZoneEditModalHide}>
+            </FormModalComponent>*/}
+            {/*<FormModalComponent modal={zoneEditModal} handleClose={handleZoneEditModalHide}>
                 <CollectorZoneEditContainer handleClose={handleZoneEditModalHide} />
-            </FormModalComponent>
+            </FormModalComponent>*/}
             <FormModalComponent modal={zoneDetailsModal} handleClose={handleZoneDetailModalHide}>
                 <ZoneDetailsContainer id={zoneDetailsModal.id} />
             </FormModalComponent>

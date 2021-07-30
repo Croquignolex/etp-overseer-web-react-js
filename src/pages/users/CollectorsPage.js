@@ -8,22 +8,20 @@ import AppLayoutContainer from "../../containers/AppLayoutContainer";
 import ErrorAlertComponent from "../../components/ErrorAlertComponent";
 import TableSearchComponent from "../../components/TableSearchComponent";
 import FormModalComponent from "../../components/modals/FormModalComponent";
-import BlockModalComponent from "../../components/modals/BlockModalComponent";
-import CollectorNewContainer from "../../containers/collectors/CollectorNewContainer";
+import {emitCollectorsFetch, emitNextCollectorsFetch} from "../../redux/collectors/actions";
 import CollectorsCardsComponent from "../../components/collectors/CollectorsCardsComponent";
 import CollectorDetailsContainer from "../../containers/collectors/CollectorDetailsContainer";
 import CollectorMovementsContainer from "../../containers/collectors/CollectorMovementsContainer";
 import CollectorTransactionsContainer from "../../containers/collectors/CollectorTransactionsContainer";
-import {emitCollectorsFetch, emitNextCollectorsFetch, emitToggleCollectorStatus} from "../../redux/collectors/actions";
-import {applySuccess, dateToString, needleSearch, requestFailed, requestLoading, requestSucceeded} from "../../functions/generalFunctions";
-import {storeCollectorsRequestReset, storeNextCollectorsRequestReset, storeCollectorStatusToggleRequestReset,} from "../../redux/requests/collectors/actions";
+import {dateToString, needleSearch, requestFailed, requestLoading} from "../../functions/generalFunctions";
+import {storeCollectorsRequestReset, storeNextCollectorsRequestReset} from "../../redux/requests/collectors/actions";
 
 // Component
 function CollectorsPage({collectors, collectorsRequests, hasMoreData, page, dispatch, location}) {
     // Local states
     const [needle, setNeedle] = useState('');
-    const [blockModal, setBlockModal] = useState({show: false, body: '', id: 0});
-    const [newCollectorModal, setNewCollectorModal] = useState({show: false, header: ''});
+    // const [blockModal, setBlockModal] = useState({show: false, body: '', id: 0});
+    // const [newCollectorModal, setNewCollectorModal] = useState({show: false, header: ''});
     const [movementsModal, setMovementsModal] = useState({show: false, header: '', collector: {}});
     const [transactionsModal, setTransactionsModal] = useState({show: false, header: '', collector: {}});
     const [collectorDetailsModal, setCollectorDetailsModal] = useState({show: false, header: '', id: ''});
@@ -38,14 +36,14 @@ function CollectorsPage({collectors, collectorsRequests, hasMoreData, page, disp
         // eslint-disable-next-line
     }, []);
 
-    // Local effects
+    /*// Local effects
     useEffect(() => {
         // Reset inputs while toast (well done) into current scope
         if(requestSucceeded(collectorsRequests.status)) {
             applySuccess(collectorsRequests.status.message);
         }
         // eslint-disable-next-line
-    }, [collectorsRequests.status]);
+    }, [collectorsRequests.status]);*/
 
     const handleNeedleInput = (data) => {
         setNeedle(data)
@@ -55,7 +53,7 @@ function CollectorsPage({collectors, collectorsRequests, hasMoreData, page, disp
     const shouldResetErrorData = () => {
         dispatch(storeCollectorsRequestReset());
         dispatch(storeNextCollectorsRequestReset());
-        dispatch(storeCollectorStatusToggleRequestReset());
+        // dispatch(storeCollectorStatusToggleRequestReset());
     };
 
     // Fetch next collector data to enhance infinite scroll
@@ -63,7 +61,7 @@ function CollectorsPage({collectors, collectorsRequests, hasMoreData, page, disp
         dispatch(emitNextCollectorsFetch({page}));
     }
 
-    // Show new collector modal form
+    /*// Show new collector modal form
     const handleNewCollectorModalShow = () => {
         setNewCollectorModal({newCollectorModal, header: "NOUVEAU RESPONSABLE DE ZONE", show: true})
     }
@@ -71,7 +69,7 @@ function CollectorsPage({collectors, collectorsRequests, hasMoreData, page, disp
     // Hide new collector modal form
     const handleNewCollectorModalHide = () => {
         setNewCollectorModal({...newCollectorModal, show: false})
-    }
+    }*/
 
     // Show collector details modal form
     const handleCollectorDetailsModalShow = ({id, name}) => {
@@ -83,10 +81,10 @@ function CollectorsPage({collectors, collectorsRequests, hasMoreData, page, disp
         setCollectorDetailsModal({...collectorDetailsModal, show: false})
     }
 
-    // Trigger when user block status confirmed on modal
+   /* // Trigger when user block status confirmed on modal
     const handleBlockModalShow = ({id, name}) => {
         setBlockModal({...blockModal, show: true, id, body: `Bloquer le responsable de zone ${name}?`})
-    };
+    };*/
 
     // Show transactions modal form
     const handleTransactionsModalShow = (collector) => {
@@ -108,7 +106,7 @@ function CollectorsPage({collectors, collectorsRequests, hasMoreData, page, disp
         setMovementsModal({...movementsModal, show: false})
     }
 
-    // Hide block confirmation modal
+    /*// Hide block confirmation modal
     const handleBlockModalHide = () => {
         setBlockModal({...blockModal, show: false})
     }
@@ -117,7 +115,7 @@ function CollectorsPage({collectors, collectorsRequests, hasMoreData, page, disp
     const handleBlock = (id) => {
         handleBlockModalHide();
         dispatch(emitToggleCollectorStatus({id}));
-    };
+    };*/
 
     // Render
     return (
@@ -140,18 +138,16 @@ function CollectorsPage({collectors, collectorsRequests, hasMoreData, page, disp
                                             {/* Error message */}
                                             {requestFailed(collectorsRequests.list) && <ErrorAlertComponent message={collectorsRequests.list.message} />}
                                             {requestFailed(collectorsRequests.next) && <ErrorAlertComponent message={collectorsRequests.next.message} />}
-                                            {requestFailed(collectorsRequests.status) && <ErrorAlertComponent message={collectorsRequests.status.message} />}
-                                            <button type="button"
+                                            {/*{requestFailed(collectorsRequests.status) && <ErrorAlertComponent message={collectorsRequests.status.message} />}*/}
+                                           {/* <button type="button"
                                                     className="btn btn-theme ml-2 mb-2"
                                                     onClick={handleNewCollectorModalShow}
                                             >
                                                 <i className="fa fa-plus" /> Nouveau responsable
-                                            </button>
+                                            </button>*/}
                                             {/* Search result & Infinite scroll */}
                                             {(needle !== '' && needle !== undefined)
-                                                ? <CollectorsCardsComponent handleBlock={handleBlock}
-                                                                            handleBlockModalShow={handleBlockModalShow}
-                                                                            collectors={searchEngine(collectors, needle)}
+                                                ? <CollectorsCardsComponent collectors={searchEngine(collectors, needle)}
                                                                             handleMovementsModalShow={handleMovementsModalShow}
                                                                             handleTransactionsModalShow={handleTransactionsModalShow}
                                                                             handleCollectorDetailsModalShow={handleCollectorDetailsModalShow}
@@ -164,8 +160,6 @@ function CollectorsPage({collectors, collectorsRequests, hasMoreData, page, disp
                                                                         style={{ overflow: 'hidden' }}
                                                         >
                                                             <CollectorsCardsComponent collectors={collectors}
-                                                                                      handleBlock={handleBlock}
-                                                                                      handleBlockModalShow={handleBlockModalShow}
                                                                                       handleMovementsModalShow={handleMovementsModalShow}
                                                                                       handleTransactionsModalShow={handleTransactionsModalShow}
                                                                                       handleCollectorDetailsModalShow={handleCollectorDetailsModalShow}
@@ -182,13 +176,13 @@ function CollectorsPage({collectors, collectorsRequests, hasMoreData, page, disp
                 </div>
             </AppLayoutContainer>
             {/* Modal */}
-            <BlockModalComponent modal={blockModal}
+            {/*<BlockModalComponent modal={blockModal}
                                  handleBlock={handleBlock}
                                  handleClose={handleBlockModalHide}
             />
             <FormModalComponent modal={newCollectorModal} handleClose={handleNewCollectorModalHide}>
                 <CollectorNewContainer type={newCollectorModal.type} handleClose={handleNewCollectorModalHide} />
-            </FormModalComponent>
+            </FormModalComponent>*/}
             <FormModalComponent modal={collectorDetailsModal} handleClose={handleCollectorDetailsModalHide}>
                 <CollectorDetailsContainer id={collectorDetailsModal.id} />
             </FormModalComponent>

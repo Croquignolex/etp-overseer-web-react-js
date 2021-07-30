@@ -1,14 +1,12 @@
 import React, {useState} from 'react';
 import PropTypes from "prop-types";
 
-import LoaderComponent from "../LoaderComponent";
 import FormModalComponent from "../modals/FormModalComponent";
 import {dateToString, formatNumber} from "../../functions/generalFunctions";
 import ZoneDetailsContainer from "../../containers/zones/ZoneDetailsContainer";
 
 // Component
-function CollectorsCardsComponent({collectors, handleBlock, handleBlockModalShow,
-                                      handleMovementsModalShow, handleTransactionsModalShow, handleCollectorDetailsModalShow}) {
+function CollectorsCardsComponent({collectors, handleMovementsModalShow, handleTransactionsModalShow, handleCollectorDetailsModalShow}) {
     // Local states
     const [zoneDetailsModal, setZoneDetailsModal] = useState({show: false, header: 'DETAIL DE LA ZONE', id: ''});
 
@@ -29,7 +27,7 @@ function CollectorsCardsComponent({collectors, handleBlock, handleBlockModalShow
                                 <div className="card-body">
                                     <div className="text-center mb-3">
                                         <img src={item.avatar} alt="avatar..." className="profile-user-img img-fluid img-circle" />
-                                        <div className="float-right">
+                                        {/*<div className="float-right">
                                             {item.actionLoader ? <LoaderComponent little={true} /> :(
                                                 item.status
                                                     ? <i onClick={() => handleBlockModalShow(item)}
@@ -40,7 +38,7 @@ function CollectorsCardsComponent({collectors, handleBlock, handleBlockModalShow
                                                          onClick={() => handleBlock(item.id)}
                                                     />
                                             )}
-                                        </div>
+                                        </div>*/}
                                     </div>
                                     <ul className="list-group list-group-unbordered">
                                         <li className="list-group-item">
@@ -117,8 +115,6 @@ function CollectorsCardsComponent({collectors, handleBlock, handleBlockModalShow
 // Prop types to ensure destroyed props data type
 CollectorsCardsComponent.propTypes = {
     collectors: PropTypes.array.isRequired,
-    handleBlock: PropTypes.func.isRequired,
-    handleBlockModalShow: PropTypes.func.isRequired,
     handleMovementsModalShow: PropTypes.func.isRequired,
     handleTransactionsModalShow: PropTypes.func.isRequired,
     handleCollectorDetailsModalShow: PropTypes.func.isRequired,
