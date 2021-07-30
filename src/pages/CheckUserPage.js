@@ -32,7 +32,7 @@ function CheckUserPage({location, request, dispatch}) {
         <div className="container">
             <div className="row">
                 <div className="col-6 mx-auto">
-                    <img alt="..." src={require('../assets/images/supervisor.png')} className="img-fluid" />
+                    <img alt="..." src={require('../assets/images/overseer.png')} className="img-fluid" />
                 </div>
                 <div className="col-12 mt-4">
                     {requestLoading(request) && <LoaderComponent />}
