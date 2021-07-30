@@ -5,7 +5,6 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import {ALL_SIMS} from "../../constants/pageNameConstants";
 import LoaderComponent from "../../components/LoaderComponent";
 import HeaderComponent from "../../components/HeaderComponent";
-import SimNewContainer from "../../containers/sims/SimNewContainer";
 import AppLayoutContainer from "../../containers/AppLayoutContainer";
 import ErrorAlertComponent from "../../components/ErrorAlertComponent";
 import SimsCardsComponent from "../../components/sims/SimsCardsComponent";
@@ -21,7 +20,7 @@ import {dateToString, needleSearch, requestFailed, requestLoading} from "../../f
 function SimsPage({sims, simsRequests, hasMoreData, page, dispatch, location}) {
     // Local states
     const [needle, setNeedle] = useState('');
-    const [newSimModal, setNewSimModal] = useState({show: false, header: ''});
+    // const [newSimModal, setNewSimModal] = useState({show: false, header: ''});
     const [transactionsModal, setTransactionsModal] = useState({show: false, header: '', sim: {}});
     const [simDetailsModal, setSimDetailsModal] = useState({show: false, header: "DETAIL DU COMPTE", id: ''});
 
@@ -54,7 +53,7 @@ function SimsPage({sims, simsRequests, hasMoreData, page, dispatch, location}) {
         dispatch(emitNextSimsFetch({page}));
     }
 
-    // Show new sim modal form
+   /* // Show new sim modal form
     const handleNewSimModalShow = () => {
         setNewSimModal({newSimModal, header: "NOUVEAU COMPTE", show: true})
     }
@@ -62,7 +61,7 @@ function SimsPage({sims, simsRequests, hasMoreData, page, dispatch, location}) {
     // Hide new sim modal form
     const handleNewSimModalHide = () => {
         setNewSimModal({...newSimModal, show: false})
-    }
+    }*/
 
     // Show sim details modal form
     const handleSimDetailsModalShow = ({id}) => {
@@ -108,12 +107,12 @@ function SimsPage({sims, simsRequests, hasMoreData, page, dispatch, location}) {
                                             {/* Error message */}
                                             {requestFailed(simsRequests.list) && <ErrorAlertComponent message={simsRequests.list.message} />}
                                             {requestFailed(simsRequests.next) && <ErrorAlertComponent message={simsRequests.next.message} />}
-                                            <button type="button"
+                                           {/* <button type="button"
                                                     className="btn btn-theme ml-2 mb-2"
                                                     onClick={handleNewSimModalShow}
                                             >
                                                 <i className="fa fa-plus" /> Nouveau compte
-                                            </button>
+                                            </button>*/}
                                             {/* Search result & Infinite scroll */}
                                             {requestLoading(simsRequests.list) ? <LoaderComponent /> : ((needle !== '' && needle !== undefined) ?
                                                     (
@@ -145,9 +144,9 @@ function SimsPage({sims, simsRequests, hasMoreData, page, dispatch, location}) {
                 </div>
             </AppLayoutContainer>
             {/* Modal */}
-            <FormModalComponent modal={newSimModal} handleClose={handleNewSimModalHide}>
+            {/*<FormModalComponent modal={newSimModal} handleClose={handleNewSimModalHide}>
                 <SimNewContainer handleClose={handleNewSimModalHide} />
-            </FormModalComponent>
+            </FormModalComponent>*/}
             <FormModalComponent small={true} modal={simDetailsModal} handleClose={handleSimDetailsModalHide}>
                 <SimDetailsContainer id={simDetailsModal.id} />
             </FormModalComponent>
