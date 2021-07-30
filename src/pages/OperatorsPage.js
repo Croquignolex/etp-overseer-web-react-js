@@ -9,7 +9,6 @@ import AppLayoutContainer from "../containers/AppLayoutContainer";
 import ErrorAlertComponent from "../components/ErrorAlertComponent";
 import TableSearchComponent from "../components/TableSearchComponent";
 import FormModalComponent from "../components/modals/FormModalComponent";
-import OperatorNewContainer from "../containers/operators/OperatorNewContainer";
 import OperatorsCardsComponent from "../components/operators/OperatorsCardsComponent";
 import {emitNextOperatorsFetch, emitOperatorsFetch} from "../redux/operators/actions";
 import OperatorDetailsContainer from "../containers/operators/OperatorDetailsContainer";
@@ -21,7 +20,7 @@ import {storeNextOperatorsRequestReset, storeOperatorsRequestReset} from "../red
 function OperatorsPage({operators, operatorsRequests, hasMoreData, page, dispatch, location}) {
     // Local states
     const [needle, setNeedle] = useState('');
-    const [newOperatorModal, setNewOperatorModal] = useState({show: false, header: ''});
+    // const [newOperatorModal, setNewOperatorModal] = useState({show: false, header: ''});
     const [transactionsModal, setTransactionsModal] = useState({show: false, header: '', operator: {}});
     const [operatorDetailsModal, setOperatorDetailsModal] = useState({show: false, header: "DETAIL DE L'OPERATEUR", id: ''});
 
@@ -50,7 +49,7 @@ function OperatorsPage({operators, operatorsRequests, hasMoreData, page, dispatc
         dispatch(emitNextOperatorsFetch({page}));
     }
 
-    // Show new operator modal form
+    /*// Show new operator modal form
     const handleNewOperatorModalShow = () => {
         setNewOperatorModal({newOperatorModal, header: "NOUVEL OPERATEUR", show: true})
     }
@@ -58,7 +57,7 @@ function OperatorsPage({operators, operatorsRequests, hasMoreData, page, dispatc
     // Hide new operator modal form
     const handleNewOperatorModalHide = () => {
         setNewOperatorModal({...newOperatorModal, show: false})
-    }
+    }*/
 
     // Show operator details modal form
     const handleOperatorDetailsModalShow = ({id}) => {
@@ -101,12 +100,12 @@ function OperatorsPage({operators, operatorsRequests, hasMoreData, page, dispatc
                                             {/* Error message */}
                                             {requestFailed(operatorsRequests.list) && <ErrorAlertComponent message={operatorsRequests.list.message} />}
                                             {requestFailed(operatorsRequests.next) && <ErrorAlertComponent message={operatorsRequests.next.message} />}
-                                            <button type="button"
+                                            {/*<button type="button"
                                                     className="btn btn-theme ml-2 mb-2"
                                                     onClick={handleNewOperatorModalShow}
                                             >
                                                 <i className="fa fa-plus" /> Nouvel opérateur
-                                            </button>
+                                            </button>*/}
                                             {/* Search result & Infinite scroll */}
                                             {(needle !== '' && needle !== undefined)
                                                 ? <OperatorsCardsComponent operators={searchEngine(operators, needle)}
@@ -136,9 +135,9 @@ function OperatorsPage({operators, operatorsRequests, hasMoreData, page, dispatc
                 </div>
             </AppLayoutContainer>
             {/* Modal */}
-            <FormModalComponent modal={newOperatorModal} handleClose={handleNewOperatorModalHide}>
+           {/* <FormModalComponent modal={newOperatorModal} handleClose={handleNewOperatorModalHide}>
                 <OperatorNewContainer handleClose={handleNewOperatorModalHide} />
-            </FormModalComponent>
+            </FormModalComponent>*/}
             <FormModalComponent modal={operatorDetailsModal} handleClose={handleOperatorDetailsModalHide}>
                 <OperatorDetailsContainer id={operatorDetailsModal.id} />
             </FormModalComponent>
