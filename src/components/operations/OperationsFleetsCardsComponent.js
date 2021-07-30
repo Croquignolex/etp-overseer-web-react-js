@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import React, {useState} from 'react';
 
-import LoaderComponent from "../LoaderComponent";
 import OperatorComponent from "../OperatorComponent";
 import FormModalComponent from "../modals/FormModalComponent";
 import {fleetTypeBadgeColor} from "../../functions/typeFunctions";
@@ -11,7 +10,7 @@ import SimDetailsContainer from "../../containers/sims/SimDetailsContainer";
 import AgentDetailsContainer from "../../containers/agents/AgentDetailsContainer";
 
 // Component
-function OperationsFleetsCardsComponent({supplies, handleFleetRecoveryModalShow, handleCashRecoveryModalShow, handleSupplyDetailsModalShow}) {
+function OperationsFleetsCardsComponent({supplies, handleSupplyDetailsModalShow}) {
     // Local states
     const [simDetailsModal, setSimDetailsModal] = useState({show: false, header: 'DETAIL DU COMPTE', id: ''});
     const [agentDetailsModal, setAgentDetailsModal] = useState({show: false, header: "DETAIL DE L'AGENT/RESSOURCE", id: ''});
@@ -98,7 +97,7 @@ function OperationsFleetsCardsComponent({supplies, handleFleetRecoveryModalShow,
                                         >
                                             <i className="fa fa-eye" /> Details
                                         </button><br/>
-                                        {item.status !== DONE && (
+                                        {/*{item.status !== DONE && (
                                             item.actionLoader ? <LoaderComponent little={true} /> : (
                                                 <>
                                                     <button type="button"
@@ -115,7 +114,7 @@ function OperationsFleetsCardsComponent({supplies, handleFleetRecoveryModalShow,
                                                     </button>
                                                 </>
                                             )
-                                        )}
+                                        )}*/}
                                     </div>
                                 </div>
                             </div>
@@ -144,9 +143,9 @@ function OperationsFleetsCardsComponent({supplies, handleFleetRecoveryModalShow,
 // Prop types to ensure destroyed props data type
 OperationsFleetsCardsComponent.propTypes = {
     supplies: PropTypes.array.isRequired,
-    handleCashRecoveryModalShow: PropTypes.func.isRequired,
+    // handleCashRecoveryModalShow: PropTypes.func.isRequired,
     handleSupplyDetailsModalShow: PropTypes.func.isRequired,
-    handleFleetRecoveryModalShow: PropTypes.func.isRequired,
+    // handleFleetRecoveryModalShow: PropTypes.func.isRequired,
 };
 
 export default React.memo(OperationsFleetsCardsComponent);
