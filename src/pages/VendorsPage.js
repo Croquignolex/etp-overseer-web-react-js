@@ -9,7 +9,6 @@ import AppLayoutContainer from "../containers/AppLayoutContainer";
 import ErrorAlertComponent from "../components/ErrorAlertComponent";
 import TableSearchComponent from "../components/TableSearchComponent";
 import FormModalComponent from "../components/modals/FormModalComponent";
-import VendorNewContainer from "../containers/vendors/VendorNewContainer";
 import VendorsCardsComponent from "../components/vendors/VendorsCardsComponent";
 import {emitNextVendorsFetch, emitVendorsFetch} from "../redux/vendors/actions";
 import VendorDetailsContainer from "../containers/vendors/VendorDetailsContainer";
@@ -20,7 +19,7 @@ import {storeNextVendorsRequestReset, storeVendorsRequestReset} from "../redux/r
 function VendorsPage({vendors, vendorsRequests, hasMoreData, page, dispatch, location}) {
     // Local states
     const [needle, setNeedle] = useState('');
-    const [newVendorModal, setNewVendorModal] = useState({show: false, header: ''});
+    // const [newVendorModal, setNewVendorModal] = useState({show: false, header: ''});
     const [vendorDetailsModal, setVendorDetailsModal] = useState({show: false, header: "DETAIL DU FOURNISSEUR", id: ''});
 
     // Local effects
@@ -48,7 +47,7 @@ function VendorsPage({vendors, vendorsRequests, hasMoreData, page, dispatch, loc
         dispatch(emitNextVendorsFetch({page}));
     }
 
-    // Show new vendor modal form
+    /*// Show new vendor modal form
     const handleNewVendorModalShow = () => {
         setNewVendorModal({newVendorModal, header: "NOUVEAU FOURNISSEUR", show: true})
     }
@@ -56,7 +55,7 @@ function VendorsPage({vendors, vendorsRequests, hasMoreData, page, dispatch, loc
     // Hide new vendor modal form
     const handleNewVendorModalHide = () => {
         setNewVendorModal({...newVendorModal, show: false})
-    }
+    }*/
 
     // Show vendor details modal form
     const handleVendorDetailsModalShow = ({id}) => {
@@ -89,12 +88,12 @@ function VendorsPage({vendors, vendorsRequests, hasMoreData, page, dispatch, loc
                                             {/* Error message */}
                                             {requestFailed(vendorsRequests.list) && <ErrorAlertComponent message={vendorsRequests.list.message} />}
                                             {requestFailed(vendorsRequests.next) && <ErrorAlertComponent message={vendorsRequests.next.message} />}
-                                            <button type="button"
+                                            {/*<button type="button"
                                                     className="btn btn-theme ml-2 mb-2"
                                                     onClick={handleNewVendorModalShow}
                                             >
                                                 <i className="fa fa-plus" /> Nouveau fournisseur
-                                            </button>
+                                            </button>*/}
                                             {/* Search result & Infinite scroll */}
                                             {(needle !== '' && needle !== undefined)
                                                 ? <VendorsCardsComponent vendors={searchEngine(vendors, needle)}
@@ -122,9 +121,9 @@ function VendorsPage({vendors, vendorsRequests, hasMoreData, page, dispatch, loc
                 </div>
             </AppLayoutContainer>
             {/* Modal */}
-            <FormModalComponent modal={newVendorModal} handleClose={handleNewVendorModalHide}>
+            {/*<FormModalComponent modal={newVendorModal} handleClose={handleNewVendorModalHide}>
                 <VendorNewContainer handleClose={handleNewVendorModalHide} />
-            </FormModalComponent>
+            </FormModalComponent>*/}
             <FormModalComponent small={true} modal={vendorDetailsModal} handleClose={handleVendorDetailsModalHide}>
                 <VendorDetailsContainer id={vendorDetailsModal.id} />
             </FormModalComponent>
