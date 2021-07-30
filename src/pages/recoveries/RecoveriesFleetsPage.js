@@ -9,18 +9,16 @@ import AppLayoutContainer from "../../containers/AppLayoutContainer";
 import ErrorAlertComponent from "../../components/ErrorAlertComponent";
 import {RECOVERIES_FLEET_PAGE} from "../../constants/pageNameConstants";
 import TableSearchComponent from "../../components/TableSearchComponent";
-import FormModalComponent from "../../components/modals/FormModalComponent";
 import {emitNextReturnsFetch, emitReturnsFetch} from "../../redux/returns/actions";
 import RecoveriesFleetsCardsComponent from "../../components/recoveries/RecoveriesFleetsCardsComponent";
 import {dateToString, needleSearch, requestFailed, requestLoading} from "../../functions/generalFunctions";
 import {storeReturnsRequestReset, storeNextReturnsRequestReset} from "../../redux/requests/returns/actions";
-import RecoveriesFleetsAddReturnContainer from "../../containers/recoveries/RecoveriesFleetsAddReturnContainer";
 
 // Component
 function RecoveriesFleetsPage({returns, returnsRequests, hasMoreData, page, dispatch, location}) {
     // Local states
     const [needle, setNeedle] = useState('');
-    const [recoveryModal, setRecoveryModal] = useState({show: false, header: "EFFECTUER UN RETOUR FLOTTE"});
+    // const [recoveryModal, setRecoveryModal] = useState({show: false, header: "EFFECTUER UN RETOUR FLOTTE"});
 
     // Local effects
     useEffect(() => {
@@ -47,7 +45,7 @@ function RecoveriesFleetsPage({returns, returnsRequests, hasMoreData, page, disp
         dispatch(emitNextReturnsFetch({page}));
     }
 
-    // Show recovery modal form
+    /*// Show recovery modal form
     const handleRecoveryModalShow = (item) => {
         setRecoveryModal({...recoveryModal, item, show: true})
     }
@@ -55,7 +53,7 @@ function RecoveriesFleetsPage({returns, returnsRequests, hasMoreData, page, disp
     // Hide recovery modal form
     const handleRecoveryModalHide = () => {
         setRecoveryModal({...recoveryModal, show: false})
-    }
+    }*/
 
     // Render
     return (
@@ -78,12 +76,12 @@ function RecoveriesFleetsPage({returns, returnsRequests, hasMoreData, page, disp
                                             {/* Error message */}
                                             {requestFailed(returnsRequests.list) && <ErrorAlertComponent message={returnsRequests.list.message} />}
                                             {requestFailed(returnsRequests.next) && <ErrorAlertComponent message={returnsRequests.next.message} />}
-                                            <button type="button"
+                                            {/*<button type="button"
                                                     className="btn btn-theme mb-2"
                                                     onClick={handleRecoveryModalShow}
                                             >
                                                 <i className="fa fa-redo" /> Effectuer un retour flotte
-                                            </button>
+                                            </button>*/}
                                             {/* Search result & Infinite scroll */}
                                             {(needle !== '' && needle !== undefined)
                                                 ? <RecoveriesFleetsCardsComponent returns={searchEngine(returns, needle)} />
@@ -107,9 +105,9 @@ function RecoveriesFleetsPage({returns, returnsRequests, hasMoreData, page, disp
                 </div>
             </AppLayoutContainer>
             {/* Modal */}
-            <FormModalComponent modal={recoveryModal} handleClose={handleRecoveryModalHide}>
+            {/*<FormModalComponent modal={recoveryModal} handleClose={handleRecoveryModalHide}>
                 <RecoveriesFleetsAddReturnContainer handleClose={handleRecoveryModalHide} />
-            </FormModalComponent>
+            </FormModalComponent>*/}
         </>
     )
 }
