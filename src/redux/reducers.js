@@ -14,7 +14,6 @@ import settings from './settings/reducer';
 import managers from './managers/reducer';
 import supplies from './supplies/reducer';
 import payments from './payments/reducer';
-import movements from './movements/reducer';
 import operators from './operators/reducer';
 import transfers from './transfers/reducer';
 import companies from './companies/reducer';
@@ -26,7 +25,6 @@ import clearances from './clearances/reducer';
 import collectors from './collectors/reducer';
 import accountants from './accountants/reducer';
 import supervisors from './supervisors/reducer';
-import transactions from './transactions/reducer';
 import userRequests from './requests/user/reducer';
 import simsRequests from './requests/sims/reducer';
 import notifications from './notifications/reducer';
@@ -51,13 +49,11 @@ import transfersRequests from './requests/transfers/reducer';
 import simsTypesRequests from './requests/simsTypes/reducer';
 import handoversRequests from './requests/handovers/reducer';
 import companiesRequests from './requests/companies/reducer';
-import movementsRequests from './requests/movements/reducer';
 import collectorsRequests from './requests/collectors/reducer';
 import clearancesRequests from './requests/clearances/reducer';
 import recoveriesRequests from './requests/recoveries/reducer';
 import accountantsRequests from './requests/accountants/reducer';
 import supervisorsRequests from './requests/supervisors/reducer';
-import transactionsRequests from './requests/transactions/reducer';
 import notificationsRequests from './requests/notifications/reducer';
 import administratorsRequests from './requests/administrators/reducer';
 
@@ -81,7 +77,6 @@ export default {
     expenses,
     operators,
     transfers,
-    movements,
     simsTypes,
     companies,
     handovers,
@@ -93,7 +88,6 @@ export default {
     accountants,
     simsRequests,
     userRequests,
-    transactions,
     zonesRequests,
     notifications,
     fleetsRequests,
@@ -111,7 +105,6 @@ export default {
     settingsRequests,
     paymentsRequests,
     overseersRequests,
-    movementsRequests,
     handoversRequests,
     simsTypesRequests,
     transfersRequests,
@@ -122,7 +115,6 @@ export default {
     collectorsRequests,
     supervisorsRequests,
     accountantsRequests,
-    transactionsRequests,
     notificationsRequests,
     administratorsRequests,
 };

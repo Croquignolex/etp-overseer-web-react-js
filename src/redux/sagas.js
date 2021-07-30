@@ -16,7 +16,6 @@ import supplies from './supplies/saga';
 import payments from './payments/saga';
 import expenses from './expenses/saga';
 import revenues from './revenues/saga';
-import movements from './movements/saga';
 import operators from './operators/saga';
 import transfers from './transfers/saga';
 import companies from './companies/saga';
@@ -28,7 +27,6 @@ import collectors from './collectors/saga';
 import recoveries from './recoveries/saga';
 import supervisors from './supervisors/saga';
 import accountants from './accountants/saga';
-import transactions from './transactions/saga';
 import notifications from './notifications/saga';
 import administrators from './administrators/saga';
 
@@ -52,7 +50,6 @@ export default function* sagas() {
         payments(),
         settings(),
         overseers(),
-        movements(),
         companies(),
         handovers(),
         simsTypes(),
@@ -63,7 +60,6 @@ export default function* sagas() {
         collectors(),
         accountants(),
         supervisors(),
-        transactions(),
         notifications(),
         administrators(),
     ]);
