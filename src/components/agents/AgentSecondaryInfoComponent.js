@@ -3,17 +3,15 @@ import React, {useState} from 'react';
 
 import FormModalComponent from "../modals/FormModalComponent";
 import ZoneDetailsContainer from "../../containers/zones/ZoneDetailsContainer";
-import AgentDocEditContainer from "../../containers/agents/AgentDocEditContainer";
-import AgentZoneEditContainer from "../../containers/agents/AgentZoneEditContainer";
 
 // Component
 function AgentSecondaryInfoComponent({agent}) {
     // Local states
     const [zoneDetailsModal, setZoneDetailsModal] = useState({show: false, header: 'DETAIL DE LA ZONE', id: ''});
-    const [zoneEditModal, setZoneEditModal] = useState({show: false, header: 'MODIFIER LA ZONE DE ' + agent.name});
-    const [docEditModal, setDocEditModal] = useState({show: false, header: 'MODIFIER LE DOSSIER DE ' + agent.name});
+    // const [zoneEditModal, setZoneEditModal] = useState({show: false, header: 'MODIFIER LA ZONE DE ' + agent.name});
+    // const [docEditModal, setDocEditModal] = useState({show: false, header: 'MODIFIER LE DOSSIER DE ' + agent.name});
 
-    // Show zone edit modal form
+   /* // Show zone edit modal form
     const handleZoneEditModalShow = () => {
         setZoneEditModal({...zoneEditModal, show: true})
     }
@@ -31,7 +29,7 @@ function AgentSecondaryInfoComponent({agent}) {
     // Hide doc edit modal form
     const handleDocEditModalHide = () => {
         setDocEditModal({...docEditModal, show: false})
-    }
+    }*/
 
     // Hide zone details modal form
     const handleZoneDetailModalHide = () => {
@@ -41,12 +39,12 @@ function AgentSecondaryInfoComponent({agent}) {
     // Render
     return (
         <>
-            <button type="button" className="btn btn-theme mr-1 mb-1" onClick={handleZoneEditModalShow}>
+           {/* <button type="button" className="btn btn-theme mr-1 mb-1" onClick={handleZoneEditModalShow}>
                 <i className="fa fa-pencil" /> Modifier la zone
             </button>
             <button type="button" className="btn btn-theme mb-1" onClick={handleDocEditModalShow}>
                 <i className="fa fa-pencil" /> Modifier le dossier
-            </button>
+            </button>*/}
             <div className="card">
                 <div className="card-body">
                     <ul className="list-group list-group-unbordered mb-3">
@@ -92,12 +90,12 @@ function AgentSecondaryInfoComponent({agent}) {
                 </div>
             </div>
             {/* Modal */}
-            <FormModalComponent modal={zoneEditModal} handleClose={handleZoneEditModalHide}>
+            {/*<FormModalComponent modal={zoneEditModal} handleClose={handleZoneEditModalHide}>
                 <AgentZoneEditContainer handleClose={handleZoneEditModalHide} />
             </FormModalComponent>
             <FormModalComponent modal={docEditModal} handleClose={handleDocEditModalHide}>
                 <AgentDocEditContainer handleClose={handleDocEditModalHide} />
-            </FormModalComponent>
+            </FormModalComponent>*/}
             <FormModalComponent modal={zoneDetailsModal} handleClose={handleZoneDetailModalHide}>
                 <ZoneDetailsContainer id={zoneDetailsModal.id} />
             </FormModalComponent>

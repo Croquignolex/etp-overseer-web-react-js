@@ -3,16 +3,15 @@ import React, {useState} from 'react';
 
 import {formatNumber} from "../../functions/generalFunctions";
 import FormModalComponent from "../modals/FormModalComponent";
-import AgentAddSimContainer from "../../containers/agents/AgentAddSimContainer";
 import SimDetailsContainer from "../../containers/sims/SimDetailsContainer";
 
 // Component
 function AgentSimsListComponent({agent}) {
     // Local states
     const [simDetailsModal, setSimDetailsModal] = useState({show: false, header: 'DETAIL DU COMPTE', id: ''});
-    const [addSimModal, setAddSimEditModal] = useState({show: false, header: 'AJOUTER UN COMPTE CHEZ ' + agent.name});
+    // const [addSimModal, setAddSimEditModal] = useState({show: false, header: 'AJOUTER UN COMPTE CHEZ ' + agent.name});
 
-    // Show add sim modal form
+    /*// Show add sim modal form
     const handleAddSimModalShow = () => {
         setAddSimEditModal({...addSimModal, show: true})
     }
@@ -20,7 +19,7 @@ function AgentSimsListComponent({agent}) {
     // Hide add sim modal form
     const handleAddSimModalHide = () => {
         setAddSimEditModal({...addSimModal, show: false})
-    }
+    }*/
 
     // Hide sim details modal form
     const handleSimDetailModalHide = () => {
@@ -30,9 +29,9 @@ function AgentSimsListComponent({agent}) {
     // Render
     return (
         <>
-            <button type="button" className="btn btn-theme mb-1" onClick={handleAddSimModalShow}>
+            {/*<button type="button" className="btn btn-theme mb-1" onClick={handleAddSimModalShow}>
                 <i className="fa fa-plus" /> Ajouter un compte
-            </button>
+            </button>*/}
             <div className="card">
                 <div className="table-responsive">
                     <table className="table table-hover text-nowrap table-bordered">
@@ -74,9 +73,9 @@ function AgentSimsListComponent({agent}) {
                 </div>
             </div>
             {/* Modal */}
-            <FormModalComponent modal={addSimModal} handleClose={handleAddSimModalHide}>
+           {/* <FormModalComponent modal={addSimModal} handleClose={handleAddSimModalHide}>
                 <AgentAddSimContainer handleClose={handleAddSimModalHide} />
-            </FormModalComponent>
+            </FormModalComponent>*/}
             <FormModalComponent small={true} modal={simDetailsModal} handleClose={handleSimDetailModalHide}>
                 <SimDetailsContainer id={simDetailsModal.id} />
             </FormModalComponent>

@@ -1,14 +1,13 @@
 import React, {useState} from 'react';
 import PropTypes from "prop-types";
 
-import LoaderComponent from "../LoaderComponent";
 import FormModalComponent from "../modals/FormModalComponent";
 import {agentTypeBadgeColor} from "../../functions/typeFunctions";
 import {dateToString, formatNumber} from "../../functions/generalFunctions";
 import ZoneDetailsContainer from "../../containers/zones/ZoneDetailsContainer";
 
 // Component
-function AgentsCardsComponent({agents, handleBlock, handleBlockModalShow, handleAgentDetailsModalShow}) {
+function AgentsCardsComponent({agents, handleAgentDetailsModalShow}) {
     // Local states
     const [zoneDetailsModal, setZoneDetailsModal] = useState({show: false, header: 'DETAIL DE LA ZONE', id: ''});
 
@@ -33,7 +32,7 @@ function AgentsCardsComponent({agents, handleBlock, handleBlockModalShow, handle
                                 <div className="card-body">
                                     <div className="text-center mb-3">
                                         <img src={item.avatar} alt="avatar..." className="profile-user-img img-fluid img-circle" />
-                                        <div className="float-right">
+                                        {/*<div className="float-right">
                                             {item.actionLoader ? <LoaderComponent little={true} /> :(
                                                 item.status
                                                     ? <i onClick={() => handleBlockModalShow(item)}
@@ -43,9 +42,8 @@ function AgentsCardsComponent({agents, handleBlock, handleBlockModalShow, handle
                                                          onClick={() => handleBlock(item.id)}
                                                     />
                                             )}
-                                        </div>
+                                        </div>*/}
                                     </div>
-
                                     <ul className="list-group list-group-unbordered">
                                         <li className="list-group-item">
                                             <b>Création</b>
@@ -109,8 +107,6 @@ function AgentsCardsComponent({agents, handleBlock, handleBlockModalShow, handle
 // Prop types to ensure destroyed props data type
 AgentsCardsComponent.propTypes = {
     agents: PropTypes.array.isRequired,
-    handleBlock: PropTypes.func.isRequired,
-    handleBlockModalShow: PropTypes.func.isRequired,
     handleAgentDetailsModalShow: PropTypes.func.isRequired,
 };
 
