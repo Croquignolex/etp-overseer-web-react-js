@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from "prop-types";
 
-import LoaderComponent from "../LoaderComponent";
 import {DONE, PROCESSING} from "../../constants/typeConstants";
 import {fleetTypeBadgeColor} from "../../functions/typeFunctions";
 import {dateToString, formatNumber} from "../../functions/generalFunctions";
 
 // Component
-function CheckoutPaymentsCardsComponent({payments, handleConfirmModalShow}) {
+function CheckoutPaymentsCardsComponent({payments}) {
     // Render
     return (
         <>
@@ -34,6 +33,10 @@ function CheckoutPaymentsCardsComponent({payments, handleConfirmModalShow}) {
                                             <span className="float-right">{item.manager.name}</span>
                                         </li>
                                         <li className="list-group-item">
+                                            <b>Receptteur</b>
+                                            <span className="float-right">{item.collector.name}</span>
+                                        </li>
+                                        <li className="list-group-item">
                                             <b>Motif</b>
                                             <span className="float-right">{item.reason}</span>
                                         </li>
@@ -42,18 +45,6 @@ function CheckoutPaymentsCardsComponent({payments, handleConfirmModalShow}) {
                                             {item.status === PROCESSING && <b className="text-danger text-bold">En attente de confirmation</b>}
                                         </li>
                                     </ul>
-                                    {(item.status === PROCESSING) && (
-                                        <div className="mt-3 text-right">
-                                            {item.actionLoader ? <LoaderComponent little={true} /> : (
-                                                <button type="button"
-                                                        className="btn btn-theme btn-sm"
-                                                        onClick={() => handleConfirmModalShow(item)}
-                                                >
-                                                    <i className="fa fa-check" /> Confirmer
-                                                </button>
-                                            )}
-                                        </div>
-                                    )}
                                 </div>
                             </div>
                         </div>
@@ -73,8 +64,7 @@ function CheckoutPaymentsCardsComponent({payments, handleConfirmModalShow}) {
 
 // Prop types to ensure destroyed props data type
 CheckoutPaymentsCardsComponent.propTypes = {
-    payments: PropTypes.array.isRequired,
-    handleConfirmModalShow: PropTypes.func.isRequired,
+    payments: PropTypes.array.isRequired
 };
 
 export default React.memo(CheckoutPaymentsCardsComponent);
