@@ -5,7 +5,7 @@ import NavBarComponent from "../components/NavBarComponent";
 // Map state function to component props
 const mapStateToProps = (state) => ({
     userName: state.user.name,
-    unreadNotifications: state.notifications.unread
+    // unreadNotifications: state.notifications.unread
 });
 
 // Connect component to Redux

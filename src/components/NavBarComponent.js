@@ -1,16 +1,15 @@
+import React from 'react';
 import PropTypes from 'prop-types';
-import React, {Fragment} from 'react';
 import { Link } from 'react-router-dom';
 
 import {emitUserLogout} from "../redux/user/actions";
 import {USER_ROLE} from "../constants/defaultConstants";
-import {emitNotificationRead} from "../redux/notifications/actions";
-import {dateToString, formatString} from "../functions/generalFunctions";
+import {formatString} from "../functions/generalFunctions";
 import {PROFILE_PAGE, SETTINGS_PAGE} from "../constants/pageNameConstants";
-import {NOTIFICATIONS_PAGE_PATH, PROFILE_PAGE_PATH, SETTINGS_PAGE_PATH} from "../constants/pagePathConstants";
+import {PROFILE_PAGE_PATH, SETTINGS_PAGE_PATH} from "../constants/pagePathConstants";
 
 // Component
-function NavBarComponent({userName, unreadNotifications, dispatch}) {
+function NavBarComponent({userName, dispatch}) {
     const handleLogout = () => {
         dispatch(emitUserLogout());
     }
@@ -35,7 +34,7 @@ function NavBarComponent({userName, unreadNotifications, dispatch}) {
             {/* Nav bar*/}
             <ul className="navbar-nav ml-auto">
                 {/* Notification menu */}
-                <li className="nav-item dropdown">
+                {/*<li className="nav-item dropdown">
                     <span className="nav-link hand-cursor" data-toggle="dropdown">
                         <i className="far fa-bell"/>
                         {unreadNotifications.length === 0
@@ -68,7 +67,7 @@ function NavBarComponent({userName, unreadNotifications, dispatch}) {
                             Voir toutes les notifications
                         </Link>
                     </div>
-                </li>
+                </li>*/}
                 {/* User menu */}
                 <li className="nav-item dropdown">
                     <span className="nav-link hand-cursor" data-toggle="dropdown">
@@ -98,7 +97,7 @@ function NavBarComponent({userName, unreadNotifications, dispatch}) {
 NavBarComponent.propTypes = {
     dispatch: PropTypes.func.isRequired,
     userName: PropTypes.string.isRequired,
-    unreadNotifications: PropTypes.array.isRequired,
+    // unreadNotifications: PropTypes.array.isRequired,
 };
 
 export default React.memo(NavBarComponent);

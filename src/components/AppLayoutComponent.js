@@ -1,19 +1,13 @@
 import PropTypes from "prop-types";
-import React, {useEffect, useLayoutEffect} from 'react';
-import {NotificationManager} from "react-notifications";
+import React, {useLayoutEffect} from 'react';
 
 import 'react-notifications/lib/notifications.css';
 
 import NavBarContainer from "../containers/NavBarContainer";
 import SideBarContainer from "../containers/SideBarContainer";
-import {requestSucceeded} from "../functions/generalFunctions";
-import {playSuccessSound} from "../functions/playSoundFunctions";
-import {ENABLE_NOTIFICATION} from "../constants/generalConstants";
-import {storeUserCheckRequestReset} from "../redux/requests/user/actions";
-import {emitUnreadNotificationsFetch} from "../redux/notifications/actions";
 
 // Component
-function AppLayoutComponent({userCheckRequest, dispatch, pathname, children}) {
+function AppLayoutComponent({pathname, children}) {
     // Local layout effect
     useLayoutEffect(() => {
        if(is_mobile()) {
@@ -22,14 +16,14 @@ function AppLayoutComponent({userCheckRequest, dispatch, pathname, children}) {
            document.getElementsByTagName('body')[0].classList.add('sidebar-collapse')
        }
         // Check notification settings
-        if(ENABLE_NOTIFICATION) {
+        /*if(ENABLE_NOTIFICATION) {
             dispatch(emitUnreadNotificationsFetch());
-        }
+        }*/
         // eslint-disable-next-line
     }, [pathname]);
 
     // Local effect
-    useEffect(() => {
+    /*useEffect(() => {
         // Welcome form the first check
         if(requestSucceeded(userCheckRequest)) {
             playSuccessSound();
@@ -45,7 +39,7 @@ function AppLayoutComponent({userCheckRequest, dispatch, pathname, children}) {
             dispatch(emitUnreadNotificationsFetch());
         }
         // eslint-disable-next-line
-    }, []);
+    }, []);*/
 
     // Render
     return (
@@ -69,8 +63,8 @@ function is_mobile() {
 AppLayoutComponent.propTypes = {
     dispatch: PropTypes.func.isRequired,
     children: PropTypes.node.isRequired,
-    pathname: PropTypes.string.isRequired,
-    userCheckRequest: PropTypes.object.isRequired,
+    // pathname: PropTypes.string.isRequired,
+    // userCheckRequest: PropTypes.object.isRequired,
 };
 
 // Connect component to Redux
