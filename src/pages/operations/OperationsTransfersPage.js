@@ -7,26 +7,11 @@ import LoaderComponent from "../../components/LoaderComponent";
 import AppLayoutContainer from "../../containers/AppLayoutContainer";
 import ErrorAlertComponent from "../../components/ErrorAlertComponent";
 import TableSearchComponent from "../../components/TableSearchComponent";
-import FormModalComponent from "../../components/modals/FormModalComponent";
 import {OPERATIONS_TRANSFERS_PAGE} from "../../constants/pageNameConstants";
-import ConfirmModalComponent from "../../components/modals/ConfirmModalComponent";
-import {emitConfirmTransfer, emitNextTransfersFetch, emitTransfersFetch} from "../../redux/transfers/actions";
+import {emitNextTransfersFetch, emitTransfersFetch} from "../../redux/transfers/actions";
+import {dateToString, needleSearch, requestFailed, requestLoading} from "../../functions/generalFunctions";
 import OperationsTransfersCardsComponent from "../../components/operations/OperationsTransfersCardsComponent";
-import OperationsTransfersAddTransferContainer from "../../containers/operations/OperationsTransfersAddTransferContainer";
-import {
-    applySuccess,
-    dateToString,
-    formatNumber,
-    needleSearch,
-    requestFailed,
-    requestLoading,
-    requestSucceeded
-} from "../../functions/generalFunctions";
-import {
-    storeTransfersRequestReset,
-    storeNextTransfersRequestReset,
-    storeConfirmTransferRequestReset
-} from "../../redux/requests/transfers/actions";
+import {storeTransfersRequestReset, storeNextTransfersRequestReset} from "../../redux/requests/transfers/actions";
 
 // Component
 function OperationsTransfersPage({transfers, transfersRequests, hasMoreData, page, dispatch, location}) {
