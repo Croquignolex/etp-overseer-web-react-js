@@ -39,10 +39,10 @@ import {storeAllAdministratorsRequestReset} from "../redux/requests/administrato
 import DashboardWithOperatorCardComponent from "../components/dashboard/DashboardWithOperatorCardComponent";
 
 // Component
-function DashboardPage({agents, overseers, accountants, settings, dispatch,
-                           balanceUserRequests, allVendorsRequests, administrators,
+function DashboardPage({agents, overseers, accountants, settings,
+                           allVendorsRequests, administrators, allOverseersRequests,
                            supervisors, managers, collectors, companies, sims, zones,
-                           operators, user, allAgentsRequests, allAdministratorsRequests, allOverseersRequests,
+                           operators, allAgentsRequests, allAdministratorsRequests, dispatch,
                            allSupervisorsRequests, allManagersRequests, allCollectorsRequests, allAccountantsRequests,
                            allCompaniesRequests, allSimsRequests, allZonesRequests, allOperatorsRequests, location, vendors}) {
     // Local effects
@@ -122,20 +122,6 @@ function DashboardPage({agents, overseers, accountants, settings, dispatch,
                     <HeaderComponent title={DASHBOARD_PAGE} icon={'fa fa-tachometer-alt'} />
                     <section className="content">
                         <div className='container-fluid'>
-                            {/* Cash */}
-                            <div className="row">
-                                {cardsData.includes(setting.CARD_BALANCE) &&
-                                <div className="col-lg-3 col-md-4 col-sm-6">
-                                    <DashboardCardComponent color='bg-dark'
-                                                            icon='fa fa-coins'
-                                                            url={path.PROFILE_PAGE_PATH}
-                                                            label={setting.LABEL_BALANCE}
-                                                            request={balanceUserRequests}
-                                                            data={formatNumber(user.balance)}
-                                    />
-                                </div>
-                                }
-                            </div>
                             {/*  Fleet balance */}
                             <div className="row">
                                 {cardsData.includes(setting.CARD_FLEET_SIMS_FLEETS_MTN) &&
@@ -331,7 +317,6 @@ function DashboardPage({agents, overseers, accountants, settings, dispatch,
 DashboardPage.propTypes = {
     sims: PropTypes.array.isRequired,
     zones: PropTypes.array.isRequired,
-    user: PropTypes.object.isRequired,
     agents: PropTypes.array.isRequired,
     dispatch: PropTypes.func.isRequired,
     vendors: PropTypes.array.isRequired,
@@ -349,7 +334,6 @@ DashboardPage.propTypes = {
     allZonesRequests: PropTypes.object.isRequired,
     allAgentsRequests: PropTypes.object.isRequired,
     allVendorsRequests: PropTypes.object.isRequired,
-    balanceUserRequests: PropTypes.object.isRequired,
     allManagersRequests: PropTypes.object.isRequired,
     allCompaniesRequests: PropTypes.object.isRequired,
     allOperatorsRequests: PropTypes.object.isRequired,
