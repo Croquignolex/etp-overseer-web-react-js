@@ -24,7 +24,6 @@ const mapStateToProps = (state) => ({
     allSimsRequests: state.simsRequests.all,
     administrators: state.administrators.list,
     allZonesRequests: state.zonesRequests.all,
-    resetUserRequests: state.userRequests.reset,
     allAgentsRequests: state.agentsRequests.all,
     allVendorsRequests: state.vendorsRequests.all,
     allManagersRequests: state.managersRequests.all,
