@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import PropTypes from "prop-types";
 
+import {dateToString} from "../../functions/generalFunctions";
 import FormModalComponent from "../modals/FormModalComponent";
 import {agentTypeBadgeColor} from "../../functions/typeFunctions";
-import {dateToString, formatNumber} from "../../functions/generalFunctions";
 import ZoneDetailsContainer from "../../containers/zones/ZoneDetailsContainer";
 
 // Component
@@ -72,10 +72,10 @@ function AgentsCardsComponent({agents, handleAgentDetailsModalShow}) {
                                                 />
                                             </span>
                                         </li>
-                                        <li className="list-group-item">
+                                        {/*<li className="list-group-item">
                                             <b>Solde total</b>
                                             <span className="float-right text-success text-bold">{formatNumber(item.account.balance)}</span>
-                                        </li>
+                                        </li>*/}
                                         <li className="list-group-item">
                                             <b>Créer par</b>
                                             <span className="float-right">{item.creator.name}</span>
