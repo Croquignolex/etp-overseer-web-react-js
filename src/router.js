@@ -1,6 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
-import { ConnectedRouter } from 'connected-react-router';
+import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 
 import * as path from "./constants/pagePathConstants";
 import asyncComponent from './components/asyncComponent';
@@ -9,9 +8,9 @@ import PublicRouteContainer from "./containers/PublicRouteContainer";
 import RestrictedRouteContainer from "./containers/RestrictedRouteContainer";
 
 // Component
-function AppRoutes({history}) {
+function AppRoutes() {
     return (
-        <ConnectedRouter history={history}>
+        <Router>
             <NotificationContainer />
             <Switch>
                 {/* Available pages on guest mode */}
@@ -61,7 +60,7 @@ function AppRoutes({history}) {
                  {/* 404 page */}
                 <Route component={asyncComponent(() => import('./pages/NotFoundPage'))} />
             </Switch>
-        </ConnectedRouter>
+        </Router>
     );
 }
 
