@@ -47,7 +47,7 @@ function SimDetailsComponent({id, sim, dispatch, request}) {
                     <div className="row">
                         <div className="col-lg-12 col-md-12">
                             {/*<button type="button" className="btn btn-theme mb-1" onClick={handleInfoEditModalShow}>
-                                <i className="fa fa-pencil" /> Modifier les info
+                                <i className="fa fa-edit" /> Modifier les info
                             </button>*/}
                             <div className="card">
                                 <div className={`${simTypeBadgeColor(sim.type.name).background} card-header`}>

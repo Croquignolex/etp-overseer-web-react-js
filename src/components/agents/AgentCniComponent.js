@@ -37,7 +37,7 @@ function AgentCniComponent({agent}) {
     return (
         <>
            {/* <button type="button" className="btn btn-theme mb-1" onClick={handleCniEditModalShow}>
-                <i className="fa fa-pencil" /> Modifier la CNI
+                <i className="fa fa-edit" /> Modifier la CNI
             </button>*/}
             <div className='row'>
                 <Ribbon text='Image avant' image={agent.frontIDCard} />

@@ -45,10 +45,10 @@ function CollectorInfoComponent({collector}) {
     return (
         <>
             {/*<button type="button" className="btn btn-theme mb-1 mr-1" onClick={handleInfoEditModalShow}>
-                <i className="fa fa-pencil" /> Modifier les info
+                <i className="fa fa-edit" /> Modifier les info
             </button>
             <button type="button" className="btn btn-theme mb-1" onClick={handleZoneEditModalShow}>
-                <i className="fa fa-pencil" /> Modifier la zone
+                <i className="fa fa-edit" /> Modifier la zone
             </button>*/}
             <div className="card">
                 <div className="card-header bg-secondary" />

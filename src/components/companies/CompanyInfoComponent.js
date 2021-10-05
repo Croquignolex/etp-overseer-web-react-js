@@ -33,10 +33,10 @@ function CompanyInfoComponent({company}) {
     return (
         <>
             {/*<button type="button" className="btn btn-theme mr-1 mb-1" onClick={handleInfoEditModalShow}>
-                <i className="fa fa-pencil" /> Modifier les info
+                <i className="fa fa-edit" /> Modifier les info
             </button>
             <button type="button" className="btn btn-theme mb-1" onClick={handleDocEditModalShow}>
-                <i className="fa fa-pencil" /> Modifier le dossier
+                <i className="fa fa-edit" /> Modifier le dossier
             </button>*/}
             <div className="card">
                 <div className="card-header bg-secondary" />

@@ -9,6 +9,7 @@ function LoaderComponent({little}) {
             <img alt='loading...'
                  className={`${little && 'little-loader'} img-fluid`}
                  src={require('../assets/images/spinner-theme.svg')}
+                 width={50}
             />
         </div>
     );

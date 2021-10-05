@@ -23,7 +23,7 @@ function OperatorInfoComponent({operator}) {
     return (
         <>
             {/*<button type="button" className="btn btn-theme mb-1" onClick={handleInfoEditModalShow}>
-                <i className="fa fa-pencil" /> Modifier les info
+                <i className="fa fa-edit" /> Modifier les info
             </button>*/}
             <div className="card">
                 <div className="card-header bg-secondary" />
