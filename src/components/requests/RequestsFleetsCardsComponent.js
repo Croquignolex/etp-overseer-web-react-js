@@ -2,9 +2,9 @@ import PropTypes from "prop-types";
 import React, {useState} from 'react';
 
 import OperatorComponent from "../OperatorComponent";
-import {DONE, PENDING} from "../../constants/typeConstants";
 import FormModalComponent from "../modals/FormModalComponent";
 import {fleetTypeBadgeColor} from "../../functions/typeFunctions";
+import {CANCEL, DONE, PENDING} from "../../constants/typeConstants";
 import {dateToString, formatNumber} from "../../functions/generalFunctions";
 import SimDetailsContainer from "../../containers/sims/SimDetailsContainer";
 import AgentDetailsContainer from "../../containers/agents/AgentDetailsContainer";
@@ -96,6 +96,7 @@ function RequestsFleetsCardsComponent({fleets}) {
                                         </li>
                                         <li className="list-group-item">
                                             {item.status === DONE && <b className="text-success text-bold">Flottée</b>}
+                                            {item.status === CANCEL && <b className="text-danger text-bold">Annulé</b>}
                                             {item.status === PENDING && <b className="text-danger text-bold">En attente de flottage</b>}
                                         </li>
                                     </ul>
