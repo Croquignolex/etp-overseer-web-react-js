@@ -247,6 +247,7 @@ function extractOperatorTransactionsData(apiTransactions) {
             out: transaction.out,
             type: transaction.type,
             user: transaction.user,
+            balance: transaction.balance,
             left_account: transaction.left,
             right_account: transaction.right,
             creation: dateToString(transaction.created_at),
