@@ -124,7 +124,7 @@ function CollectorMovementsComponent({collector, movements, dispatch, request}) 
                                             })}
                                             {movements.length === 0 && (
                                                 <tr>
-                                                    <td colSpan={6}>
+                                                    <td colSpan={8}>
                                                         <div className='alert custom-active text-center'>
                                                             Pas de mouvements de caisse
                                                         </div>
