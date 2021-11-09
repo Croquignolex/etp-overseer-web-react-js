@@ -51,16 +51,6 @@ function SupervisorsPage({supervisors, supervisorsRequests, hasMoreData, page, d
         dispatch(emitNextSupervisorsFetch({page}));
     }
 
-   /* // Show new supervisor modal form
-    const handleNewSupervisorModalShow = () => {
-        setNewSupervisorModal({newSupervisorModal, header: "NOUVEAU SUPERVISEUR", show: true})
-    }
-
-    // Hide new supervisor modal form
-    const handleNewSupervisorModalHide = () => {
-        setNewSupervisorModal({...newSupervisorModal, show: false})
-    }*/
-
     // Show supervisor details modal form
     const handleSupervisorDetailsModalShow = ({id, name}) => {
         setSupervisorDetailsModal({...supervisorDetailsModal, show: true, id, header: "DETAIL DE " + name})
@@ -112,12 +102,6 @@ function SupervisorsPage({supervisors, supervisorsRequests, hasMoreData, page, d
                                             {/* Error message */}
                                             {requestFailed(supervisorsRequests.list) && <ErrorAlertComponent message={supervisorsRequests.list.message} />}
                                             {requestFailed(supervisorsRequests.next) && <ErrorAlertComponent message={supervisorsRequests.next.message} />}
-                                           {/* <button type="button"
-                                                    className="btn btn-theme ml-2 mb-2"
-                                                    onClick={handleNewSupervisorModalShow}
-                                            >
-                                                <i className="fa fa-plus" /> Nouveau superviseur
-                                            </button>*/}
                                             {/* Search result & Infinite scroll */}
                                             {(needle !== '' && needle !== undefined)
                                                 ? <SupervisorsCardsComponent supervisors={searchEngine(supervisors, needle)}
@@ -149,9 +133,6 @@ function SupervisorsPage({supervisors, supervisorsRequests, hasMoreData, page, d
                 </div>
             </AppLayoutContainer>
             {/* Modal */}
-            {/*<FormModalComponent modal={newSupervisorModal} handleClose={handleNewSupervisorModalHide}>
-                <SupervisorNewContainer type={newSupervisorModal.type} handleClose={handleNewSupervisorModalHide} />
-            </FormModalComponent>*/}
             <FormModalComponent modal={supervisorDetailsModal} handleClose={handleSupervisorDetailsModalHide}>
                 <SupervisorDetailsContainer id={supervisorDetailsModal.id} />
             </FormModalComponent>
