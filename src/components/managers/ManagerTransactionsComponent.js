@@ -117,8 +117,8 @@ function ManagerTransactionsComponent({manager, transactions, dispatch, request}
                                                         <td>{item.creation}</td>
                                                         <td>{item.operator}</td>
                                                         <td>{item.type}</td>
-                                                        <td>{formatString(item.left_account, 20)}</td>
-                                                        <td>{formatString(item.right_account, 20)}</td>
+                                                        <td title={item.left_account}>{formatString(item.left_account, 20)}</td>
+                                                        <td title={item.right_account}>{formatString(item.right_account, 20)}</td>
                                                         <td>{item.in}</td>
                                                         <td>{item.out}</td>
                                                         <td>{item.balance}</td>

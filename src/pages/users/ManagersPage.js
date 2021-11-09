@@ -20,8 +20,6 @@ import {storeManagersRequestReset, storeNextManagersRequestReset,} from "../../r
 function ManagersPage({managers, managersRequests, hasMoreData, page, dispatch, location}) {
     // Local states
     const [needle, setNeedle] = useState('');
-    // const [blockModal, setBlockModal] = useState({show: false, body: '', id: 0});
-    // const [newManagerModal, setNewManagerModal] = useState({show: false, header: ''});
     const [movementsModal, setMovementsModal] = useState({show: false, header: '', manager: {}});
     const [managerDetailsModal, setManagerDetailsModal] = useState({show: false, header: '', id: 0});
     const [transactionsModal, setTransactionsModal] = useState({show: false, header: '', manager: {}});
@@ -36,15 +34,6 @@ function ManagersPage({managers, managersRequests, hasMoreData, page, dispatch, 
         // eslint-disable-next-line
     }, []);
 
-   /* // Local effects
-    useEffect(() => {
-        // Reset inputs while toast (well done) into current scope
-        if(requestSucceeded(managersRequests.status)) {
-            applySuccess(managersRequests.status.message);
-        }
-        // eslint-disable-next-line
-    }, [managersRequests.status]);*/
-
     const handleNeedleInput = (data) => {
         setNeedle(data)
     }
@@ -53,23 +42,12 @@ function ManagersPage({managers, managersRequests, hasMoreData, page, dispatch, 
     const shouldResetErrorData = () => {
         dispatch(storeManagersRequestReset());
         dispatch(storeNextManagersRequestReset());
-        // dispatch(storeManagerStatusToggleRequestReset());
     };
 
     // Fetch next manager data to enhance infinite scroll
     const handleNextManagersData = () => {
         dispatch(emitNextManagersFetch({page}));
     }
-
-   /* // Show new manager modal form
-    const handleNewManagerModalShow = () => {
-        setNewManagerModal({newManagerModal, header: "NOUVELLE GESTIONNAIRE DE FLOTTE", show: true})
-    }
-
-    // Hide new manager modal form
-    const handleNewManagerModalHide = () => {
-        setNewManagerModal({...newManagerModal, show: false})
-    }*/
 
     // Show movements modal form
     const handleMovementsModalShow = (manager) => {
@@ -101,22 +79,6 @@ function ManagersPage({managers, managersRequests, hasMoreData, page, dispatch, 
         setManagerDetailsModal({...managerDetailsModal, show: false})
     }
 
-   /* // Trigger when user block status confirmed on modal
-    const handleBlockModalShow = ({id, name}) => {
-        setBlockModal({...blockModal, show: true, id, body: `Bloquer la gestionnaire de flotte ${name}?`})
-    };
-
-    // Hide block confirmation modal
-    const handleBlockModalHide = () => {
-        setBlockModal({...blockModal, show: false})
-    }
-
-    // Trigger when user change status confirmed on modal
-    const handleBlock = (id) => {
-        handleBlockModalHide();
-        dispatch(emitToggleManagerStatus({id}));
-    };*/
-
     // Render
     return (
         <>
@@ -138,13 +100,6 @@ function ManagersPage({managers, managersRequests, hasMoreData, page, dispatch, 
                                             {/* Error message */}
                                             {requestFailed(managersRequests.list) && <ErrorAlertComponent message={managersRequests.list.message} />}
                                             {requestFailed(managersRequests.next) && <ErrorAlertComponent message={managersRequests.next.message} />}
-                                            {/*{requestFailed(managersRequests.status) && <ErrorAlertComponent message={managersRequests.status.message} />}*/}
-                                           {/* <button type="button"
-                                                    className="btn btn-theme ml-2 mb-2"
-                                                    onClick={handleNewManagerModalShow}
-                                            >
-                                                <i className="fa fa-plus" /> Nouvelle gestionnaire
-                                            </button>*/}
                                             {/* Search result & Infinite scroll */}
                                             {(needle !== '' && needle !== undefined)
                                                 ? <ManagersCardsComponent managers={searchEngine(managers, needle)}
@@ -176,13 +131,6 @@ function ManagersPage({managers, managersRequests, hasMoreData, page, dispatch, 
                 </div>
             </AppLayoutContainer>
             {/* Modal */}
-            {/*<BlockModalComponent modal={blockModal}
-                                 handleBlock={handleBlock}
-                                 handleClose={handleBlockModalHide}
-            />
-            <FormModalComponent modal={newManagerModal} handleClose={handleNewManagerModalHide}>
-                <ManagerNewContainer type={newManagerModal.type} handleClose={handleNewManagerModalHide} />
-            </FormModalComponent>*/}
             <FormModalComponent modal={managerDetailsModal} handleClose={handleManagerDetailsModalHide}>
                 <ManagerDetailsContainer id={managerDetailsModal.id} />
             </FormModalComponent>
