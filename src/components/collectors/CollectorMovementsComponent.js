@@ -71,6 +71,7 @@ function CollectorMovementsComponent({collector, movements, dispatch, request}) 
                     <ExcelColumn label="DATE" value="creation"/>
                     <ExcelColumn label="TYPE" value="type"/>
                     <ExcelColumn label="NATURE" value="label"/>
+                    <ExcelColumn label="MOTIF" value="reason"/>
                     <ExcelColumn label="ENTREES" value="in"/>
                     <ExcelColumn label="SORTIES" value="out"/>
                     <ExcelColumn label="SOLDES" value="balance"/>
@@ -101,6 +102,7 @@ function CollectorMovementsComponent({collector, movements, dispatch, request}) 
                                                 <th>DATE</th>
                                                 <th>TYPE</th>
                                                 <th>NATURE</th>
+                                                <th>MOTIF</th>
                                                 <th>ENTREES</th>
                                                 <th>SORTIES</th>
                                                 <th>SOLDES</th>
@@ -112,7 +114,8 @@ function CollectorMovementsComponent({collector, movements, dispatch, request}) 
                                                     <tr key={key}>
                                                         <td>{item.creation}</td>
                                                         <td>{item.type}</td>
-                                                        <td>{formatString(item.label, 20)}</td>
+                                                        <td title={item.label}>{formatString(item.label, 20)}</td>
+                                                        <td title={item.reason}>{formatString(item.reason, 20)}</td>
                                                         <td>{item.in}</td>
                                                         <td>{item.out}</td>
                                                         <td>{item.balance}</td>

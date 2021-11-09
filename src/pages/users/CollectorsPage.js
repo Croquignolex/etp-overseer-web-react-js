@@ -20,8 +20,6 @@ import {storeCollectorsRequestReset, storeNextCollectorsRequestReset} from "../.
 function CollectorsPage({collectors, collectorsRequests, hasMoreData, page, dispatch, location}) {
     // Local states
     const [needle, setNeedle] = useState('');
-    // const [blockModal, setBlockModal] = useState({show: false, body: '', id: 0});
-    // const [newCollectorModal, setNewCollectorModal] = useState({show: false, header: ''});
     const [movementsModal, setMovementsModal] = useState({show: false, header: '', collector: {}});
     const [transactionsModal, setTransactionsModal] = useState({show: false, header: '', collector: {}});
     const [collectorDetailsModal, setCollectorDetailsModal] = useState({show: false, header: '', id: ''});
@@ -36,15 +34,6 @@ function CollectorsPage({collectors, collectorsRequests, hasMoreData, page, disp
         // eslint-disable-next-line
     }, []);
 
-    /*// Local effects
-    useEffect(() => {
-        // Reset inputs while toast (well done) into current scope
-        if(requestSucceeded(collectorsRequests.status)) {
-            applySuccess(collectorsRequests.status.message);
-        }
-        // eslint-disable-next-line
-    }, [collectorsRequests.status]);*/
-
     const handleNeedleInput = (data) => {
         setNeedle(data)
     }
@@ -53,23 +42,12 @@ function CollectorsPage({collectors, collectorsRequests, hasMoreData, page, disp
     const shouldResetErrorData = () => {
         dispatch(storeCollectorsRequestReset());
         dispatch(storeNextCollectorsRequestReset());
-        // dispatch(storeCollectorStatusToggleRequestReset());
     };
 
     // Fetch next collector data to enhance infinite scroll
     const handleNextCollectorsData = () => {
         dispatch(emitNextCollectorsFetch({page}));
     }
-
-    /*// Show new collector modal form
-    const handleNewCollectorModalShow = () => {
-        setNewCollectorModal({newCollectorModal, header: "NOUVEAU RESPONSABLE DE ZONE", show: true})
-    }
-
-    // Hide new collector modal form
-    const handleNewCollectorModalHide = () => {
-        setNewCollectorModal({...newCollectorModal, show: false})
-    }*/
 
     // Show collector details modal form
     const handleCollectorDetailsModalShow = ({id, name}) => {
@@ -80,11 +58,6 @@ function CollectorsPage({collectors, collectorsRequests, hasMoreData, page, disp
     const handleCollectorDetailsModalHide = () => {
         setCollectorDetailsModal({...collectorDetailsModal, show: false})
     }
-
-   /* // Trigger when user block status confirmed on modal
-    const handleBlockModalShow = ({id, name}) => {
-        setBlockModal({...blockModal, show: true, id, body: `Bloquer le responsable de zone ${name}?`})
-    };*/
 
     // Show transactions modal form
     const handleTransactionsModalShow = (collector) => {
@@ -105,17 +78,6 @@ function CollectorsPage({collectors, collectorsRequests, hasMoreData, page, disp
     const handleMovementsModalHide = () => {
         setMovementsModal({...movementsModal, show: false})
     }
-
-    /*// Hide block confirmation modal
-    const handleBlockModalHide = () => {
-        setBlockModal({...blockModal, show: false})
-    }
-
-    // Trigger when user change status confirmed on modal
-    const handleBlock = (id) => {
-        handleBlockModalHide();
-        dispatch(emitToggleCollectorStatus({id}));
-    };*/
 
     // Render
     return (
@@ -138,13 +100,6 @@ function CollectorsPage({collectors, collectorsRequests, hasMoreData, page, disp
                                             {/* Error message */}
                                             {requestFailed(collectorsRequests.list) && <ErrorAlertComponent message={collectorsRequests.list.message} />}
                                             {requestFailed(collectorsRequests.next) && <ErrorAlertComponent message={collectorsRequests.next.message} />}
-                                            {/*{requestFailed(collectorsRequests.status) && <ErrorAlertComponent message={collectorsRequests.status.message} />}*/}
-                                           {/* <button type="button"
-                                                    className="btn btn-theme ml-2 mb-2"
-                                                    onClick={handleNewCollectorModalShow}
-                                            >
-                                                <i className="fa fa-plus" /> Nouveau responsable
-                                            </button>*/}
                                             {/* Search result & Infinite scroll */}
                                             {(needle !== '' && needle !== undefined)
                                                 ? <CollectorsCardsComponent collectors={searchEngine(collectors, needle)}
@@ -176,13 +131,6 @@ function CollectorsPage({collectors, collectorsRequests, hasMoreData, page, disp
                 </div>
             </AppLayoutContainer>
             {/* Modal */}
-            {/*<BlockModalComponent modal={blockModal}
-                                 handleBlock={handleBlock}
-                                 handleClose={handleBlockModalHide}
-            />
-            <FormModalComponent modal={newCollectorModal} handleClose={handleNewCollectorModalHide}>
-                <CollectorNewContainer type={newCollectorModal.type} handleClose={handleNewCollectorModalHide} />
-            </FormModalComponent>*/}
             <FormModalComponent modal={collectorDetailsModal} handleClose={handleCollectorDetailsModalHide}>
                 <CollectorDetailsContainer id={collectorDetailsModal.id} />
             </FormModalComponent>
