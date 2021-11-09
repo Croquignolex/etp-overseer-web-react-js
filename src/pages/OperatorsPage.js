@@ -20,7 +20,6 @@ import {storeNextOperatorsRequestReset, storeOperatorsRequestReset} from "../red
 function OperatorsPage({operators, operatorsRequests, hasMoreData, page, dispatch, location}) {
     // Local states
     const [needle, setNeedle] = useState('');
-    // const [newOperatorModal, setNewOperatorModal] = useState({show: false, header: ''});
     const [transactionsModal, setTransactionsModal] = useState({show: false, header: '', operator: {}});
     const [operatorDetailsModal, setOperatorDetailsModal] = useState({show: false, header: "DETAIL DE L'OPERATEUR", id: ''});
 
@@ -48,16 +47,6 @@ function OperatorsPage({operators, operatorsRequests, hasMoreData, page, dispatc
     const handleNextOperatorsData = () => {
         dispatch(emitNextOperatorsFetch({page}));
     }
-
-    /*// Show new operator modal form
-    const handleNewOperatorModalShow = () => {
-        setNewOperatorModal({newOperatorModal, header: "NOUVEL OPERATEUR", show: true})
-    }
-
-    // Hide new operator modal form
-    const handleNewOperatorModalHide = () => {
-        setNewOperatorModal({...newOperatorModal, show: false})
-    }*/
 
     // Show operator details modal form
     const handleOperatorDetailsModalShow = ({id}) => {
@@ -100,12 +89,6 @@ function OperatorsPage({operators, operatorsRequests, hasMoreData, page, dispatc
                                             {/* Error message */}
                                             {requestFailed(operatorsRequests.list) && <ErrorAlertComponent message={operatorsRequests.list.message} />}
                                             {requestFailed(operatorsRequests.next) && <ErrorAlertComponent message={operatorsRequests.next.message} />}
-                                            {/*<button type="button"
-                                                    className="btn btn-theme ml-2 mb-2"
-                                                    onClick={handleNewOperatorModalShow}
-                                            >
-                                                <i className="fa fa-plus" /> Nouvel opérateur
-                                            </button>*/}
                                             {/* Search result & Infinite scroll */}
                                             {(needle !== '' && needle !== undefined)
                                                 ? <OperatorsCardsComponent operators={searchEngine(operators, needle)}
@@ -135,9 +118,6 @@ function OperatorsPage({operators, operatorsRequests, hasMoreData, page, dispatc
                 </div>
             </AppLayoutContainer>
             {/* Modal */}
-           {/* <FormModalComponent modal={newOperatorModal} handleClose={handleNewOperatorModalHide}>
-                <OperatorNewContainer handleClose={handleNewOperatorModalHide} />
-            </FormModalComponent>*/}
             <FormModalComponent modal={operatorDetailsModal} handleClose={handleOperatorDetailsModalHide}>
                 <OperatorDetailsContainer id={operatorDetailsModal.id} />
             </FormModalComponent>

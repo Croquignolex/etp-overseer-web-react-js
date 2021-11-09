@@ -117,8 +117,8 @@ function OperatorTransactionsComponent({operator, transactions, dispatch, reques
                                                         <td>{item.creation}</td>
                                                         <td>{item.type}</td>
                                                         <td>{formatString(item.user, 20)}</td>
-                                                        <td>{formatString(item.left_account, 20)}</td>
-                                                        <td>{formatString(item.right_account, 20)}</td>
+                                                        <td title={item.left_account}>{formatString(item.left_account, 20)}</td>
+                                                        <td title={item.right_account}>{formatString(item.right_account, 20)}</td>
                                                         <td>{item.in}</td>
                                                         <td>{item.out}</td>
                                                         <td>{item.balance}</td>
