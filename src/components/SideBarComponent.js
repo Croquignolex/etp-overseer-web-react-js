@@ -23,6 +23,7 @@ function SideBarComponent({user, pathname}) {
             buildCheckoutMenu(),
             buildUsersMenu(),
             buildSimsMenu(),
+            buildAgenciesMenu(),
             buildCompaniesMenu(),
             buildZonesMenu(),
             buildVendorsMenu(),
@@ -228,6 +229,16 @@ function buildSimsMenu() {
             {name: page.RESOURCES_SIMS, path: path.RESOURCES_SIMS_PAGE_PATH},
         ]
     }
+}
+
+// Build agencies menu
+function buildAgenciesMenu() {
+    return {
+        name: page.AGENCIES_PAGE,
+        path: path.AGENCIES_PAGE_PATH,
+        icon: 'fa fa-building',
+        sub: []
+    };
 }
 
 // Build vendors menu

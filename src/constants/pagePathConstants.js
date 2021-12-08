@@ -7,6 +7,7 @@ export const NOTIFICATIONS_PAGE_PATH = "/notifications";
 // Commons
 export const ZONES_PAGE_PATH = "/zones";
 export const VENDORS_PAGE_PATH = "/vendors";
+export const AGENCIES_PAGE_PATH = "/agencies";
 export const COMPANIES_PAGE_PATH = "/companies";
 export const OPERATORS_PAGE_PATH = "/operators";
 

@@ -86,6 +86,13 @@ export const EDIT_VENDOR_API_PATH = `${API_URL}/edit_vendor`;
 export const CREATE_VENDOR_API_PATH = `${API_URL}/new_vendor`;
 export const VENDOR_DETAILS_API_PATH = `${API_URL}/show_vendor`;
 
+// Agencies
+export const AGENCIES_API_PATH = `${API_URL}/agencies`;
+export const EDIT_AGENCY_API_PATH = `${API_URL}/edit_agency`;
+export const CREATE_AGENCY_API_PATH = `${API_URL}/new_agency`;
+export const ALL_AGENCIES_API_PATH = `${API_URL}/all_agencies`;
+export const AGENCY_DETAILS_API_PATH = `${API_URL}/show_agency`;
+
 // Administrators
 export const ADMINISTRATORS_API_PATH = `${API_URL}/administrateurs`;
 export const ADMINISTRATOR_DETAILS_API_PATH = `${API_URL}/details_user`;
