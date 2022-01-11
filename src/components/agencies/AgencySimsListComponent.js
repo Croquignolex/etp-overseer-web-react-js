@@ -12,10 +12,10 @@ function AgencySimsListComponent({agency}) {
     const [simDetailsModal, setSimDetailsModal] = useState({show: false, header: 'DETAIL DU COMPTE', id: ''});
     const [addSimModal, setAddSimEditModal] = useState({show: false, header: 'AJOUTER UN COMPTE A ' + agency.name});
 
-    // Show add sim modal form
+    /*// Show add sim modal form
     const handleAddSimModalShow = () => {
         setAddSimEditModal({...addSimModal, show: true})
-    }
+    }*/
 
     // Hide add sim modal form
     const handleAddSimModalHide = () => {
@@ -30,9 +30,9 @@ function AgencySimsListComponent({agency}) {
     // Render
     return (
         <>
-            <button type="button" className="btn btn-theme mb-1" onClick={handleAddSimModalShow}>
+            {/*<button type="button" className="btn btn-theme mb-1" onClick={handleAddSimModalShow}>
                 <i className="fa fa-plus" /> Ajouter un compte
-            </button>
+            </button>*/}
             <div className="card">
                 <div className="table-responsive">
                     <table className="table table-hover text-nowrap table-bordered">

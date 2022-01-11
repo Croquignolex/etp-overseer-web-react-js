@@ -48,11 +48,11 @@ function AgenciesPage({agencies, agenciesRequests, hasMoreData, page, dispatch, 
         dispatch(emitNextAgenciesFetch({page}));
     }
 
-    // Show new agency modal form
+    /*// Show new agency modal form
     const handleNewAgencyModalShow = () => {
         setNewAgencyModal({newAgencyModal, header: "NOUVELLE AGENCE", show: true})
     }
-
+*/
     // Hide new agency modal form
     const handleNewAgencyModalHide = () => {
         setNewAgencyModal({...newAgencyModal, show: false})
@@ -89,12 +89,12 @@ function AgenciesPage({agencies, agenciesRequests, hasMoreData, page, dispatch, 
                                             {/* Error message */}
                                             {requestFailed(agenciesRequests.list) && <ErrorAlertComponent message={agenciesRequests.list.message} />}
                                             {requestFailed(agenciesRequests.next) && <ErrorAlertComponent message={agenciesRequests.next.message} />}
-                                            <button type="button"
+                                            {/*<button type="button"
                                                     className="btn btn-theme ml-2 mb-2"
                                                     onClick={handleNewAgencyModalShow}
                                             >
                                                 <i className="fa fa-plus" /> Nouvelle agence
-                                            </button>
+                                            </button>*/}
                                             {/* Search result & Infinite scroll */}
                                             {(needle !== '' && needle !== undefined)
                                                 ? <AgenciesCardsComponent agencies={searchEngine(agencies, needle)}
@@ -125,7 +125,7 @@ function AgenciesPage({agencies, agenciesRequests, hasMoreData, page, dispatch, 
             <FormModalComponent modal={newAgencyModal} handleClose={handleNewAgencyModalHide}>
                 <AgencyNewContainer handleClose={handleNewAgencyModalHide} />
             </FormModalComponent>
-            <FormModalComponent small={true} modal={agencyDetailsModal} handleClose={handleAgencyDetailsModalHide}>
+            <FormModalComponent modal={agencyDetailsModal} handleClose={handleAgencyDetailsModalHide}>
                 <AgencyDetailsContainer id={agencyDetailsModal.id} />
             </FormModalComponent>
         </>

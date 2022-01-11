@@ -13,20 +13,20 @@ function ResourceSecondaryInfoComponent({agent}) {
     const [agencyDetailsModal, setAgencyDetailsModal] = useState({show: false, header: "DETAIL DE L'AGENCE", id: ''});
     const [agencyEditModal, setAgencyEditModal] = useState({show: false, header: "MODIFIER L'AGENCE DE " + agent.name});
 
-    // Show agency edit modal form
+    /*// Show agency edit modal form
     const handleAgencyEditModalShow = () => {
         setAgencyEditModal({...agencyEditModal, show: true})
-    }
+    }*/
 
     // Hide zone edit modal form
     const handleAgencyEditModalHide = () => {
         setAgencyEditModal({...agencyEditModal, show: false})
     }
 
-    // Show doc edit modal form
+    /*// Show doc edit modal form
     const handleDocEditModalShow = () => {
         setDocEditModal({...docEditModal, show: true})
-    }
+    }*/
 
     // Hide doc edit modal form
     const handleDocEditModalHide = () => {
@@ -41,12 +41,12 @@ function ResourceSecondaryInfoComponent({agent}) {
     // Render
     return (
         <>
-            <button type="button" className="btn btn-theme mr-1 mb-1" onClick={handleAgencyEditModalShow}>
+            {/*<button type="button" className="btn btn-theme mr-1 mb-1" onClick={handleAgencyEditModalShow}>
                 <i className="fa fa-edit" /> Modifier l'agence
             </button>
             <button type="button" className="btn btn-theme mb-1" onClick={handleDocEditModalShow}>
                 <i className="fa fa-edit" /> Modifier le dossier
-            </button>
+            </button>*/}
             <div className="card">
                 <div className="card-body">
                     <ul className="list-group list-group-unbordered mb-3">

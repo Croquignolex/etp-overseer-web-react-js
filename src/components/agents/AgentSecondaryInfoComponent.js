@@ -13,20 +13,20 @@ function AgentSecondaryInfoComponent({agent}) {
     const [zoneEditModal, setZoneEditModal] = useState({show: false, header: 'MODIFIER LA ZONE DE ' + agent.name});
     const [docEditModal, setDocEditModal] = useState({show: false, header: 'MODIFIER LE DOSSIER DE ' + agent.name});
 
-    // Show zone edit modal form
+    /*// Show zone edit modal form
     const handleZoneEditModalShow = () => {
         setZoneEditModal({...zoneEditModal, show: true})
-    }
+    }*/
 
     // Hide zone edit modal form
     const handleZoneEditModalHide = () => {
         setZoneEditModal({...zoneEditModal, show: false})
     }
 
-    // Show doc edit modal form
+    /*// Show doc edit modal form
     const handleDocEditModalShow = () => {
         setDocEditModal({...docEditModal, show: true})
-    }
+    }*/
 
     // Hide doc edit modal form
     const handleDocEditModalHide = () => {
@@ -41,12 +41,12 @@ function AgentSecondaryInfoComponent({agent}) {
     // Render
     return (
         <>
-            <button type="button" className="btn btn-theme mr-1 mb-1" onClick={handleZoneEditModalShow}>
+            {/*<button type="button" className="btn btn-theme mr-1 mb-1" onClick={handleZoneEditModalShow}>
                 <i className="fa fa-edit" /> Modifier la zone
             </button>
             <button type="button" className="btn btn-theme mb-1" onClick={handleDocEditModalShow}>
                 <i className="fa fa-edit" /> Modifier le dossier
-            </button>
+            </button>*/}
             <div className="card">
                 <div className="card-body">
                     <ul className="list-group list-group-unbordered mb-3">

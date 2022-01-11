@@ -80,10 +80,10 @@ function AgentsPage({agents, agentsRequests, hasMoreData, page, dispatch, locati
         dispatch(emitNextAgentsFetch({page}));
     }
 
-    // Show new agent modal form
+    /*// Show new agent modal form
     const handleNewAgentModalShow = () => {
         setNewAgentModal({newAgentModal, header: "NOUVEL AGENT", show: true})
-    }
+    }*/
 
     // Hide new agent modal form
     const handleNewAgentModalHide = () => {
@@ -141,12 +141,12 @@ function AgentsPage({agents, agentsRequests, hasMoreData, page, dispatch, locati
                                             {requestFailed(agentsRequests.list) && <ErrorAlertComponent message={agentsRequests.list.message} />}
                                             {requestFailed(agentsRequests.next) && <ErrorAlertComponent message={agentsRequests.next.message} />}
                                             {requestFailed(agentsRequests.status) && <ErrorAlertComponent message={agentsRequests.status.message} />}
-                                            <button type="button"
+                                            {/*<button type="button"
                                                     className="btn btn-theme ml-2 mb-2"
                                                     onClick={handleNewAgentModalShow}
                                             >
                                                 <i className="fa fa-plus" /> Nouvel agent
-                                            </button>
+                                            </button>*/}
                                             {/* Search result & Infinite scroll */}
                                             {requestLoading(agentsRequests.list) ? <LoaderComponent /> : ((needle !== '' && needle !== undefined) ?
                                                     (

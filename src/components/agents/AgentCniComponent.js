@@ -9,10 +9,10 @@ function AgentCniComponent({agent}) {
     // Local states
     const [cniEditModal, setCniEditModal] = useState({show: false, header: 'MODIFIER LA CNI DE ' + agent.name});
 
-    // Show cni edit modal form
+    /*// Show cni edit modal form
     const handleCniEditModalShow = () => {
         setCniEditModal({...cniEditModal, show: true})
-    }
+    }*/
 
     // Hide cni edit modal form
     const handleCniEditModalHide = () => {
@@ -38,9 +38,9 @@ function AgentCniComponent({agent}) {
     // Render
     return (
         <>
-            <button type="button" className="btn btn-theme mb-1" onClick={handleCniEditModalShow}>
+            {/*<button type="button" className="btn btn-theme mb-1" onClick={handleCniEditModalShow}>
                 <i className="fa fa-edit" /> Modifier la CNI
-            </button>
+            </button>*/}
             <div className='row'>
                 <Ribbon text='Image avant' image={agent.frontIDCard} />
                 <Ribbon text='Image arrière' image={agent.backIDCard} />

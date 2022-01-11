@@ -11,9 +11,9 @@ function AgencyInfoComponent({agency}) {
     const [infoEditModal, setInfoEditModal] = useState({show: false, header: 'MODIFIER LES INFO DE ' + agency.name});
 
     // Show info edit modal form
-    const handleInfoEditModalShow = () => {
+    /*const handleInfoEditModalShow = () => {
         setInfoEditModal({...infoEditModal, show: true})
-    }
+    }*/
 
     // Hide info edit modal form
     const handleInfoEditModalHide = () => {
@@ -23,9 +23,9 @@ function AgencyInfoComponent({agency}) {
     // Render
     return (
         <>
-            <button type="button" className="btn btn-theme mb-1" onClick={handleInfoEditModalShow}>
+            {/*<button type="button" className="btn btn-theme mb-1" onClick={handleInfoEditModalShow}>
                 <i className="fa fa-edit" /> Modifier les info
-            </button>
+            </button>*/}
             <div className="card">
                 <div className="card-header bg-secondary" />
                 <div className="card-body">
