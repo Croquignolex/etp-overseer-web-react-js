@@ -97,7 +97,8 @@ function extractFleetData(apiSim, apiUser, apiAgent, apiClaimer, apiFleet, apiOp
     if(apiAgent && apiUser) {
         fleet.agent = {
             name: apiUser.name,
-            id: apiUser.id.toString()
+            id: apiUser.id.toString(),
+            reference: apiAgent.reference
         };
     }
     if(apiSim) {
