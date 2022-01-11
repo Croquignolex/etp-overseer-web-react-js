@@ -114,7 +114,8 @@ function extractSupplyData(apiSimOutgoing, apiSimIncoming, apiUser, apiAgent, ap
     if(apiAgent && apiUser) {
         supply.agent = {
             name: apiUser.name,
-            id: apiUser.id.toString()
+            id: apiUser.id.toString(),
+            reference: apiAgent.reference
         };
     }
     if(apiSimOutgoing) {
