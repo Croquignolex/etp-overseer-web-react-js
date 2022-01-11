@@ -21,6 +21,7 @@ import {
     EMIT_INTERNAL_SIMS_FETCH,
     EMIT_RESOURCES_SIMS_FETCH,
     EMIT_ALL_MASTER_SIMS_FETCH,
+    EMIT_ALL_FLEETS_SIMS_FETCH,
     EMIT_COLLECTORS_SIMS_FETCH,
     EMIT_NEXT_AGENTS_SIMS_FETCH,
     EMIT_SIM_TRANSACTIONS_FETCH,
@@ -50,9 +51,12 @@ import {
     storeAllSimsRequestSucceed,
     storeEditSimRequestSucceed,
     storeNextSimsRequestSucceed,
+    storeAllFleetSimsRequestInit,
     storeAllMasterSimsRequestInit,
+    storeAllFleetSimsRequestFailed,
     storeAllInternalSimsRequestInit,
     storeSimTransactionsRequestInit,
+    storeAllFleetSimsRequestSucceed,
     storeAllMasterSimsRequestFailed,
     storeAllMasterSimsRequestSucceed,
     storeAllInternalSimsRequestFailed,
@@ -403,7 +407,8 @@ export function* emitSimFetch() {
                 apiResponse.data.agent,
                 apiResponse.data.corporate,
                 apiResponse.data.flote,
-                apiResponse.data.recouvreur
+                apiResponse.data.recouvreur,
+                apiResponse.data.agency,
             );
             // Fire event to redux
             yield put(storeSetSimData({sim}));
@@ -418,7 +423,7 @@ export function* emitSimFetch() {
 
 // New sim into API
 export function* emitNewSim() {
-    yield takeLatest(EMIT_NEW_SIM, function*({name, number, operator, agent, collector, resource,
+    yield takeLatest(EMIT_NEW_SIM, function*({name, number, operator, agent, collector, agency,
                                                  reference, description, simType, company}) {
         try {
             // Fire event for request
@@ -431,9 +436,9 @@ export function* emitNewSim() {
                 type: simType,
                 numero: number,
                 id_agent: agent,
+                id_agency: agency,
                 id_flotte: operator,
                 id_corporate: company,
-                id_ressource: resource,
                 id_recouvreur: collector,
             }
             // API request
@@ -446,7 +451,8 @@ export function* emitNewSim() {
                 apiResponse.data.agent,
                 apiResponse.data.corporate,
                 apiResponse.data.flote,
-                apiResponse.data.recouvreur
+                apiResponse.data.recouvreur,
+                apiResponse.data.agency,
             );
             // Fire event to redux
             yield put(storeSetNewSimData({sim}));
@@ -501,7 +507,8 @@ export function* emitUpdateSim() {
                 apiResponse.data.agent,
                 apiResponse.data.corporate,
                 apiResponse.data.flote,
-                apiResponse.data.recouvreur
+                apiResponse.data.recouvreur,
+                apiResponse.data.agency,
             );
             // Fire event to redux
             yield put(storeSetSimData({sim, alsoInList: true}));
@@ -514,6 +521,25 @@ export function* emitUpdateSim() {
     });
 }
 
+// Fetch all fleets sims from API
+export function* emitAllFleetSimsFetch() {
+    yield takeLatest(EMIT_ALL_FLEETS_SIMS_FETCH, function*() {
+        try {
+            // Fire event for request
+            yield put(storeAllFleetSimsRequestInit());
+            const apiResponse = yield call(apiGetRequest, `${api.ALL_FLEETS_SIMS_API_PATH}?page=1`);
+            // Extract data
+            const sims = extractSimsData(apiResponse.data.puces);
+            // Fire event to redux
+            yield put(storeSetSimsData({sims, hasMoreData: apiResponse.data.hasMoreData, page: 2}));
+            // Fire event for request
+            yield put(storeAllFleetSimsRequestSucceed({message: apiResponse.message}));
+        } catch (message) {
+            // Fire event for request
+            yield put(storeAllFleetSimsRequestFailed({message}));
+        }
+    });
+}
 
 // Extract sim transactions data
 function extractSimTransactionsData(apiTransactions) {
@@ -536,15 +562,18 @@ function extractSimTransactionsData(apiTransactions) {
 }
 
 // Extract sim data
-function extractSimData(apiSim, apiType, apiUser, apiAgent, apiCompany, apiOperator, apiCollector) {
+function extractSimData(apiSim, apiType, apiUser, apiAgent, apiCompany, apiOperator, apiCollector, apiAgency) {
     let sim = {
         id: '', name: '', reference: '', number: '', balance: '', description: '', creation: '',
 
         type: {id: '', name: ''},
         agent: {id: '', name: ''},
+        agency: {id: '', name: ''},
         company: {id: '', name: ''},
         operator: {id: '', name: ''},
-        collector: {id: '', name: ''}
+        collector: {id: '', name: ''},
+
+        transactions: []
     };
     if(apiAgent && apiUser) {
         sim.agent = {
@@ -576,6 +605,12 @@ function extractSimData(apiSim, apiType, apiUser, apiAgent, apiCompany, apiOpera
             id: apiType.id.toString()
         };
     }
+    if(apiAgency) {
+        sim.agency = {
+            name: apiAgency.name,
+            id: apiAgency.id.toString()
+        };
+    }
     if(apiSim) {
         sim.name = apiSim.nom;
         sim.actionLoader = false;
@@ -600,7 +635,8 @@ function extractSimsData(apiSims) {
             data.agent,
             data.corporate,
             data.flote,
-            data.recouvreur
+            data.recouvreur,
+            data.agency
         ))
     });
     return sims;
@@ -619,6 +655,7 @@ export default function* sagaSims() {
         fork(emitFleetsSimsFetch),
         fork(emitAgentsSimsFetch),
         fork(emitMastersSimsFetch),
+        fork(emitAllFleetSimsFetch),
         fork(emitAllMasterSimsFetch),
         fork(emitResourcesSimsFetch),
         fork(emitNextFleetsSimsFetch),

@@ -13,6 +13,7 @@ const initialState = {
 
         type: {id: '', name: ''},
         agent: {id: '', name: ''},
+        agency: {id: '', name: ''},
         company: {id: '', name: ''},
         operator: {id: '', name: ''},
         collector: {id: '', name: ''},

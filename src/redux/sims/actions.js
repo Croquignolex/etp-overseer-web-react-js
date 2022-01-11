@@ -20,6 +20,7 @@ export const EMIT_SEARCH_SIMS_FETCH = 'EMIT_SEARCH_SIMS_FETCH';
 export const EMIT_MASTERS_SIMS_FETCH = 'EMIT_MASTERS_SIMS_FETCH';
 export const EMIT_INTERNAL_SIMS_FETCH = 'EMIT_INTERNAL_SIMS_FETCH';
 export const EMIT_RESOURCES_SIMS_FETCH = 'EMIT_RESOURCES_SIMS_FETCH';
+export const EMIT_ALL_FLEETS_SIMS_FETCH = 'EMIT_ALL_FLEETS_SIMS_FETCH';
 export const EMIT_ALL_MASTER_SIMS_FETCH = 'EMIT_ALL_MASTER_SIMS_FETCH';
 export const EMIT_COLLECTORS_SIMS_FETCH = 'EMIT_COLLECTORS_SIMS_FETCH';
 export const EMIT_NEXT_FLEETS_SIMS_FETCH = 'EMIT_NEXT_FLEETS_SIMS_FETCH';
@@ -149,14 +150,14 @@ export const emitSimFetch = ({id}) => ({
 });
 
 // Emit new sim
-export const emitNewSim = ({name, simType, number, operator, agent, resource,
+export const emitNewSim = ({name, simType, number, operator, agent, agency,
                                reference, description, company, collector}) => ({
     name,
     agent,
     number,
+    agency,
     company,
     simType,
-    resource,
     operator,
     reference,
     collector,
@@ -194,4 +195,9 @@ export const emitSimTransactionsFetch = ({id, selectedStartDay, selectedEndDay})
     selectedEndDay,
     selectedStartDay,
     type: EMIT_SIM_TRANSACTIONS_FETCH
+});
+
+// Emit all fleet sims fetch
+export const emitAllFleetSimsFetch = () => ({
+    type: EMIT_ALL_FLEETS_SIMS_FETCH
 });
