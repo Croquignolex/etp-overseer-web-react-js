@@ -152,7 +152,8 @@ function extractRecoveryData(apiRecovery, apiUser, apiAgent, apiCollector, apiSi
     if(apiAgent && apiUser) {
         recovery.agent = {
             name: apiUser.name,
-            id: apiUser.id.toString()
+            id: apiUser.id.toString(),
+            reference: apiAgent.reference
         };
     }
     if(apiCollector) {
