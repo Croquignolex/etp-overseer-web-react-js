@@ -1,8 +1,8 @@
 import {connect} from "react-redux";
 
 import AgenciesPage from "../../pages/AgenciesPage";
-import {setPageTitle} from "../../functions/generalFunctions";
 import {AGENCIES_PAGE} from "../../constants/pageNameConstants";
+import {setPageTitle} from "../../functions/generalFunctions";
 
 setPageTitle(AGENCIES_PAGE);
 

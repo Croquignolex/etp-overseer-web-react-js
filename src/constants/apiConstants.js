@@ -44,6 +44,8 @@ export const All_INTERNAL_SIMS_API_PATH = `${API_URL}/puce_list_interne_all`;
 // Agents
 export const AGENT_API_PATH = `${API_URL}/show_agent`;
 export const AGENTS_API_PATH = `${API_URL}/list_agents`;
+export const RESOURCE_API_PATH = `${API_URL}/show_resource`;
+export const RESOURCES_API_PATH = `${API_URL}/list_resources`;
 export const EDIT_AGENT_CNI_API_PATH = `${API_URL}/edit_cni`;
 export const AGENT_ADD_SIM = `${API_URL}/ajouter_puce_agent`;
 export const CREATE_AGENT_API_PATH = `${API_URL}/create_agent`;
@@ -52,7 +54,9 @@ export const EDIT_AGENT_INFO_API_PATH = `${API_URL}/edit_agent`;
 export const ALL_AGENTS_API_PATH = `${API_URL}/list_agents_all`;
 export const EDIT_AGENT_DOC_API_PATH = `${API_URL}/edit_folder`;
 export const SEARCH_AGENTS_API_PATH = `${API_URL}/search_agents`;
+export const CREATE_RESOURCE_API_PATH = `${API_URL}/create_resource`;
 export const AGENT_ZONE_UPDATE_API_PATH = `${API_URL}/edit_zone_agent`;
+export const AGENT_AGENCY_UPDATE_API_PATH = `${API_URL}/edit_agency_agent`;
 export const TOGGLE_AGENT_STATUS_API_PATH = `${API_URL}/edit_agent_status`;
 
 // Collectors
@@ -91,6 +95,7 @@ export const AGENCIES_API_PATH = `${API_URL}/agencies`;
 export const EDIT_AGENCY_API_PATH = `${API_URL}/edit_agency`;
 export const CREATE_AGENCY_API_PATH = `${API_URL}/new_agency`;
 export const ALL_AGENCIES_API_PATH = `${API_URL}/all_agencies`;
+export const AGENCY_ADD_SIM = `${API_URL}/ajouter_puce_agence`;
 export const AGENCY_DETAILS_API_PATH = `${API_URL}/show_agency`;
 
 // Administrators

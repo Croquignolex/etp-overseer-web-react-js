@@ -13,10 +13,13 @@ import {
     EMIT_NEW_AGENT,
     EMIT_AGENT_FETCH,
     EMIT_AGENTS_FETCH,
+    EMIT_NEW_RESOURCE,
     storeSetAgentData,
     storeSetAgentsData,
     EMIT_ADD_AGENT_SIMS,
+    EMIT_RESOURCE_FETCH,
     storeSetNewAgentData,
+    EMIT_RESOURCES_FETCH,
     EMIT_ALL_AGENTS_FETCH,
     EMIT_UPDATE_AGENT_DOC,
     EMIT_UPDATE_AGENT_CNI,
@@ -28,6 +31,8 @@ import {
     storeSetAgentToggleData,
     EMIT_SEARCH_AGENTS_FETCH,
     EMIT_TOGGLE_AGENT_STATUS,
+    EMIT_UPDATE_AGENT_AGENCY,
+    EMIT_NEXT_RESOURCES_FETCH,
     storeStopInfiniteScrollAgentData
 } from "./actions";
 import {
@@ -126,6 +131,26 @@ export function* emitAgentsFetch() {
     });
 }
 
+// Fetch resources from API
+export function* emitResourcesFetch() {
+    yield takeLatest(EMIT_RESOURCES_FETCH, function*() {
+        try {
+            // Fire event for request
+            yield put(storeAgentsRequestInit());
+            const apiResponse = yield call(apiGetRequest, `${api.RESOURCES_API_PATH}?page=1`);
+            // Extract data
+            const agents = extractAgentsData(apiResponse.data.agents);
+            // Fire event to redux
+            yield put(storeSetAgentsData({agents, hasMoreData: apiResponse.data.hasMoreData, page: 2}));
+            // Fire event for request
+            yield put(storeAgentsRequestSucceed({message: apiResponse.message}));
+        } catch (message) {
+            // Fire event for request
+            yield put(storeAgentsRequestFailed({message}));
+        }
+    });
+}
+
 // Fetch next agents from API
 export function* emitNextAgentsFetch() {
     yield takeLatest(EMIT_NEXT_AGENTS_FETCH, function*({page}) {
@@ -147,10 +172,30 @@ export function* emitNextAgentsFetch() {
     });
 }
 
+// Fetch next resources from API
+export function* emitNextResourcesFetch() {
+    yield takeLatest(EMIT_NEXT_RESOURCES_FETCH, function*({page}) {
+        try {
+            // Fire event for request
+            yield put(storeNextAgentsRequestInit());
+            const apiResponse = yield call(apiGetRequest, `${api.RESOURCES_API_PATH}?page=${page}`);
+            // Extract data
+            const agents = extractAgentsData(apiResponse.data.agents);
+            // Fire event to redux
+            yield put(storeSetNextAgentsData({agents, hasMoreData: apiResponse.data.hasMoreData, page: page + 1}));
+            // Fire event for request
+            yield put(storeNextAgentsRequestSucceed({message: apiResponse.message}));
+        } catch (message) {
+            // Fire event for request
+            yield put(storeNextAgentsRequestFailed({message}));
+            yield put(storeStopInfiniteScrollAgentData());
+        }
+    });
+}
+
 // New agent into API
 export function* emitNewAgent() {
-    yield takeLatest(EMIT_NEW_AGENT, function*({name, address, phone, zone, reference,
-                                                   town, country, email, password, description,
+    yield takeLatest(EMIT_NEW_AGENT, function*({name, address, phone, zone, email, description,
                                                    frontIDCard, backIDCard, document}) {
         try {
             // Fire event for request
@@ -158,15 +203,11 @@ export function* emitNewAgent() {
             // From data
             const data = new FormData();
             data.append('name', name);
-            data.append('ville', town);
             data.append('phone', phone);
             data.append('email', email);
-            data.append('pays', country);
             data.append('id_zone', zone);
             data.append('adresse', address);
             data.append('document', document);
-            data.append('password', password);
-            data.append('reference', reference);
             data.append('description', description);
             frontIDCard && data.append('base_64_image', frontIDCard);
             backIDCard && data.append('base_64_image_back', backIDCard);
@@ -179,6 +220,47 @@ export function* emitNewAgent() {
                 apiResponse.data.zone,
                 apiResponse.data.caisse,
                 apiResponse.data.createur,
+            );
+            // Fire event to redux
+            yield put(storeSetNewAgentData({agent}));
+            // Fire event for request
+            yield put(storeAddAgentRequestSucceed({message: apiResponse.message}));
+        } catch (message) {
+            // Fire event for request
+            yield put(storeAddAgentRequestFailed({message}));
+        }
+    });
+}
+
+// New agent into API
+export function* emitNewResource() {
+    yield takeLatest(EMIT_NEW_RESOURCE, function*({name, address, phone, agency, email, description,
+                                                   frontIDCard, backIDCard, document}) {
+        try {
+            // Fire event for request
+            yield put(storeAddAgentRequestInit());
+            // From data
+            const data = new FormData();
+            data.append('name', name);
+            data.append('phone', phone);
+            data.append('email', email);
+            data.append('id_agency', agency);
+            data.append('adresse', address);
+            data.append('document', document);
+            data.append('description', description);
+            frontIDCard && data.append('base_64_image', frontIDCard);
+            backIDCard && data.append('base_64_image_back', backIDCard);
+            // API request
+            const apiResponse = yield call(apiPostRequest, api.CREATE_RESOURCE_API_PATH, data);
+            // Extract data
+            const agent = extractAgentData(
+                apiResponse.data.agent,
+                apiResponse.data.user,
+                apiResponse.data.zone,
+                apiResponse.data.caisse,
+                apiResponse.data.createur,
+                apiResponse.data.puces,
+                apiResponse.data.agency,
             );
             // Fire event to redux
             yield put(storeSetNewAgentData({agent}));
@@ -206,6 +288,34 @@ export function* emitAgentFetch() {
                 apiResponse.data.caisse,
                 apiResponse.data.createur,
                 apiResponse.data.puces
+            );
+            // Fire event to redux
+            yield put(storeSetAgentData({agent}));
+            // Fire event for request
+            yield put(storeAgentRequestSucceed({message: apiResponse.message}));
+        } catch (message) {
+            // Fire event for request
+            yield put(storeAgentRequestFailed({message}));
+        }
+    });
+}
+
+// Fetch resource from API
+export function* emitResourceFetch() {
+    yield takeLatest(EMIT_RESOURCE_FETCH, function*({id}) {
+        try {
+            // Fire event for request
+            yield put(storeAgentRequestInit());
+            const apiResponse = yield call(apiGetRequest, `${api.RESOURCE_API_PATH}/${id}`);
+            // Extract data
+            const agent = extractAgentData(
+                apiResponse.data.agent,
+                apiResponse.data.user,
+                apiResponse.data.zone,
+                apiResponse.data.caisse,
+                apiResponse.data.createur,
+                apiResponse.data.puces,
+                apiResponse.data.agency,
             );
             // Fire event to redux
             yield put(storeSetAgentData({agent}));
@@ -283,6 +393,35 @@ export function* emitUpdateAgentZone() {
                 apiResponse.data.caisse,
                 apiResponse.data.createur,
                 apiResponse.data.puces
+            );
+            // Fire event to redux
+            yield put(storeSetAgentData({agent, alsoInList: true}));
+            // Fire event for request
+            yield put(storeAgentEditZoneRequestSucceed({message: apiResponse.message}));
+        } catch (message) {
+            // Fire event for request
+            yield put(storeAgentEditZoneRequestFailed({message}));
+        }
+    });
+}
+
+// Update agent agency
+export function* emitUpdateAgentAgency() {
+    yield takeLatest(EMIT_UPDATE_AGENT_AGENCY, function*({id, agency}) {
+        try {
+            // Fire event for request
+            yield put(storeAgentEditZoneRequestInit());
+            const data = {id_agency: agency};
+            const apiResponse = yield call(apiPostRequest, `${api.AGENT_AGENCY_UPDATE_API_PATH}/${id}`, data);
+            // Extract data
+            const agent = extractAgentData(
+                apiResponse.data.agent,
+                apiResponse.data.user,
+                apiResponse.data.zone,
+                apiResponse.data.caisse,
+                apiResponse.data.createur,
+                apiResponse.data.puces,
+                apiResponse.data.agency,
             );
             // Fire event to redux
             yield put(storeSetAgentData({agent, alsoInList: true}));
@@ -383,13 +522,14 @@ export function* emitAddAgentSims() {
 }
 
 // Extract sim data
-function extractAgentData(apiAgent, apiUser, apiZone, apiAccount, apiCreator, apiSims) {
+function extractAgentData(apiAgent, apiUser, apiZone, apiAccount, apiCreator, apiSims, apiAgency) {
     let agent = {
         id: '', name: '', address: '',
         salePoint: '', frontIDCard: '', backIDCard: '',
         description: '', phone: '', email: '', creation: '',
         avatar: '', status: '', reference: '', town: '', country: '',
 
+        agency: {id: '', name: ''},
         creator: {id: '', name: ''},
         account: {id: '', balance: ''},
         zone: {id: '', name: '', map: ''},
@@ -412,6 +552,12 @@ function extractAgentData(apiAgent, apiUser, apiZone, apiAccount, apiCreator, ap
             map: apiZone.map,
             name: apiZone.nom,
             id: apiZone.id.toString()
+        }
+    }
+    if(apiAgency) {
+        agent.agency = {
+            name: apiAgency.name,
+            id: apiAgency.id.toString()
         }
     }
     if(apiAccount) {
@@ -459,7 +605,8 @@ function extractAgentsData(apiAgents) {
                 data.zone,
                 data.caisse,
                 data.createur,
-                data.puces
+                data.puces,
+                data.agency,
             ));
         });
     }
@@ -471,15 +618,20 @@ export default function* sagaAgents() {
     yield all([
         fork(emitNewAgent),
         fork(emitAgentFetch),
+        fork(emitNewResource),
         fork(emitAgentsFetch),
         fork(emitAddAgentSims),
+        fork(emitResourceFetch),
+        fork(emitResourcesFetch),
         fork(emitUpdateAgentCNI),
         fork(emitUpdateAgentDoc),
         fork(emitAllAgentsFetch),
         fork(emitUpdateAgentZone),
         fork(emitNextAgentsFetch),
         fork(emitUpdateAgentInfo),
+        fork(emitUpdateAgentAgency),
         fork(emitSearchAgentsFetch),
         fork(emitToggleAgentStatus),
+        fork(emitNextResourcesFetch),
     ]);
 }

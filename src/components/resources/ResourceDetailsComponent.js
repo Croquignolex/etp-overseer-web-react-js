@@ -2,19 +2,19 @@ import PropTypes from "prop-types";
 import React, {useEffect} from 'react';
 
 import LoaderComponent from "../LoaderComponent";
-import AgencyInfoComponent from "./AgencyInfoComponent";
 import ErrorAlertComponent from "../ErrorAlertComponent";
-import {emitAgencyFetch} from "../../redux/agencies/actions";
-import AgencySimsListComponent from "./AgencySimsListComponent";
+import AgentCniComponent from "../agents/AgentCniComponent";
+import {emitResourceFetch} from "../../redux/agents/actions";
+import {storeAgentRequestReset} from "../../redux/requests/agents/actions";
+import AgentPrimaryInfoComponent from "../agents/AgentPrimaryInfoComponent";
+import ResourceSecondaryInfoComponent from "./ResourceSecondaryInfoComponent";
 import {requestFailed, requestLoading} from "../../functions/generalFunctions";
-import {storeShowAgencyRequestReset} from "../../redux/requests/agencies/actions";
 
 // Component
-function AgencyDetailsComponent({id, agency, dispatch, request}) {
-
+function ResourceDetailsComponent({id, agent, dispatch, request}) {
     // Local effects
     useEffect(() => {
-        dispatch(emitAgencyFetch({id}));
+        dispatch(emitResourceFetch({id}));
         // Cleaner error alert while component did unmount without store dependency
         return () => {
             shouldResetErrorData();
@@ -24,7 +24,7 @@ function AgencyDetailsComponent({id, agency, dispatch, request}) {
 
     // Reset error alert
     const shouldResetErrorData = () => {
-        dispatch(storeShowAgencyRequestReset());
+        dispatch(storeAgentRequestReset());
     };
 
     // Render
@@ -33,11 +33,14 @@ function AgencyDetailsComponent({id, agency, dispatch, request}) {
             {requestLoading(request)  ? <LoaderComponent /> : (
                 requestFailed(request) ? <ErrorAlertComponent message={request.message} /> : (
                     <div className="row">
-                        <div className="col-lg-12 col-md-12">
-                            <AgencyInfoComponent agency={agency} />
+                        <div className="col-lg-6 col-md-6">
+                            <AgentPrimaryInfoComponent agent={agent} />
+                        </div>
+                        <div className="col-lg-6 col-md-6">
+                            <ResourceSecondaryInfoComponent agent={agent} />
                         </div>
                         <div className="col-lg-12 col-md-12">
-                            <AgencySimsListComponent agency={agency} />
+                            <AgentCniComponent agent={agent} />
                         </div>
                     </div>
                 )
@@ -47,11 +50,11 @@ function AgencyDetailsComponent({id, agency, dispatch, request}) {
 }
 
 // Prop types to ensure destroyed props data type
-AgencyDetailsComponent.propTypes = {
+ResourceDetailsComponent.propTypes = {
     id: PropTypes.string.isRequired,
-    agency: PropTypes.object.isRequired,
+    agent: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
     request: PropTypes.object.isRequired,
 };
 
-export default React.memo(AgencyDetailsComponent);
+export default React.memo(ResourceDetailsComponent);

@@ -8,6 +8,7 @@ import {
     EMIT_UPDATE_AGENCY,
     storeSetAgencyData,
     EMIT_AGENCIES_FETCH,
+    EMIT_ADD_AGENCY_SIMS,
     storeSetAgenciesData,
     storeSetNewAgencyData,
     EMIT_ALL_AGENCIES_FETCH,
@@ -26,6 +27,7 @@ import {
     storeAgenciesRequestSucceed,
     storeNextAgenciesRequestInit,
     storeShowAgencyRequestFailed,
+    storeAgencyAddSimRequestInit,
     storeAddAgencyRequestSucceed,
     storeEditAgencyRequestFailed,
     storeAllAgenciesRequestFailed,
@@ -33,7 +35,9 @@ import {
     storeEditAgencyRequestSucceed,
     storeNextAgenciesRequestFailed,
     storeAllAgenciesRequestSucceed,
+    storeAgencyAddSimRequestFailed,
     storeNextAgenciesRequestSucceed,
+    storeAgencyAddSimRequestSucceed,
 } from "../requests/agencies/actions";
 
 // Fetch all agencies from API
@@ -99,16 +103,20 @@ export function* emitNextAgenciesFetch() {
 
 // New agency into API
 export function* emitNewAgency() {
-    yield takeLatest(EMIT_NEW_AGENCY, function*({name, description}) {
+    yield takeLatest(EMIT_NEW_AGENCY, function*({name, manager, description}) {
         try {
             // Fire event for request
             yield put(storeAddAgencyRequestInit());
             // From data
-            const data = {name, description}
+            const data = {name, manager, description}
             // API request
             const apiResponse = yield call(apiPostRequest, api.CREATE_AGENCY_API_PATH, data);
             // Extract data
-            const agency = extractAgencyData(apiResponse.data.agency);
+            const agency = extractAgencyData(
+                apiResponse.data.agency,
+                apiResponse.data.manager,
+                apiResponse.data.puces,
+            );
             // Fire event to redux
             yield put(storeSetNewAgencyData({agency}));
             // Fire event for request
@@ -129,7 +137,9 @@ export function* emitAgencyFetch() {
             const apiResponse = yield call(apiGetRequest, `${api.AGENCY_DETAILS_API_PATH}/${id}`);
             // Extract data
             const agency = extractAgencyData(
-                apiResponse.data.agency
+                apiResponse.data.agency,
+                apiResponse.data.manager,
+                apiResponse.data.puces,
             );
             // Fire event to redux
             yield put(storeSetAgencyData({agency}));
@@ -152,7 +162,9 @@ export function* emitUpdateAgency() {
             const apiResponse = yield call(apiPostRequest, `${api.EDIT_AGENCY_API_PATH}/${id}`, data);
             // Extract data
             const agency = extractAgencyData(
-                apiResponse.data.agency
+                apiResponse.data.agency,
+                apiResponse.data.manager,
+                apiResponse.data.puces,
             );
             // Fire event to redux
             yield put(storeSetAgencyData({agency, alsoInList: true}));
@@ -165,15 +177,59 @@ export function* emitUpdateAgency() {
     });
 }
 
+// Add agency sim
+export function* emitAddAgencySims() {
+    yield takeLatest(EMIT_ADD_AGENCY_SIMS, function*({id, name, reference, number, description, operator}) {
+        try {
+            // Fire event for request
+            yield put(storeAgencyAddSimRequestInit());
+            const data = {reference, nom: name, description, numero: number, id_flotte: operator,}
+            const apiResponse = yield call(apiPostRequest, `${api.AGENCY_ADD_SIM}/${id}`, data);
+            // Extract data
+            const agency = extractAgencyData(
+                apiResponse.data.agency,
+                apiResponse.data.manager,
+                apiResponse.data.puces,
+            );
+            // Fire event to redux
+            yield put(storeSetAgencyData({agency, alsoInList: true}));
+            // Fire event for request
+            yield put(storeAgencyAddSimRequestSucceed({message: apiResponse.message}));
+        } catch (message) {
+            // Fire event for request
+            yield put(storeAgencyAddSimRequestFailed({message}));
+        }
+    });
+}
+
 // Extract zone data
-function extractAgencyData(apiAgency) {
+function extractAgencyData(apiAgency, apiManager, apiSims) {
     let agency = {
-        id: '', name: '', balance: '', description: '', creation: '',
+        id: '', name: '', description: '', creation: '',
+
+        sims: [],
+        manager: {id: '', name: ''},
     };
+    if(apiSims) {
+        apiSims.forEach(data => {
+            agency.sims.push({
+                name: data.nom,
+                number: data.numero,
+                balance: data.solde,
+                id: data.id.toString(),
+                creation: data.created_at
+            })
+        });
+    }
+    if(apiManager) {
+        agency.manager = {
+            name: apiManager.name,
+            id: apiManager.id.toString(),
+        }
+    }
     if(apiAgency) {
         agency.actionLoader = false;
         agency.name = apiAgency.name;
-        agency.balance = apiAgency.solde;
         agency.id = apiAgency.id.toString();
         agency.creation = apiAgency.created_at;
         agency.description = apiAgency.description;
@@ -187,7 +243,9 @@ function extractAgenciesData(apiAgencies) {
     if(apiAgencies) {
         apiAgencies.forEach(data => {
             agencies.push(extractAgencyData(
-                data.agency
+                data.agency,
+                data.manager,
+                data.puces,
             ));
         });
     }
@@ -200,6 +258,7 @@ export default function* sagaAgencies() {
         fork(emitNewAgency),
         fork(emitAgencyFetch),
         fork(emitUpdateAgency),
+        fork(emitAddAgencySims),
         fork(emitAgenciesFetch),
         fork(emitAllAgenciesFetch),
         fork(emitNextAgenciesFetch),

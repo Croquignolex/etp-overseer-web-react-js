@@ -14,6 +14,7 @@ const initialState = {
         description: '', phone: '', email: '', creation: '',
         avatar: '', status: '', reference: '', town: '', country: '',
 
+        agency: {id: '', name: ''},
         creator: {id: '', name: ''},
         account: {id: '', balance: ''},
         zone: {id: '', name: '', map: ''},

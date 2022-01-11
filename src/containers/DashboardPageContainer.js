@@ -8,6 +8,7 @@ setPageTitle(DASHBOARD_PAGE);
 
 // Map state function to component props
 const mapStateToProps = (state) => ({
+    user: state.user,
     sims: state.sims.list,
     zones: state.zones.list,
     settings: state.settings,
@@ -26,6 +27,7 @@ const mapStateToProps = (state) => ({
     allAgentsRequests: state.agentsRequests.all,
     allVendorsRequests: state.vendorsRequests.all,
     allManagersRequests: state.managersRequests.all,
+    balanceUserRequests: state.userRequests.balance,
     allCompaniesRequests: state.companiesRequests.all,
     allOperatorsRequests: state.operatorsRequests.all,
     allOverseersRequests: state.overseersRequests.all,

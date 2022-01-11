@@ -1,10 +1,20 @@
-import React from 'react';
 import PropTypes from "prop-types";
+import React, {useState} from 'react';
 
 import {dateToString} from "../../functions/generalFunctions";
+import FormModalComponent from "../modals/FormModalComponent";
+import ResourceDetailsContainer from "../../containers/resources/ResourceDetailsContainer";
 
 // Component
 function AgenciesCardsComponent({agencies, handleAgencyDetailsModalShow}) {
+    // Local states
+    const [agentDetailsModal, setAgentDetailsModal] = useState({show: false, header: "DETAIL DE LA RESSOURCE", id: ''});
+
+    // Hide agent details modal form
+    const handleAgentDetailsModalHide = () => {
+        setAgentDetailsModal({...agentDetailsModal, show: false})
+    }
+
     // Render
     return (
         <>
@@ -24,6 +34,15 @@ function AgenciesCardsComponent({agencies, handleAgencyDetailsModalShow}) {
                                             <b>Nom</b>
                                             <span className="float-right">{item.name}</span>
                                         </li>
+                                        {/*<li className="list-group-item">
+                                            <b>Responsable</b>
+                                            <span className="float-right">
+                                                {item.manager.name}
+                                                <i className="fa fa-question-circle small ml-1 hand-cursor text-theme"
+                                                   onClick={() => setAgentDetailsModal({...agentDetailsModal, show: true, id: item.manager.id})}
+                                                />
+                                            </span>
+                                        </li>*/}
                                     </ul>
                                     <div className="mt-3 text-right">
                                         <button type="button"
@@ -46,6 +65,9 @@ function AgenciesCardsComponent({agencies, handleAgencyDetailsModalShow}) {
                     </div>
                 }
             </div>
+            <FormModalComponent modal={agentDetailsModal} handleClose={handleAgentDetailsModalHide}>
+                <ResourceDetailsContainer id={agentDetailsModal.id} />
+            </FormModalComponent>
         </>
     )
 }

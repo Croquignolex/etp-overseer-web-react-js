@@ -7,11 +7,11 @@ import LoaderComponent from "../../components/LoaderComponent";
 import {agentTypeBadgeColor} from "../../functions/typeFunctions";
 import AppLayoutContainer from "../../containers/AppLayoutContainer";
 import ErrorAlertComponent from "../../components/ErrorAlertComponent";
-import AgentNewContainer from "../../containers/agents/AgentNewContainer";
 import FormModalComponent from "../../components/modals/FormModalComponent";
 import BlockModalComponent from "../../components/modals/BlockModalComponent";
-import AgentsCardsComponent from "../../components/agents/AgentsCardsComponent";
-import AgentDetailsContainer from "../../containers/agents/AgentDetailsContainer";
+import ResourceNewContainer from "../../containers/resources/ResourceNewContainer";
+import ResourcesCardsComponent from "../../components/resources/ResourcesCardsComponent";
+import ResourceDetailsContainer from "../../containers/resources/ResourceDetailsContainer";
 import TableSearchWithButtonComponent from "../../components/TableSearchWithButtonComponent";
 import {
     storeAgentsRequestReset,
@@ -27,10 +27,10 @@ import {
     requestSucceeded
 } from "../../functions/generalFunctions";
 import {
-    emitAgentsFetch,
-    emitNextAgentsFetch,
+    emitResourcesFetch,
     emitSearchAgentsFetch,
-    emitToggleAgentStatus
+    emitToggleAgentStatus,
+    emitNextResourcesFetch
 } from "../../redux/agents/actions";
 
 // Component
@@ -43,7 +43,7 @@ function AgentsPage({agents, agentsRequests, hasMoreData, page, dispatch, locati
 
     // Local effects
     useEffect(() => {
-        dispatch(emitAgentsFetch());
+        dispatch(emitResourcesFetch());
         // Cleaner error alert while component did unmount without store dependency
         return () => {
             shouldResetErrorData();
@@ -77,12 +77,12 @@ function AgentsPage({agents, agentsRequests, hasMoreData, page, dispatch, locati
 
     // Fetch next agents data to enhance infinite scroll
     const handleNextAgentsData = () => {
-        dispatch(emitNextAgentsFetch({page}));
+        dispatch(emitNextResourcesFetch({page}));
     }
 
     // Show new agent modal form
     const handleNewAgentModalShow = () => {
-        setNewAgentModal({newAgentModal, header: "NOUVEL AGENT", show: true})
+        setNewAgentModal({newAgentModal, header: "NOUVELLE RESSOURCE", show: true})
     }
 
     // Hide new agent modal form
@@ -102,7 +102,7 @@ function AgentsPage({agents, agentsRequests, hasMoreData, page, dispatch, locati
 
     // Trigger when user block status confirmed on modal
     const handleBlockModalShow = ({id, name}) => {
-        setBlockModal({...blockModal, show: true, id, body: `Bloquer l'agent ${name}?`})
+        setBlockModal({...blockModal, show: true, id, body: `Bloquer la ressource ${name}?`})
     };
 
     // Hide block confirmation modal
@@ -121,7 +121,7 @@ function AgentsPage({agents, agentsRequests, hasMoreData, page, dispatch, locati
         <>
             <AppLayoutContainer pathname={location.pathname}>
                 <div className="content-wrapper">
-                    <HeaderComponent title="Tous les agents" icon={'fa fa-user-cog'} />
+                    <HeaderComponent title="Toutes les ressources" icon={'fa fa-user-cog'} />
                     <section className="content">
                         <div className='container-fluid'>
                             <div className="row">
@@ -145,12 +145,12 @@ function AgentsPage({agents, agentsRequests, hasMoreData, page, dispatch, locati
                                                     className="btn btn-theme ml-2 mb-2"
                                                     onClick={handleNewAgentModalShow}
                                             >
-                                                <i className="fa fa-plus" /> Nouvel agent
+                                                <i className="fa fa-plus" /> Nouvelle ressource
                                             </button>
                                             {/* Search result & Infinite scroll */}
                                             {requestLoading(agentsRequests.list) ? <LoaderComponent /> : ((needle !== '' && needle !== undefined) ?
                                                     (
-                                                        <AgentsCardsComponent handleBlock={handleBlock}
+                                                        <ResourcesCardsComponent handleBlock={handleBlock}
                                                                               agents={searchEngine(agents, needle)}
                                                                               handleBlockModalShow={handleBlockModalShow}
                                                                               handleAgentDetailsModalShow={handleAgentDetailsModalShow}
@@ -163,7 +163,7 @@ function AgentsPage({agents, agentsRequests, hasMoreData, page, dispatch, locati
                                                                         loader={<LoaderComponent />}
                                                                         style={{ overflow: 'hidden' }}
                                                         >
-                                                            <AgentsCardsComponent agents={agents}
+                                                            <ResourcesCardsComponent agents={agents}
                                                                                   handleBlock={handleBlock}
                                                                                   handleBlockModalShow={handleBlockModalShow}
                                                                                   handleAgentDetailsModalShow={handleAgentDetailsModalShow}
@@ -185,10 +185,10 @@ function AgentsPage({agents, agentsRequests, hasMoreData, page, dispatch, locati
                                  handleClose={handleBlockModalHide}
             />
             <FormModalComponent modal={newAgentModal} handleClose={handleNewAgentModalHide}>
-                <AgentNewContainer handleClose={handleNewAgentModalHide} />
+                <ResourceNewContainer handleClose={handleNewAgentModalHide} />
             </FormModalComponent>
             <FormModalComponent modal={agentDetailsModal} handleClose={handleAgentDetailsModalHide}>
-                <AgentDetailsContainer id={agentDetailsModal.id} />
+                <ResourceDetailsContainer id={agentDetailsModal.id} />
             </FormModalComponent>
         </>
     )

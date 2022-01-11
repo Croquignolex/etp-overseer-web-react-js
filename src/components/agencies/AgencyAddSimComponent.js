@@ -7,18 +7,19 @@ import ButtonComponent from "../form/ButtonComponent";
 import SelectComponent from "../form/SelectComponent";
 import ErrorAlertComponent from "../ErrorAlertComponent";
 import TextareaComponent from "../form/TextareaComponent";
-import {emitAddAgentSims} from "../../redux/agents/actions";
+import {RESOURCE_TYPE} from "../../constants/typeConstants";
+import {emitAddAgencySims} from "../../redux/agencies/actions";
 import {DEFAULT_FORM_DATA} from "../../constants/defaultConstants";
 import {dataToArrayForSelect} from "../../functions/arrayFunctions";
 import {playWarningSound} from "../../functions/playSoundFunctions";
 import {emitAllOperatorsFetch} from "../../redux/operators/actions";
 import {phoneChecker, requiredChecker} from "../../functions/checkerFunctions";
-import {storeAgentAddSimRequestReset} from "../../redux/requests/agents/actions";
+import {storeAgencyAddSimRequestReset} from "../../redux/requests/agencies/actions";
 import {storeAllOperatorsRequestReset} from "../../redux/requests/operators/actions";
 import {applySuccess, requestFailed, requestLoading, requestSucceeded} from "../../functions/generalFunctions";
 
 // Component
-function AgentAddSimComponent({request, agent, operators, allOperatorsRequests, dispatch, handleClose}) {
+function AgencyAddSimComponent({request, agency, operators, allOperatorsRequests, dispatch, handleClose}) {
     // Local state
     const [name, setName] = useState(DEFAULT_FORM_DATA);
     const [number, setNumber] = useState(DEFAULT_FORM_DATA);
@@ -47,7 +48,7 @@ function AgentAddSimComponent({request, agent, operators, allOperatorsRequests, 
 
     // Reset error alert
     const shouldResetErrorData = () => {
-        dispatch(storeAgentAddSimRequestReset());
+        dispatch(storeAgencyAddSimRequestReset());
         dispatch(storeAllOperatorsRequestReset());
     };
 
@@ -91,12 +92,12 @@ function AgentAddSimComponent({request, agent, operators, allOperatorsRequests, 
 
         // Check
         if(validationOK) {
-            dispatch(emitAddAgentSims({
-                id: agent.id,
+            dispatch(emitAddAgencySims({
+                id: agency.id,
                 name: _name.data,
                 number: _number.data,
                 operator: _operator.data,
-                reference: agent.reference,
+                reference: RESOURCE_TYPE,
                 description: description.data
             }));
         }
@@ -111,8 +112,8 @@ function AgentAddSimComponent({request, agent, operators, allOperatorsRequests, 
                 <div className="row">
                     <div className='col-sm-6'>
                         <DisabledInput id='inputAgent'
-                                       val={agent.name}
-                                       label='Agent'
+                                       label='Agence'
+                                       val={agency.name}
                         />
                     </div>
                 </div>
@@ -162,8 +163,8 @@ function AgentAddSimComponent({request, agent, operators, allOperatorsRequests, 
 }
 
 // Prop types to ensure destroyed props data type
-AgentAddSimComponent.propTypes = {
-    agent: PropTypes.object.isRequired,
+AgencyAddSimComponent.propTypes = {
+    agency: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
     request: PropTypes.object.isRequired,
     operators: PropTypes.array.isRequired,
@@ -171,4 +172,4 @@ AgentAddSimComponent.propTypes = {
     allOperatorsRequests: PropTypes.object.isRequired,
 };
 
-export default React.memo(AgentAddSimComponent);
+export default React.memo(AgencyAddSimComponent);

@@ -29,6 +29,11 @@ export const STORE_EDIT_AGENCY_REQUEST_RESET = 'STORE_EDIT_AGENCY_REQUEST_RESET'
 export const STORE_EDIT_AGENCY_REQUEST_FAILED = 'STORE_EDIT_AGENCY_REQUEST_FAILED';
 export const STORE_EDIT_AGENCY_REQUEST_SUCCEEDED = 'STORE_EDIT_AGENCY_REQUEST_SUCCEEDED';
 
+export const STORE_AGENCY_ADD_SIM_REQUEST_INIT = 'STORE_AGENCY_ADD_SIM_REQUEST_INIT';
+export const STORE_AGENCY_ADD_SIM_REQUEST_RESET = 'STORE_AGENCY_ADD_SIM_REQUEST_RESET';
+export const STORE_AGENCY_ADD_SIM_REQUEST_FAILED = 'STORE_AGENCY_ADD_SIM_REQUEST_FAILED';
+export const STORE_AGENCY_ADD_SIM_REQUEST_SUCCEEDED = 'STORE_AGENCY_ADD_SIM_REQUEST_SUCCEEDED';
+
 // ======================================================== Agencies
 // Set agencies init data into store
 export const storeAgenciesRequestInit = () => ({
@@ -160,4 +165,26 @@ export const storeEditAgencyRequestSucceed = ({message}) => ({
 // Set edit agency reset data into store
 export const storeEditAgencyRequestReset = () => ({
     type: STORE_EDIT_AGENCY_REQUEST_RESET
+});
+// ======================================================== Agency add sim
+// Set agency add sim init data into store
+export const storeAgencyAddSimRequestInit = () => ({
+    type: STORE_AGENCY_ADD_SIM_REQUEST_INIT
+});
+
+// Set agency add sim failed data into store
+export const storeAgencyAddSimRequestFailed = ({message}) => ({
+    message,
+    type: STORE_AGENCY_ADD_SIM_REQUEST_FAILED
+});
+
+// Set agency add sim succeeded data into store
+export const storeAgencyAddSimRequestSucceed = ({message}) => ({
+    message,
+    type: STORE_AGENCY_ADD_SIM_REQUEST_SUCCEEDED
+});
+
+// Set agency add sim reset data into store
+export const storeAgencyAddSimRequestReset = () => ({
+    type: STORE_AGENCY_ADD_SIM_REQUEST_RESET
 });

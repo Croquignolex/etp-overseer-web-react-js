@@ -4,16 +4,16 @@ import PropTypes from "prop-types";
 import LoaderComponent from "../LoaderComponent";
 import {dateToString} from "../../functions/generalFunctions";
 import FormModalComponent from "../modals/FormModalComponent";
-import ZoneDetailsContainer from "../../containers/zones/ZoneDetailsContainer";
+import AgencyDetailsContainer from "../../containers/agencies/AgencyDetailsContainer";
 
 // Component
-function AgentsCardsComponent({agents, handleBlock, handleBlockModalShow, handleAgentDetailsModalShow}) {
+function ResourcesCardsComponent({agents, handleBlock, handleBlockModalShow, handleAgentDetailsModalShow}) {
     // Local states
-    const [zoneDetailsModal, setZoneDetailsModal] = useState({show: false, header: 'DETAIL DE LA ZONE', id: ''});
+    const [agencyDetailsModal, setAgencyDetailsModal] = useState({show: false, header: "DETAIL DE L'AGENCE", id: ''});
 
-    // Hide zone details modal form
-    const handleZoneDetailModalHide = () => {
-        setZoneDetailsModal({...zoneDetailsModal, show: false})
+    // Hide agency details modal form
+    const handleAgencyDetailModalHide = () => {
+        setAgencyDetailsModal({...agencyDetailsModal, show: false})
     }
 
     // Render
@@ -55,11 +55,11 @@ function AgentsCardsComponent({agents, handleBlock, handleBlockModalShow, handle
                                             <span className="float-right">{item.phone}</span>
                                         </li>
                                         <li className="list-group-item">
-                                            <b>Zone</b>
+                                            <b>Agence</b>
                                             <span className="float-right">
-                                                {item.zone.name}
+                                                {item.agency.name}
                                                 <i className="fa fa-question-circle small ml-1 hand-cursor text-theme"
-                                                   onClick={() => setZoneDetailsModal({...zoneDetailsModal, show: true, id: item.zone.id})}
+                                                   onClick={() => setAgencyDetailsModal({...agencyDetailsModal, show: true, id: item.agency.id})}
                                                 />
                                             </span>
                                         </li>
@@ -90,19 +90,19 @@ function AgentsCardsComponent({agents, handleBlock, handleBlockModalShow, handle
                 }
             </div>
             {/* Modal */}
-            <FormModalComponent modal={zoneDetailsModal} handleClose={handleZoneDetailModalHide}>
-                <ZoneDetailsContainer id={zoneDetailsModal.id} />
+            <FormModalComponent modal={agencyDetailsModal} handleClose={handleAgencyDetailModalHide}>
+                <AgencyDetailsContainer id={agencyDetailsModal.id} />
             </FormModalComponent>
         </>
     )
 }
 
 // Prop types to ensure destroyed props data type
-AgentsCardsComponent.propTypes = {
+ResourcesCardsComponent.propTypes = {
     agents: PropTypes.array.isRequired,
     handleBlock: PropTypes.func.isRequired,
     handleBlockModalShow: PropTypes.func.isRequired,
     handleAgentDetailsModalShow: PropTypes.func.isRequired,
 };
 
-export default React.memo(AgentsCardsComponent);
+export default React.memo(ResourcesCardsComponent);

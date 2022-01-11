@@ -10,16 +10,21 @@ export const STORE_STOP_INFINITE_SCROLL_AGENTS_DATA = 'STORE_STOP_INFINITE_SCROL
 // Middleware action types
 export const EMIT_NEW_AGENT = 'EMIT_NEW_AGENT';
 export const EMIT_AGENT_FETCH = 'EMIT_AGENT_FETCH';
+export const EMIT_NEW_RESOURCE = 'EMIT_NEW_RESOURCE';
 export const EMIT_AGENTS_FETCH = 'EMIT_AGENTS_FETCH';
+export const EMIT_RESOURCE_FETCH = 'EMIT_RESOURCE_FETCH';
 export const EMIT_ADD_AGENT_SIMS = 'EMIT_ADD_AGENT_SIMS';
+export const EMIT_RESOURCES_FETCH = 'EMIT_RESOURCES_FETCH';
 export const EMIT_ALL_AGENTS_FETCH = 'EMIT_ALL_AGENTS_FETCH';
 export const EMIT_UPDATE_AGENT_CNI = 'EMIT_UPDATE_AGENT_CNI';
-export const EMIT_NEXT_AGENTS_FETCH = 'EMIT_NEXT_SIMS_FETCH';
 export const EMIT_UPDATE_AGENT_DOC = 'EMIT_UPDATE_AGENT_DOC';
+export const EMIT_NEXT_AGENTS_FETCH = 'EMIT_NEXT_AGENTS_FETCH';
 export const EMIT_UPDATE_AGENT_ZONE = 'EMIT_UPDATE_AGENT_ZONE';
 export const EMIT_UPDATE_AGENT_INFO = 'EMIT_UPDATE_AGENT_INFO';
+export const EMIT_UPDATE_AGENT_AGENCY = 'EMIT_UPDATE_AGENT_AGENCY';
 export const EMIT_SEARCH_AGENTS_FETCH = 'EMIT_SEARCH_AGENTS_FETCH';
 export const EMIT_TOGGLE_AGENT_STATUS = 'EMIT_TOGGLE_AGENT_STATUS';
+export const EMIT_NEXT_RESOURCES_FETCH = 'EMIT_NEXT_RESOURCES_FETCH';
 
 //====================== Reducer trigger actions
 // Set agents data in store
@@ -74,6 +79,11 @@ export const emitAgentsFetch = () => ({
     type: EMIT_AGENTS_FETCH
 });
 
+// Emit resources fetch
+export const emitResourcesFetch = () => ({
+    type: EMIT_RESOURCES_FETCH
+});
+
 // Emit search agents fetch
 export const emitSearchAgentsFetch = ({needle}) => ({
     needle,
@@ -84,6 +94,12 @@ export const emitSearchAgentsFetch = ({needle}) => ({
 export const emitNextAgentsFetch = ({page}) => ({
     page,
     type: EMIT_NEXT_AGENTS_FETCH
+});
+
+// Emit next resources fetch
+export const emitNextResourcesFetch = ({page}) => ({
+    page,
+    type: EMIT_NEXT_RESOURCES_FETCH
 });
 
 // Emit all agents fetch
@@ -97,6 +113,12 @@ export const emitAgentFetch = ({id}) => ({
     type: EMIT_AGENT_FETCH
 });
 
+// Emit resource fetch
+export const emitResourceFetch = ({id}) => ({
+    id,
+    type: EMIT_RESOURCE_FETCH
+});
+
 // Emit toggle agent status
 export const emitToggleAgentStatus = ({id}) => ({
     id,
@@ -104,23 +126,31 @@ export const emitToggleAgentStatus = ({id}) => ({
 });
 
 // Emit new agent fetch
-export const emitNewAgent = ({name, address, phone, zone, reference, town,
-                                 country, email, password, description,
-                                 backIDCard, frontIDCard, document}) => ({
+export const emitNewAgent = ({name, address, phone, zone, email, description, backIDCard, frontIDCard, document}) => ({
     name,
     zone,
-    town,
     phone,
     email,
-    country,
     address,
     document,
-    password,
-    reference,
     backIDCard,
     frontIDCard,
     description,
     type: EMIT_NEW_AGENT
+});
+
+// Emit new resource fetch
+export const emitNewResource = ({name, address, phone, agency, email, description, backIDCard, frontIDCard, document}) => ({
+    name,
+    phone,
+    email,
+    agency,
+    address,
+    document,
+    backIDCard,
+    frontIDCard,
+    description,
+    type: EMIT_NEW_RESOURCE
 });
 
 // Emit update agent info
@@ -138,6 +168,13 @@ export const emitUpdateAgentZone = ({id, zone}) => ({
     id,
     zone,
     type: EMIT_UPDATE_AGENT_ZONE
+});
+
+// Emit update agent agency
+export const emitUpdateAgentAgency = ({id, agency}) => ({
+    id,
+    agency,
+    type: EMIT_UPDATE_AGENT_AGENCY
 });
 
 // Emit update agent doc

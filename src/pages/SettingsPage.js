@@ -66,15 +66,9 @@ function SettingsPage({settings, request, dispatch, location}) {
                 {value: setting.CARD_COLLECTORS, label: setting.LABEL_COLLECTORS},
                 {value: setting.CARD_SUPERVISORS, label: setting.LABEL_SUPERVISORS},
                 {value: setting.CARD_ACCOUNTANTS, label: setting.LABEL_ACCOUNTANTS},
-                {value: setting.CARD_FLEET_FLEET_SIMS_FLEETS_MTN, label: setting.LABEL_FLEET_FLEET_SIMS_FLEETS_YUP},
-                {value: setting.CARD_FLEET_FLEET_SIMS_FLEETS_YUP, label: setting.LABEL_FLEET_FLEET_SIMS_FLEETS_MTN},
-                {value: setting.CARD_MASTER_FLEET_SIMS_FLEETS_MTN, label: setting.LABEL_MASTER_FLEET_SIMS_FLEETS_YUP},
-                {value: setting.CARD_MASTER_FLEET_SIMS_FLEETS_YUP, label: setting.LABEL_MASTER_FLEET_SIMS_FLEETS_MTN},
-                {value: setting.CARD_FLEET_FLEET_SIMS_FLEETS_ORANGE, label: setting.LABEL_FLEET_FLEET_SIMS_FLEETS_ORANGE},
-                {value: setting.CARD_MASTER_FLEET_SIMS_FLEETS_ORANGE, label: setting.LABEL_MASTER_FLEET_SIMS_FLEETS_ORANGE},
-                {value: setting.CARD_COLLECTOR_FLEET_SIMS_FLEETS_MTN, label: setting.LABEL_COLLECTOR_FLEET_SIMS_FLEETS_YUP},
-                {value: setting.CARD_COLLECTOR_FLEET_SIMS_FLEETS_YUP, label: setting.LABEL_COLLECTOR_FLEET_SIMS_FLEETS_MTN},
-                {value: setting.CARD_COLLECTOR_FLEET_SIMS_FLEETS_ORANGE, label: setting.LABEL_COLLECTOR_FLEET_SIMS_FLEETS_ORANGE},
+                {value: setting.CARD_FLEET_SIMS_FLEETS_YUP, label: setting.LABEL_FLEET_SIMS_FLEETS_YUP},
+                {value: setting.CARD_FLEET_SIMS_FLEETS_MTN, label: setting.LABEL_FLEET_SIMS_FLEETS_MTN},
+                {value: setting.CARD_FLEET_SIMS_FLEETS_ORANGE, label: setting.LABEL_FLEET_SIMS_FLEETS_ORANGE},
             ],
             charts: [
                 // {value: 0, label: 'name'}

@@ -10,6 +10,9 @@ const initialState = {
 
     current: {
         id: '', name: '', description: '', creation: '',
+
+        sims: [],
+        manager: {id: '', name: ''},
     }
 };
 

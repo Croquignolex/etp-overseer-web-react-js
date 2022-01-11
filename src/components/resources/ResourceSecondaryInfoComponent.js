@@ -2,25 +2,25 @@ import PropTypes from "prop-types";
 import React, {useState} from 'react';
 
 import FormModalComponent from "../modals/FormModalComponent";
-import ZoneDetailsContainer from "../../containers/zones/ZoneDetailsContainer";
 import AgentDocEditContainer from "../../containers/agents/AgentDocEditContainer";
-import AgentZoneEditContainer from "../../containers/agents/AgentZoneEditContainer";
+import AgencyDetailsContainer from "../../containers/agencies/AgencyDetailsContainer";
+import ResourceAgencyEditContainer from "../../containers/resources/ResourceAgencyEditContainer";
 
 // Component
-function AgentSecondaryInfoComponent({agent}) {
+function ResourceSecondaryInfoComponent({agent}) {
     // Local states
-    const [zoneDetailsModal, setZoneDetailsModal] = useState({show: false, header: 'DETAIL DE LA ZONE', id: ''});
-    const [zoneEditModal, setZoneEditModal] = useState({show: false, header: 'MODIFIER LA ZONE DE ' + agent.name});
     const [docEditModal, setDocEditModal] = useState({show: false, header: 'MODIFIER LE DOSSIER DE ' + agent.name});
+    const [agencyDetailsModal, setAgencyDetailsModal] = useState({show: false, header: "DETAIL DE L'AGENCE", id: ''});
+    const [agencyEditModal, setAgencyEditModal] = useState({show: false, header: "MODIFIER L'AGENCE DE " + agent.name});
 
-    // Show zone edit modal form
-    const handleZoneEditModalShow = () => {
-        setZoneEditModal({...zoneEditModal, show: true})
+    // Show agency edit modal form
+    const handleAgencyEditModalShow = () => {
+        setAgencyEditModal({...agencyEditModal, show: true})
     }
 
     // Hide zone edit modal form
-    const handleZoneEditModalHide = () => {
-        setZoneEditModal({...zoneEditModal, show: false})
+    const handleAgencyEditModalHide = () => {
+        setAgencyEditModal({...agencyEditModal, show: false})
     }
 
     // Show doc edit modal form
@@ -33,16 +33,16 @@ function AgentSecondaryInfoComponent({agent}) {
         setDocEditModal({...docEditModal, show: false})
     }
 
-    // Hide zone details modal form
-    const handleZoneDetailModalHide = () => {
-        setZoneDetailsModal({...zoneDetailsModal, show: false})
+    // Hide agency details modal form
+    const handleAgencyDetailModalHide = () => {
+        setAgencyDetailsModal({...agencyDetailsModal, show: false})
     }
 
     // Render
     return (
         <>
-            <button type="button" className="btn btn-theme mr-1 mb-1" onClick={handleZoneEditModalShow}>
-                <i className="fa fa-edit" /> Modifier la zone
+            <button type="button" className="btn btn-theme mr-1 mb-1" onClick={handleAgencyEditModalShow}>
+                <i className="fa fa-edit" /> Modifier l'agence
             </button>
             <button type="button" className="btn btn-theme mb-1" onClick={handleDocEditModalShow}>
                 <i className="fa fa-edit" /> Modifier le dossier
@@ -63,12 +63,12 @@ function AgentSecondaryInfoComponent({agent}) {
                             <span className="float-right">{agent.country}</span>
                         </li>
                         <li className="list-group-item">
-                            <b>Zone</b>
+                            <b>Agence</b>
                             <span className="float-right">
-                                {agent.zone.name}
-                                {agent.zone.id !== '' && (
+                                {agent.agency.name}
+                                {agent.agency.id !== '' && (
                                     <i className="fa fa-question-circle small ml-1 hand-cursor text-theme"
-                                       onClick={() => setZoneDetailsModal({...zoneDetailsModal, show: true, id: agent.zone.id})}
+                                       onClick={() => setAgencyDetailsModal({...agencyDetailsModal, show: true, id: agent.agency.id})}
                                     />
                                 )}
                             </span>
@@ -92,22 +92,22 @@ function AgentSecondaryInfoComponent({agent}) {
                 </div>
             </div>
             {/* Modal */}
-            <FormModalComponent modal={zoneEditModal} handleClose={handleZoneEditModalHide}>
-                <AgentZoneEditContainer handleClose={handleZoneEditModalHide} />
+            <FormModalComponent modal={agencyEditModal} handleClose={handleAgencyEditModalHide}>
+                <ResourceAgencyEditContainer handleClose={handleAgencyEditModalHide} />
             </FormModalComponent>
             <FormModalComponent modal={docEditModal} handleClose={handleDocEditModalHide}>
                 <AgentDocEditContainer handleClose={handleDocEditModalHide} />
             </FormModalComponent>
-            <FormModalComponent modal={zoneDetailsModal} handleClose={handleZoneDetailModalHide}>
-                <ZoneDetailsContainer id={zoneDetailsModal.id} />
+            <FormModalComponent modal={agencyDetailsModal} handleClose={handleAgencyDetailModalHide}>
+                <AgencyDetailsContainer id={agencyDetailsModal.id} />
             </FormModalComponent>
         </>
     )
 }
 
 // Prop types to ensure destroyed props data type
-AgentSecondaryInfoComponent.propTypes = {
+ResourceSecondaryInfoComponent.propTypes = {
     agent: PropTypes.object.isRequired
 };
 
-export default React.memo(AgentSecondaryInfoComponent);
+export default React.memo(ResourceSecondaryInfoComponent);

@@ -4,15 +4,16 @@ export const SETTINGS_PAGE = 'Paramètres';
 export const DASHBOARD_PAGE = 'Tableau de bord';
 export const NOTIFICATIONS_PAGE = 'Notifications';
 
-// CommonsSa
+// Commons
+export const AGENTS = 'Agents';
 export const ZONES_PAGE = 'Zones';
 export const USERS = 'Utilisateurs';
+export const RESOURCES = 'Resources';
 export const OPERATORS = 'Opérateurs';
 export const OVERSEER = 'Controlleurs';
 export const AGENCIES_PAGE = 'Agences';
 export const ADMINS = 'Administrateurs';
 export const ACCOUNTANTS = 'Comptables';
-export const AGENTS = 'Agents/Resources';
 export const SUPERVISORS = 'Superviseurs';
 export const VENDORS_PAGE = 'Fournisseurs';
 export const MANAGERS = 'Gestionnaires...';

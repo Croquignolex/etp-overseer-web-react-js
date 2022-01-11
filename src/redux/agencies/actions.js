@@ -10,6 +10,7 @@ export const EMIT_NEW_AGENCY = 'EMIT_NEW_AGENCY';
 export const EMIT_AGENCY_FETCH = 'EMIT_AGENCY_FETCH';
 export const EMIT_UPDATE_AGENCY = 'EMIT_UPDATE_AGENCY';
 export const EMIT_AGENCIES_FETCH = 'EMIT_AGENCIES_FETCH';
+export const EMIT_ADD_AGENCY_SIMS = 'EMIT_ADD_AGENCY_SIMS';
 export const EMIT_ALL_AGENCIES_FETCH = 'EMIT_ALL_AGENCIES_FETCH';
 export const EMIT_NEXT_AGENCIES_FETCH = 'EMIT_NEXT_AGENCIES_FETCH';
 
@@ -72,8 +73,9 @@ export const emitAgencyFetch = ({id}) => ({
 });
 
 // Emit new agency
-export const emitNewAgency = ({name, description}) => ({
+export const emitNewAgency = ({name, manager, description}) => ({
     name,
+    manager,
     description,
     type: EMIT_NEW_AGENCY
 });
@@ -84,4 +86,15 @@ export const emitUpdateAgency = ({id, name, description}) => ({
     name,
     description,
     type: EMIT_UPDATE_AGENCY
+});
+
+// Emit add agency sims
+export const emitAddAgencySims = ({id, name, reference, number, description, operator}) => ({
+    id,
+    name,
+    number,
+    operator,
+    reference,
+    description,
+    type: EMIT_ADD_AGENCY_SIMS
 });

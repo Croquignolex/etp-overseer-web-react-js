@@ -4,6 +4,7 @@ import {requestFailedValue, requestInitValue, requestSucceededValue} from "../..
 // Partial global store for requests data management
 const initialState = {
     all: {failed: false, loading: false, succeeded: false, message: ""},
+    sim: {failed: false, loading: false, succeeded: false, message: ""},
     add: {failed: false, loading: false, succeeded: false, message: ""},
     list: {failed: false, loading: false, succeeded: false, message: ""},
     next: {failed: false, loading: false, succeeded: false, message: ""},
@@ -116,6 +117,23 @@ function reduce(state = initialState, action) {
         // Resolve event to set edit agency reset request store data
         case actions.STORE_EDIT_AGENCY_REQUEST_RESET:
             nextState = {...state, edit: initialState.edit};
+            return nextState || state;
+        // ======================================================== Agency add sim
+        // Resolve event to set agency add sim init request store data
+        case actions.STORE_AGENCY_ADD_SIM_REQUEST_INIT:
+            nextState = {...state, sim: requestInitValue()}
+            return nextState || state;
+        // Resolve event to set agency add sim failed request store data
+        case actions.STORE_AGENCY_ADD_SIM_REQUEST_FAILED:
+            nextState = {...state, sim: requestFailedValue(action.message)};
+            return nextState || state;
+        // Resolve event to set agency add sim succeeded request store data
+        case actions.STORE_AGENCY_ADD_SIM_REQUEST_SUCCEEDED:
+            nextState = {...state, sim: requestSucceededValue(action.message)};
+            return nextState || state;
+        // Resolve event to set agency add sim reset request store data
+        case actions.STORE_AGENCY_ADD_SIM_REQUEST_RESET:
+            nextState = {...state, sim: initialState.sim};
             return nextState || state;
         // ========================================================
         // Unknown action
