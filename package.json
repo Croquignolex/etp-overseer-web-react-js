@@ -24,11 +24,12 @@
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
+    "env-cmd": "^10.1.0",
     "file-saver": "^2.0.5",
     "jquery": "^3.5.1",
     "json-loader": "^0.5.7",
-    "lodash": "^4.17.20",
-    "moment": "^2.24.0",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.4",
     "node-sass": "^4.14.1",
     "nprogress": "^0.2.0",
     "popper": "^1.0.1",
@@ -49,8 +50,7 @@
     "redux": "^4.0.4",
     "redux-saga": "^1.1.1",
     "uifx": "^2.0.7",
-    "xlsx": "^0.17.0",
-    "env-cmd": "^10.1.0"
+    "xlsx": "^0.17.0"
   },
   "scripts": {
     "start": "set PORT=9004 && env-cmd -f .env.development react-scripts start",
