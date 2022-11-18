@@ -21,6 +21,7 @@
 # env files
 .env.development
 .env.production
+.env.preproduction 
 
 npm-debug.log*
 yarn-debug.log*
