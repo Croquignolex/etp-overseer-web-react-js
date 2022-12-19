@@ -172,8 +172,6 @@ function buildCheckoutMenu() {
         sub: [
             {name: page.CHECKOUT_INTERNAL_PAYMENTS_PAGE, path: path.CHECKOUT_INTERNAL_PAYMENTS_PAGE_PATH},
             {name: page.CHECKOUT_HANDING_OVER_PAGE, path: path.CHECKOUT_HANDING_OVER_PAGE_PATH},
-            {name: page.CHECKOUT_EXTERNAL_OUTLAYS_PAGE, path: path.CHECKOUT_EXTERNAL_OUTLAYS_PAGE_PATH},
-            {name: page.CHECKOUT_EXTERNAL_PAYMENTS_PAGE, path: path.CHECKOUT_EXTERNAL_PAYMENTS_PAGE_PATH},
         ]
     }
 }
